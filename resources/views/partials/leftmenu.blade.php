@@ -9,8 +9,10 @@
     >
         <!--begin::Menu Nav-->
         <ul class="menu-nav">
-            @include('partials.menu.dashboard')
-            
+            @include('partials.menu-chunks.dashboard.menu')
+            @can('add factories')
+                @include('partials.menu-chunks.factories.menu')
+            @endcan
             <!--end::Menu Nav-->
         </ul>
         <!--end::Menu Nav-->

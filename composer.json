@@ -25,7 +25,9 @@
         "spatie/laravel-permission": "^4.0",
         "spatie/laravel-ray": "^1.13",
         "spatie/laravel-settings": "^1.0",
-        "trexology/laravel-inventory": "^3.0"
+        "trexology/laravel-inventory": "^3.0",
+        "yajra/laravel-datatables": "1.5",
+        "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

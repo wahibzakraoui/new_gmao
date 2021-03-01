@@ -3,7 +3,7 @@
 	<!--begin::Head-->
 	<head><base href="">
 		<meta charset="utf-8" />
-		<title>KERP - @yield('title')</title>
+		<title>GMAO - @yield('title')</title>
 		<meta name="description" content="KATASABFISH ERP." />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<!--begin::Fonts-->
@@ -15,6 +15,7 @@
 		<!--begin::Global Theme Styles(used by all pages)-->
 		<link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<!--end::Global Theme Styles-->
 		<!--begin::Layout Themes(used by all pages)-->
@@ -2757,6 +2758,37 @@
 		<!--end::Page Vendors-->
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="{{ asset('assets/js/pages/widgets.js') }}"></script>
+		<script>
+			$('body').on('click', '#delete_dialog', function(e){
+				e.preventDefault();
+				Swal.fire({
+				title: "Are you sure?!",
+				text: "You clicked the delete button!",
+				icon: "warning",
+				buttonsStyling: false,
+				confirmButtonText: "<i class='la la-trash'></i> I am sure!",
+				showCancelButton: true,
+				cancelButtonText: "<i class='la la-thumbs-down'></i> No, thanks",
+				customClass: {
+				confirmButton: "btn btn-danger",
+				cancelButton: "btn btn-default"
+				}
+				}).then(function(result) {
+					if (result.value) {
+						$("#delete_form").submit();
+					}
+				});
+			});
+		</script>
+		@if (session('deleted'))
+			<script>
+				Swal.fire(
+					"Deleted!",
+					"Your document has been deleted.",
+					"success"
+				)
+			</script>
+		@endif
 		@yield('my-scripts')
 		<!--end::Page Scripts-->
 	</body>
