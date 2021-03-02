@@ -177,19 +177,19 @@
                 <div class="form-group row">
                     <div class="col-lg-6">
                         <label>Factory name <span class="text-danger">*</span></label>
-                        {{ Form::text('name', null, ['class' => 'form-control']) }}
+                        {{ Form::text('name', null, ['class' => 'form-control', 'autocomplete' => 'off']) }}
                         <span class="form-text text-muted">Please enter factory name</span>
                     </div>
                     <div class="col-lg-6">
                         <label>Factory code <span class="text-danger">*</span></label>
-                        {{ Form::text('code', null, ['class' => 'form-control']) }}
+                        {{ Form::text('code', null, ['class' => 'form-control', 'autocomplete' => 'off']) }}
                         <span class="form-text text-muted">Please enter factory code</span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6">
                         <label>Description <span class="text-danger">*</span></label>
-                        {{ Form::text('description', null, ['class' => 'form-control']) }}
+                        {{ Form::text('description', null, ['class' => 'form-control', 'autocomplete' => 'off']) }}
                         <span class="form-text text-muted">Please enter a breif description of this factory</span>
                     </div>
 
@@ -214,7 +214,7 @@
                     <div class="col-lg-6"></div>
                     <div class="col-lg-6 col-xs-12 mb-5 text-right">
                         <button type="reset" class="btn btn-lg btn-secondary d-xs-block">Cancel</button>
-                        <button type="submit" class="btn btn-lg btn-primary mr-2 d-xs-block">Save</button>
+                        <button type="submit" class="btn btn-lg btn-primary mr-2 d-xs-block" id="submit_button">Save</button>
                     </div>
                 </div>
             </div>
@@ -253,9 +253,8 @@
                         notEmpty: {
                             message: 'Factory description is required'
                         },
-                        min: 5
                     }
-                }
+                },
             },
 
             plugins: {
@@ -263,6 +262,7 @@
                 // Validate fields when clicking the Submit button
                 submitButton: new FormValidation.plugins.SubmitButton(),
                 // Submit the form when all fields are valid
+                
                 defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
                 // Bootstrap Framework Integration
                 bootstrap: new FormValidation.plugins.Bootstrap({

@@ -74,10 +74,10 @@ class FactoryController extends Controller
             'name' => $request->get('name'),
             'code' => $request->get('code'),
             'description' => $request->get('description'),
-            'active' => $request->get('active'),
+            'active' => $request->get('active') ?? false,
         ]))
         {
-            return redirect($this->module);
+            return redirect($this->module)->with('success', 'Factory added successfully!');
         }
     }
 
@@ -125,7 +125,7 @@ class FactoryController extends Controller
             $request->validated();
             if($factory->firstOrFail()->update($request->all()))
             {
-                return redirect($this->module);
+                return redirect($this->module)->with('success', 'Factory edited successfully!');
             }
         }
 
@@ -143,7 +143,7 @@ class FactoryController extends Controller
             throw new PermissionDeniedException($request);
         }else{
             if($factory->firstOrFail()->delete()){
-                return redirect($this->module)->with('deleted', true);
+                return redirect($this->module)->with('deleted', true)->with('success', 'Factory deleted successfully!');
             }
         }
 
