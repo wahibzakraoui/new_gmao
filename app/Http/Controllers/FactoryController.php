@@ -25,7 +25,7 @@ class FactoryController extends Controller
         if(!auth()->user()->can("view {$this->module}")){
             throw new PermissionDeniedException($request);
         }
-        return view('pages.factories.index');
+        return view("pages.{$this->module}.index");
     }
 
     public function list(Request $request){
