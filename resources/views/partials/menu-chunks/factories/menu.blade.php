@@ -1,5 +1,5 @@
 <li class="menu-section">
-    <h4 class="menu-text">Factories</h4>
+    <h4 class="menu-text">Assets</h4>
     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 </li>
 <li class="menu-item menu-item-submenu {{ Route::currentRouteName() == 'factories' || Route::currentRouteName() == 'add-factory' ? 'menu-item-open' : '' }}" aria-haspopup="true" data-menu-toggle="hover">

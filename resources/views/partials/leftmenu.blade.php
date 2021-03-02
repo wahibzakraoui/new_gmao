@@ -13,6 +13,21 @@
             @can('add factories')
                 @include('partials.menu-chunks.factories.menu')
             @endcan
+            @can('add areas')
+                @include('partials.menu-chunks.areas.menu')
+            @endcan
+            @can('add equipments')
+                @include('partials.menu-chunks.equipments.menu')
+            @endcan
+            @can('add parts')
+                @include('partials.menu-chunks.parts.menu')
+            @endcan
+            @can('add gamuts')
+                @include('partials.menu-chunks.gamuts.menu')
+            @endcan
+            @can('add periodicities')
+                @include('partials.menu-chunks.periodicities.menu')
+            @endcan
             <!--end::Menu Nav-->
         </ul>
         <!--end::Menu Nav-->
