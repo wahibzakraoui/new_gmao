@@ -2760,6 +2760,7 @@
 		<script src="{{ asset('assets/js/pages/widgets.js') }}"></script>
 		<script>
 			$('body').on('click', '#delete_dialog', function(e){
+				var form = $(this).parents('form');
 				e.preventDefault();
 				Swal.fire({
 				title: "Are you sure?!",
@@ -2775,7 +2776,7 @@
 				}
 				}).then(function(result) {
 					if (result.value) {
-						$("#delete_form").submit();
+						form.submit();
 					}
 				});
 			});

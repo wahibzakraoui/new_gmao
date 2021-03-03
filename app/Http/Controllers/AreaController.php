@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateAreaRequest;
+use App\Http\Requests\CreateAreaRequest;
 use Illuminate\Http\Request;
 use App\Models\Factory;
 use Yajra\DataTables\Facades\DataTables;
@@ -76,7 +77,7 @@ class AreaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UpdateAreaRequest $request)
+    public function store(CreateAreaRequest $request)
     {
         if(!auth()->user()->can("create {$this->module}")){
             throw new PermissionDeniedException($request);

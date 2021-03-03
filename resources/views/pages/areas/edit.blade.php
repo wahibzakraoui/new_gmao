@@ -192,6 +192,7 @@
                                     <option value="{{$c->code}}" selected="selected">{{$c->code}}</option>
                                 @endforeach
                             </select>
+                            <span class="form-text text-muted">Please type each code and press "ENTER" key on your keyboard.</span>
                         </div>
                     </div>
                 </div>

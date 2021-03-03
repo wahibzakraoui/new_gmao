@@ -197,6 +197,7 @@
                             <select class="form-control select2" id="kt_select2_11" multiple name="codes[]">
                                 <option label="Label"></option>
                             </select>
+                            <span class="form-text text-muted">Please enter code and press "ENTER" key on your keyboard.</span>
                         </div>
                     </div>
                 </div>
