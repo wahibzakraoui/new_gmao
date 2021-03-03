@@ -177,6 +177,7 @@
                         <th>Area Name</th>
                         <th>Description</th>
                         <th>Factory</th>
+                        <th>Area Codes</th>
                         <th>Active</th>
                         <th>Actions</th>
                     </tr>
@@ -252,13 +253,14 @@
                     { data: 'name' },
                     { data: 'description' },
                     { "data": "factoryName", "name": "factories.name"  },
+                    { data: 'areaCodes' },
                     { data: 'active' },
                     { data: 'actions', name: 'actions', orderable: false, searchable: false }
                 ],
                 columnDefs: [
                     {
                         width: '75px',
-                        targets: 3,
+                        targets: 4,
                         render: function (data, type, full, meta) {
                             var status = {
                                 0: { 'title': 'Inactive', 'state': 'danger' },

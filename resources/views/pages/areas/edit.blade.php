@@ -161,7 +161,8 @@
             </div>
         </div>
         <div class="card-body">
-            {{ Form::model($area, array('route' => array('update-area', $area->id), 'method' => 'POST', 'id' => 'edit_area_form')) }}
+            {{ Form::model($area, array('route' => array('update-area', $area->id), 'method' => 'POST', 'id' =>
+            'edit_area_form')) }}
             <div class="card-body">
                 <div class="form-group row">
                     <div class="col-lg-6">
@@ -171,7 +172,8 @@
                     </div>
                     <div class="col-lg-6">
                         <label>Area belongs in factory <span class="text-danger">*</span></label>
-                        {{ Form::select('factory_id', $factoriesList , $area->factory_id, ['class' => 'form-control']) }}
+                        {{ Form::select('factory_id', $factoriesList , $area->factory_id, ['class' => 'form-control'])
+                        }}
                         <span class="form-text text-muted">Please enter area name</span>
                     </div>
                 </div>
@@ -181,7 +183,19 @@
                         {{ Form::text('description', null, ['class' => 'form-control']) }}
                         <span class="form-text text-muted">Please enter a breif description of this area</span>
                     </div>
+                    <div class="col-lg-6">
+                        <label>Area codes</label>
+                        <div class=" col-lg-12">
+                            <select class="form-control select2" id="kt_select2_11" multiple name="codes[]">
+                                <option label="Label"></option>
+                                @foreach($area->codes as $c)
+                                    <option value="{{$c->code}}" selected="selected">{{$c->code}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
+                
                 <div class="form-group row">
                     <div class="col-lg-6">
                         <label class="col-3 col-form-label">Active</label>
@@ -218,6 +232,7 @@
 @stop
 
 @section('my-scripts')
+<script src="{{asset('assets/js/pages/crud/forms/widgets/select2.js')}}"></script>
 <script>
     FormValidation.formValidation(
         document.getElementById('edit_area_form'),
@@ -260,5 +275,10 @@
             }
         }
     );
+</script>
+<script>
+    $('#kt_select2_12_1, #kt_select2_12_2, #kt_select2_12_3, #kt_select2_12_4').select2({
+        placeholder: "Select an option",
+    });
 </script>
 @stop

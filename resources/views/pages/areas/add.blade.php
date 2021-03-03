@@ -159,6 +159,7 @@
         </div>
         @endif
     </div>
+    @if(count($factoriesList) > 0)
     <!--begin::Card-->
     <div class="card card-custom gutter-b">
         <div class="card-header flex-wrap py-3">
@@ -172,7 +173,7 @@
         <div class="card-body">
             {{ Form::open(array('route' => array('store-area'), 'method' => 'POST', 'id' => 'create_area_form')) }}
             <div class="card-body">
-            <div class="form-group row">
+                <div class="form-group row">
                     <div class="col-lg-6">
                         <label>Area name <span class="text-danger">*</span></label>
                         {{ Form::text('name', null, ['class' => 'form-control']) }}
@@ -190,6 +191,14 @@
                         {{ Form::text('description', null, ['class' => 'form-control']) }}
                         <span class="form-text text-muted">Please enter a breif description of this area</span>
                     </div>
+                    <div class="col-lg-6">
+                        <label>Area codes</label>
+                        <div class=" col-lg-12">
+                            <select class="form-control select2" id="kt_select2_11" multiple name="codes[]">
+                                <option label="Label"></option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6">
@@ -197,7 +206,7 @@
                         <div class="col-3">
                             <span class="switch switch-outline switch-icon switch-success">
                                 <label>
-                                    {{ Form::checkbox('active') }}
+                                    {{ Form::checkbox('active', '1', true) }}
                                     <span></span>
                                 </label>
                             </span>
@@ -211,7 +220,8 @@
                     <div class="col-lg-6"></div>
                     <div class="col-lg-6 col-xs-12 mb-5 text-right">
                         <button type="reset" class="btn btn-lg btn-secondary d-xs-block">Cancel</button>
-                        <button type="submit" class="btn btn-lg btn-primary mr-2 d-xs-block" id="submit_button">Save</button>
+                        <button type="submit" class="btn btn-lg btn-primary mr-2 d-xs-block"
+                            id="submit_button">Save</button>
                     </div>
                 </div>
             </div>
@@ -221,11 +231,32 @@
         </div>
     </div>
     <!--end::Card-->
+    @else
+    <div class="col-lg-12">
+        <!--begin::Callout-->
+        <div class="card card-custom mb-2">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between p-4 flex-lg-wrap flex-xl-nowrap">
+                    <div class="d-flex flex-column mr-5">
+                        <a href="#" class="h4 text-dark text-hover-primary mb-5">No factory defined yet</a>
+                        <p class="text-dark-50">In order to add Areas, please add a Factory first. You can cme back to this page later.</p>
+                    </div>
+                    <div class="ml-6 ml-lg-0 ml-xxl-6 flex-shrink-0">
+                        <a href="{{ route('add-factory') }}" target="_self"
+                            class="btn font-weight-bolder text-uppercase btn-primary py-4 px-6">Create a Factory</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end::Callout-->
+    </div>
+    @endif
 </div>
 <!--end::Content-->
 @stop
 
 @section('my-scripts')
+<script src="{{asset('assets/js/pages/crud/forms/widgets/select2.js')}}"></script>
 <script>
     FormValidation.formValidation(
         document.getElementById('create_factory_form'),
@@ -259,7 +290,7 @@
                 // Validate fields when clicking the Submit button
                 submitButton: new FormValidation.plugins.SubmitButton(),
                 // Submit the form when all fields are valid
-                
+
                 defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
                 // Bootstrap Framework Integration
                 bootstrap: new FormValidation.plugins.Bootstrap({
@@ -269,5 +300,10 @@
             }
         }
     );
+</script>
+<script>
+    $('#kt_select2_12_1, #kt_select2_12_2, #kt_select2_12_3, #kt_select2_12_4').select2({
+        placeholder: "Select an option",
+    });
 </script>
 @stop

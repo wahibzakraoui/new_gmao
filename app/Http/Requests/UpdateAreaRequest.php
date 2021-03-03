@@ -26,6 +26,7 @@ class UpdateAreaRequest extends FormRequest
         return [
             'name' => 'required|string|min:5',
             'description' => 'required|string|min:4',
+            'codes' => 'required',
             'factory_id' => 'required|numeric',
             'active' => 'nullable|numeric'
         ];

@@ -43,9 +43,9 @@ Route::prefix('factories')->middleware(['auth:sanctum', 'verified'])->group(func
     Route::post('/list', [FactoryController::class, 'list'])->name('factories-list');
     Route::get('/add', [FactoryController::class, 'create'])->name('add-factory');
     Route::post('/add', [FactoryController::class, 'store'])->name('store-factory');
-    Route::get('/edit/{Factory}', [FactoryController::class, 'edit'])->name('edit-factory');
-    Route::post('/update/{Factory}', [FactoryController::class, 'update'])->name('update-factory');
-    Route::post('/delete/{Factory}', [FactoryController::class, 'destroy'])->name('delete-factory');
+    Route::get('/edit/{factory}', [FactoryController::class, 'edit'])->name('edit-factory');
+    Route::post('/update/{factory}', [FactoryController::class, 'update'])->name('update-factory');
+    Route::post('/delete/{factory}', [FactoryController::class, 'destroy'])->name('delete-factory');
 });
 
 
@@ -60,7 +60,7 @@ Route::prefix('areas')->middleware(['auth:sanctum', 'verified'])->group(function
     Route::post('/list', [AreaController::class, 'list'])->name('areas-list');
     Route::get('/add', [AreaController::class, 'create'])->name('add-area');
     Route::post('/add', [AreaController::class, 'store'])->name('store-area');
-    Route::get('/edit/{Area}', [AreaController::class, 'edit'])->name('edit-area');
-    Route::post('/update/{Area}', [AreaController::class, 'update'])->name('update-area');
-    Route::post('/delete/{Area}', [AreaController::class, 'destroy'])->name('delete-area');
+    Route::get('/edit/{area}', [AreaController::class, 'edit'])->name('edit-area');
+    Route::post('/update/{area}', [AreaController::class, 'update'])->name('update-area');
+    Route::post('/delete/{area}', [AreaController::class, 'destroy'])->name('delete-area');
 });
