@@ -20,5 +20,9 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleTableSeeder::class);
         $this->call(MetricsTableSeeder::class);
         $this->call(LocationsTableSeeder::class);
+        $this->call(FactoriesTableSeeder::class);
+        $this->call(AreasTableSeeder::class);
+        $this->call(AreaCodesTableSeeder::class);
+        $this->call(EquipmentsTableSeeder::class);
     }
 }

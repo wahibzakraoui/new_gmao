@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FactoryController;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\EquipmentController;
 use App\Models\Factory;
 
 
@@ -63,4 +64,21 @@ Route::prefix('areas')->middleware(['auth:sanctum', 'verified'])->group(function
     Route::get('/edit/{area}', [AreaController::class, 'edit'])->name('edit-area');
     Route::post('/update/{area}', [AreaController::class, 'update'])->name('update-area');
     Route::post('/delete/{area}', [AreaController::class, 'destroy'])->name('delete-area');
+    Route::get('/getAreaCodesJSON/{area?}', [AreaController::class, 'getAreaCodesJSON'])->name('areas-json');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Equipments Routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::prefix('equipments')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/', [EquipmentController::class, 'index'])->name('equipments');
+    Route::post('/list', [EquipmentController::class, 'list'])->name('equipments-list');
+    Route::get('/add', [EquipmentController::class, 'create'])->name('add-equipment');
+    Route::post('/add', [EquipmentController::class, 'store'])->name('store-equipment');
+    Route::get('/edit/{equipment}', [EquipmentController::class, 'edit'])->name('edit-equipment');
+    Route::post('/update/{equipment}', [EquipmentController::class, 'update'])->name('update-equipment');
+    Route::post('/delete/{equipment}', [EquipmentController::class, 'destroy'])->name('delete-equipment');
 });

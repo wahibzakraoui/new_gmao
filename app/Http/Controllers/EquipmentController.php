@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateAreaRequest;
-use App\Http\Requests\CreateAreaRequest;
+use App\Http\Requests\UpdateEquipmentRequest;
+use App\Http\Requests\CreateEquipmentRequest;
 use Illuminate\Http\Request;
 use App\Models\Factory;
 use Yajra\DataTables\Facades\DataTables;
@@ -11,11 +11,12 @@ use Illuminate\Support\Facades\View;
 use App\Exceptions\PermissionDeniedException;
 use App\Models\Area;
 use App\Models\AreaCode;
+use App\Models\Equipment;
 use Illuminate\Support\Str;
 
-class AreaController extends Controller
+class EquipmentController extends Controller
 {
-    private $module = "areas";
+    private $module = "equipments";
 
     /**
      * Display a listing of the resource.
@@ -38,24 +39,20 @@ class AreaController extends Controller
             throw new PermissionDeniedException($request);
         }
 
-        return DataTables::of(Area::leftJoin('factories', 'areas.factory_id', '=', 'factories.id')
+        return DataTables::of(Equipment::leftJoin('areas', 'equipment.area_id', '=', 'areas.id')
         ->select([
-            'areas.id', 
-            'areas.name', 
-            'areas.description',
-            'factories.name as factoryName',
-            'areas.active',
+            'equipment.id', 
+            'equipment.name', 
+            'equipment.code', 
+            'equipment.description',
+            'equipment.area_code',
+            'areas.name as areaName',
+            'equipment.active',
         ]))
-        ->orderColumn('areas.id', function ($query, $order) {
-            $query->orderBy('id', $order);
+        ->addColumn('actions', function ($equipment) {
+            return View::make("pages.{$this->module}.datatables.actions")->with('equipment', $equipment)->render();;
         })
-        ->addColumn('areaCodes', function ($area) {
-            return View::make("pages.{$this->module}.datatables.areacodes")->with('area', $area)->render();;
-        })
-        ->addColumn('actions', function ($area) {
-            return View::make("pages.{$this->module}.datatables.actions")->with('area', $area)->render();;
-        })
-        ->rawColumns(['actions', 'areaCodes'])
+        ->rawColumns(['actions'])
         ->make(true);
     }
 
@@ -70,8 +67,9 @@ class AreaController extends Controller
         if(!auth()->user()->can("create {$this->module}")){
             throw new PermissionDeniedException($request);
         }
+        ray(Area::All()->pluck('name', 'id')->prepend(['' => ''])[0]);
         return view("pages.{$this->module}.add")
-        ->with('factoriesList', Factory::All()->pluck('name', 'id'));
+        ->with('areasList', Area::All()->pluck('name', 'id')->prepend(['' => '']));
     }
 
     /**
@@ -80,29 +78,26 @@ class AreaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateAreaRequest $request)
+    public function store(CreateEquipmentRequest $request)
     {
         if(!auth()->user()->can("create {$this->module}")){
             throw new PermissionDeniedException($request);
         }
 
         $request->validated();
-        $area = Area::create([
+        $equipment = Equipment::create([
             'uuid' => Str::uuid(),
             'name' => $request->get('name'),
+            'code' => $request->get('code'),
             'description' => $request->get('description'),
-            'factory_id' => $request->get('factory_id'),
+            'area_id' => $request->get('area_id'),
+            'area_code' => $request->get('area_code'),
             'active' => $request->get('active') ?? false,
         ]);
 
-        if($area)
+        if($equipment)
         {
-            collect($request->get('codes'))->each(function($code) use ($area){
-                $id = $area->id;
-                $code = ['area_id' => $id ,'code' => $code];
-                AreaCode::create($code);
-            });
-            return redirect($this->module)->with('success', 'Area added successfully!');
+            return redirect($this->module)->with('success', 'Equipment added successfully!');
         }
     }
 
@@ -132,7 +127,7 @@ class AreaController extends Controller
         }
         return view("pages.{$this->module}.edit")
         ->with(Str::singular($this->module), $area)
-        ->with('factoriesList', Factory::All()->pluck('name', 'id'));
+        ->with('areasList', Area::All()->pluck('name', 'id'));
     }
 
     /**
@@ -142,7 +137,7 @@ class AreaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAreaRequest $request, Area $area)
+    public function update(UpdateEquipmentRequest $request, Equipment $equipment)
     {
         /* User does not have permission */
         if(!auth()->user()->can("edit {$this->module}")){
@@ -150,15 +145,9 @@ class AreaController extends Controller
         }else{
             /* User does have permission */
             $request->validated();
-            if($area->update($request->only(['name', 'description', 'active', 'factory_id'])))
+            if($equipment->update($request->only(['name', 'code', 'description', 'active', 'area_id'])))
             {
-                $area->codes()->delete();
-                collect($request->get('codes'))->each(function($code) use ($area){
-                    $id = $area->id;
-                    $code = ['area_id' => $id ,'code' => $code];
-                    AreaCode::create($code);
-                });
-                return redirect($this->module)->with('success', 'Area edited successfully!');
+                return redirect($this->module)->with('success', 'Equipment edited successfully!');
             }
         }
 
@@ -170,32 +159,15 @@ class AreaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Area $area)
+    public function destroy(Request $request, Equipment $equipment)
     {
         if(!auth()->user()->can("delete {$this->module}")){
             throw new PermissionDeniedException($request);
         }else{
-            if($area->codes()->delete() && $area->delete()){
-                return redirect($this->module)->with('deleted', true)->with('success', 'Area deleted successfully!');
+            if($equipment->delete()){
+                return redirect($this->module)->with('deleted', true)->with('success', 'Equipment deleted successfully!');
             }
         }
 
     }
-
-    /**
-     * Get specified area codes.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function getAreaCodesJSON(Request $request, Area $area){
-        $result = $area->codes->map(function($code){
-            return [
-                'name' => $code->code,
-                'id' => $code->code,
-            ];
-        });
-        return $result;
-    }
-
 }

@@ -1,0 +1,89 @@
+id,uuid,name,code,description,active,area_id,area_code
+1,d6f687c5-bef2-420c-9999-963f9d7bf421,Delivery post,DP01,Delivery post,1,1,1000
+2,4beb7c43-c4e2-453e-b6be-7ed41772e244,Transformer Post ,TP01,Transformer Post ,1,1,1000
+3,13169966-cc0c-497c-91f8-4f86147b3306,Transformer Post ,TP01,Transformer Post ,1,1,1004
+4,77f28c5c-282b-45c5-b796-f719cb4e4d28,Low Voltage switchgear MCC,YC31,Low Voltage switchgear MCC,1,1,1006
+5,582cee14-0b1d-4f6e-ad38-d752f9600db3,Auxiliary switchgear,YC32,Auxiliary switchgear,1,1,1006
+6,6776a2b0-2120-458f-bcd3-86ba48def655,Low Voltage Dist. 690V,YC21,Low Voltage Dist. 690V,1,1,1006
+7,0740c523-6c06-4779-9cd2-a415c5c152fe,Compensation 400VAC,YC33,Compensation 400VAC,1,1,1006
+8,b793012c-caba-454f-8431-49c47a215c8d,Frequency converter 690V 400kW,YC41,Frequency converter 690V 400kW,1,1,1601
+9,1a6edd3a-06fe-495a-b8d7-c03fcfabc29e,Illumination cabinet,YC43,Illumination cabinet,1,1,1601
+10,27cf5036-3926-4368-9d64-d46c9f4df8b4,Air conditions units,YC45,Air conditions units,1,1,1601
+11,604d5a22-d51e-4132-a45a-befa0e67f256,IO,YC61,IO,1,1,1601
+12,6affaabb-25e4-40c7-9829-39456dced83b,PLC,YC81,PLC,1,1,1601
+13,8fdff819-e9ac-4dac-9111-d4b4d1ca32aa,UPS 230VAC,YU01,UPS 230VAC,1,1,1601
+14,5713c342-0794-461f-8474-5d82cb63a454,Clinker Area 1,KK01,Clinker Area 1,1,2,RW01
+15,12d68c86-50e1-4505-9bb0-9d71a7b3efab,Clinker Area 2,KK02,Clinker Area 2,1,2,RW01
+16,1d8e53ad-847e-40c8-9d07-97436e6b6168,Clinker Area 3,KK03,Clinker Area 3,1,2,RW01
+17,4f92a0f8-9b08-4274-bc85-2f01f3c8f361,Limestone Area 1,LI01,Limestone Area 1,1,2,RW01
+18,ce87c722-0f0e-4d7b-9702-9a1df8da0c27,Gypsum Area,GY01,Gypsum Area,1,2,RW01
+19,0cd65e5d-e5e5-4dcb-a20c-a2582ecd021a,Limestone Area 2,LI02,Limestone Area 2,1,2,RW01
+20,d3038662-580f-4ad5-bd7b-00c8691ccbb3,Clinker Hopper,FB01,Clinker Hopper,1,3,1621
+21,6bc430fd-ba8e-4353-94af-3817fbfc2ab4,Gypsum Hopper ,FB02,Gypsum Hopper ,1,3,1621
+22,0bbf0519-9c90-46fb-9515-23d068e605ba,Limestone Hopper ,FB03,Limestone Hopper ,1,3,1621
+23,a74d7835-9b42-4913-8ee8-37285708ec62,Dosing Belt Feeder Clinker,WF01,Dosing Belt Feeder Clinker,1,3,1621
+24,2b26e53c-77b3-42fe-89b9-0482e706c05a,Dosing Belt Feeder Gypsum,WF02,Dosing Belt Feeder Gypsum,1,3,1621
+25,e9584a29-cb10-4da8-9e07-176cec60bb18,Dosing Belt Feeder Limestone,WF03,Dosing Belt Feeder Limestone,1,3,1621
+26,0016fcef-dbae-4cb3-9b1f-6e0762583ea9,Dedusting Filter,DE01,Dedusting Filter,1,3,1621
+27,76712a0c-1870-4a71-922a-ae194821c9af,Dedusting Filter,DE02,Dedusting Filter,1,3,1621
+28,de4e5ae9-ebd3-49e4-bcab-13b0ed117e35,Dedusting Filter,DE03,Dedusting Filter,1,3,1621
+29,3925165b-64da-46df-9a00-7af13724d0d9,Belt Conveyor,BC01,Belt Conveyor,1,3,1621
+30,ad7d39d8-078d-4248-9f06-c4ff6fbb75a4,Magnetic Separator,MS01,Magnetic Separator,1,3,1621
+31,182f2e2a-cc12-49c3-9f1d-198e73025a5e,Metal Detector,MT01,Metal Detector,1,3,1621
+32,26217226-4c1b-45ce-aded-3b926f931cda,Belt Conveyor,BC02,Belt Conveyor,1,3,1621
+33,c12407be-9ec9-4c0c-91c6-33261cbeece8,Cover Belt,BC03,Cover Belt,1,3,1621
+34,c1d64284-287e-4a45-9f60-18ecb81b7c46,Belt Scale,BS01,Belt Scale,1,3,1621
+35,03857fbf-6e99-42d2-91cd-cffa2d68433d,Diverter Gate,DG01,Diverter Gate,1,3,1621
+36,e2a41757-00d4-411c-81b1-1676bce72985,Shut-Off Gate,SG01,Shut-Off Gate,1,3,1621
+37,4639324a-5984-4fd2-9c19-83208b5cb456,Shut-Off Gate,SG02,Shut-Off Gate,1,3,1621
+38,482e34eb-2b3b-4255-85cb-0ed2eacfc220,Shut-Off Gate,SG03,Shut-Off Gate,1,3,1621
+39,ba795354-9ed1-4648-bb27-7dbdea179f24,Vertical Roller Mill,RM01,Vertical Roller Mill,1,4,1631
+40,55176ae5-6a59-4ea9-ac48-e0270e889ab0,Main Drive-Mill,MD01,Main Drive-Mill,1,4,1631
+41,5eee6c51-ad23-4386-8c56-30ca98916370,Lubrication-Gearbox,LQ01,Lubrication-Gearbox,1,4,1631
+42,0d4d1477-d09a-4a68-bb3a-746f7e7b9889,Lubrication-Mill,LQ11,Lubrication-Mill,1,4,1631
+43,1301196b-11d5-41d0-8000-8a7df016a490,Hyadraulic System- Mill M-Roller,HS11,Hyadraulic System- Mill M-Roller,1,4,1631
+44,a9a15544-9320-4ed4-8c24-632a4f678540,Hydraulic Unit,HY91,Hydraulic Unit,1,4,1631
+45,ad62e4ea-e450-42ac-85e4-a07254ed6282,LED Horn 01,HN01,LED Horn 01,1,4,1631
+46,68220fc1-d522-4e32-9eb8-e40e3dfbb657,Lubrication,LQ41,Lubrication,1,4,1631
+47,06cff09e-923b-4830-aa3b-491e246528da,Gearbox-mill,GB01,Gearbox-mill,1,4,1631
+48,984070c8-7b0a-4d9c-b4ea-48d6f54acd5e,Water Injection,WI01,Water Injection,1,4,1631
+49,52aca0ca-7961-45fd-9b82-2a44cf2b901e,Fan,FN01,Fan,1,4,1631
+50,a710513f-21ba-4dfc-999f-847d686fae0f,Reject Belt Conveyor,BC01,Reject Belt Conveyor,1,4,1641
+51,44ea7bca-5f11-4abb-a4c0-0425aa38e204,Discharge recycling belt conveyor,BC02,Discharge recycling belt conveyor,1,4,1641
+52,53d7e72f-50b9-4725-a127-f4a0a63b915d,Classifier,CL01,Classifier,1,4,1651
+53,4b3e32d3-1300-4fa6-b7b7-218d127ef382,Lubrication-Classifier,LQ42,Lubrication-Classifier,1,4,1651
+54,ee4acda0-fd58-48b2-928b-25356c4584f8,Process Filter,BF01,Process Filter,1,4,1651
+55,9d993c7f-5516-4147-9bc8-008e780c826c,Screw Conveyor,SC01,Screw Conveyor,1,4,1651
+56,ab99c98e-8e27-4d94-84a3-22514c4db57c,Slide Gate ,SG01,Slide Gate ,1,4,1651
+57,9cc01427-b2a1-4d7d-87d9-c657f4d16a7b,Rotary Valve,RG01,Rotary Valve,1,4,1651
+58,ddd2c5be-8d87-44a1-9148-611acefa8de4,Ducting,DU01,Ducting,1,4,1651
+59,b72fcb96-686b-4ff1-8e36-500251bb581c,Mill Fan,FN01,Mill Fan,1,4,1661
+60,e5674ef1-86ca-4edd-b911-e306f49324ab,Hot Gas,HG01,Hot Gas,1,4,1661
+61,3116cdd1-df11-488b-a266-22a37337a5c5,Damper  S,DA06,Damper  ``S``,1,4,1661
+62,b9029ff7-5bb4-44ef-a59b-1e815b8f03a2,Damper  R,DA07,Damper  ``R``,1,4,1661
+63,1dbc0547-67da-4a8f-a30c-2c9d69aa0d8b,Damper Z,DA11,Damper  ``Z``,1,4,1661
+64,5871d4fa-326e-4dc0-a0b1-2f294c5a1ef4,Damper  X,DA41,Damper  ``X``,1,4,1661
+65,52bedd8e-4604-4a11-8a7e-24fc26dde4af,Ducting,DU01,Ducting,1,4,1661
+66,4d28779e-c7af-4172-8a7b-3cc3fd43ecc3,Ducting,DU02,Ducting,1,4,1661
+67,761939ac-a0b8-49c6-9066-1b293ae22e51,Ducting,DU04,Ducting,1,4,1661
+68,5ce553b9-793b-4fef-a74b-5d5cdda4e5bc,Bucket Elevator,BE01,Bucket Elevator,1,5,1681
+69,d08bee55-c120-4fc3-841c-10180e99faac,Air Slide ,AS01,Air Slide ,1,5,1681
+70,6c07a6f8-5d6f-44d9-9095-d26dba3422ae,Air Slide ,AS02,Air Slide ,1,5,1681
+71,fd2587d5-2d0a-465e-a4c6-7e4cd0be7a1c,Silo 1,SO01,Silo 1,1,6,1691
+72,8af747a9-80f5-4e44-8803-a25a988e33d4,Silo 2,SO02,Silo 2,1,6,1692
+73,92b733a1-2a2f-44e0-84c7-26e64e57061f,Air Slide,AS01,Air Slide,1,7,1711
+74,7d57f748-6582-4b71-9c0c-b0672f7a1bbf,Vibrating Screen,SN01,Vibrating Screen,1,7,1731
+75,434ede23-f49d-424a-98bb-8e2cb692d251,Dedusting Filter,DE01,Dedusting Filter,1,7,1731
+76,7f317f89-6c2b-4bcd-aa16-5d771939e059,Bin,BI01,Bin,1,7,1731
+77,edd83f78-e91d-4064-a2ce-67b0e4a47d5b,Packing Machine,PM01,Packing Machine,1,7,1731
+78,5bf09f2d-1f43-4bfc-8a74-48f5e69d52e5,Belt Conveyor,BC01,Belt Conveyor,1,7,1731
+79,1f1ebebf-eda5-4dd1-befa-fc7dfcfc4994,Belt Conveyor,BC02,Belt Conveyor,1,7,1731
+80,8a95ab4b-c26d-455e-b4c3-21c3ab9e4dcd,Screw Conveyor,SC01,Screw Conveyor,1,7,1731
+81,fc0ff1a1-351a-448f-ac36-83bcc9834fae,Screw Conveyor,SC02,Screw Conveyor,1,7,1731
+82,ff563cc3-d3a2-4cb9-bf16-6b3f2b19ac92,Truck Loading 1,TC01,Truck Loading 1,1,7,1761
+83,04541d08-f39d-4359-88f8-b8ff2924cd7c,Truck Loading 2,TC02,Truck Loading 2,1,7,1762
+84,b49419ca-4729-40ee-821e-89c6fa56c4dd,Compressed ,CP01,Compressed ,1,8,1811
+85,6a5ab6f4-5f86-44a4-9878-e7ec05f212a2,Air Dryer,AY01,Air Dryer,1,8,1811
+86,468f2764-38d7-40ec-b381-791ea8ba3636,Air Tank,TK01,Air Tank,1,8,1811
+87,acc1b3c7-2291-4b58-952f-49e8dd0660dd,Oil Tank,TK01,Oil Tank,1,8,1811
+88,f1a79218-dfa4-48a6-a2c3-95ff07a856eb,Water tower,WT01,Water tower,1,8,1811

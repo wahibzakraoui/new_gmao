@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc51f470eb4187126a1879352c8fa167",
+    "content-hash": "e1ba995bea2f989ea641e3f90d447633",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1255,6 +1255,66 @@
             "time": "2020-10-22T13:48:01+00:00"
         },
         {
+            "name": "flynsarmy/csv-seeder",
+            "version": "v2.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Flynsarmy/laravel-csv-seeder.git",
+                "reference": "b328ae16c51e557b137ac96e999874954c88b467"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Flynsarmy/laravel-csv-seeder/zipball/b328ae16c51e557b137ac96e999874954c88b467",
+                "reference": "b328ae16c51e557b137ac96e999874954c88b467",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=4.1.0",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "nunomaduro/larastan": "^0.6.0@dev",
+                "orchestra/testbench": "6.*",
+                "squizlabs/php_codesniffer": "3.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Flynsarmy\\CsvSeeder\\CsvSeederServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Flynsarmy\\CsvSeeder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Flyn San",
+                    "email": "flynsarmy@gmail.com"
+                }
+            ],
+            "description": "Allows seeding of the database with CSV files",
+            "keywords": [
+                "csv",
+                "laravel",
+                "seed",
+                "seeding",
+                "seeds"
+            ],
+            "support": {
+                "issues": "https://github.com/Flynsarmy/laravel-csv-seeder/issues",
+                "source": "https://github.com/Flynsarmy/laravel-csv-seeder/tree/v2.0.5"
+            },
+            "time": "2021-01-04T03:02:07+00:00"
+        },
+        {
             "name": "fruitcake/laravel-cors",
             "version": "v2.0.3",
             "source": {
@@ -1894,16 +1954,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.29.0",
+            "version": "v8.30.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "d2eba352b3b3a3c515b18c5726b373fe5026733e"
+                "reference": "ab7e1c19ee0403e15fc59983b7ccb86d85db45e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/d2eba352b3b3a3c515b18c5726b373fe5026733e",
-                "reference": "d2eba352b3b3a3c515b18c5726b373fe5026733e",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/ab7e1c19ee0403e15fc59983b7ccb86d85db45e6",
+                "reference": "ab7e1c19ee0403e15fc59983b7ccb86d85db45e6",
                 "shasum": ""
             },
             "require": {
@@ -2058,20 +2118,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-02-23T14:27:41+00:00"
+            "time": "2021-03-03T14:59:13+00:00"
         },
         {
             "name": "laravel/jetstream",
-            "version": "v2.2.2",
+            "version": "v2.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/jetstream.git",
-                "reference": "81faacb09334976bab9dc3b02921272ef2a71d25"
+                "reference": "6e6e62ac1743a60296ba7265d0d91adee58b8401"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/jetstream/zipball/81faacb09334976bab9dc3b02921272ef2a71d25",
-                "reference": "81faacb09334976bab9dc3b02921272ef2a71d25",
+                "url": "https://api.github.com/repos/laravel/jetstream/zipball/6e6e62ac1743a60296ba7265d0d91adee58b8401",
+                "reference": "6e6e62ac1743a60296ba7265d0d91adee58b8401",
                 "shasum": ""
             },
             "require": {
@@ -2125,7 +2185,7 @@
                 "issues": "https://github.com/laravel/jetstream/issues",
                 "source": "https://github.com/laravel/jetstream"
             },
-            "time": "2021-02-23T20:40:55+00:00"
+            "time": "2021-03-02T16:30:16+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -2193,16 +2253,16 @@
         },
         {
             "name": "laravel/tinker",
-            "version": "v2.6.0",
+            "version": "v2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/tinker.git",
-                "reference": "daae1c43f1300fe88c05d83db6f3d8f76677ad88"
+                "reference": "04ad32c1a3328081097a181875733fa51f402083"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/tinker/zipball/daae1c43f1300fe88c05d83db6f3d8f76677ad88",
-                "reference": "daae1c43f1300fe88c05d83db6f3d8f76677ad88",
+                "url": "https://api.github.com/repos/laravel/tinker/zipball/04ad32c1a3328081097a181875733fa51f402083",
+                "reference": "04ad32c1a3328081097a181875733fa51f402083",
                 "shasum": ""
             },
             "require": {
@@ -2255,9 +2315,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/tinker/issues",
-                "source": "https://github.com/laravel/tinker/tree/v2.6.0"
+                "source": "https://github.com/laravel/tinker/tree/v2.6.1"
             },
-            "time": "2021-01-26T20:35:18+00:00"
+            "time": "2021-03-02T16:53:12+00:00"
         },
         {
             "name": "laravelcollective/html",
@@ -3733,16 +3793,16 @@
         },
         {
             "name": "phpoffice/phpspreadsheet",
-            "version": "1.16.0",
+            "version": "1.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "76d4323b85129d0c368149c831a07a3e258b2b50"
+                "reference": "c55269cb06911575a126dc225a05c0e4626e5fb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/76d4323b85129d0c368149c831a07a3e258b2b50",
-                "reference": "76d4323b85129d0c368149c831a07a3e258b2b50",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/c55269cb06911575a126dc225a05c0e4626e5fb4",
+                "reference": "c55269cb06911575a126dc225a05c0e4626e5fb4",
                 "shasum": ""
             },
             "require": {
@@ -3770,7 +3830,7 @@
             },
             "require-dev": {
                 "dompdf/dompdf": "^0.8.5",
-                "friendsofphp/php-cs-fixer": "^2.16",
+                "friendsofphp/php-cs-fixer": "^2.18",
                 "jpgraph/jpgraph": "^4.0",
                 "mpdf/mpdf": "^8.0",
                 "phpcompatibility/php-compatibility": "^9.3",
@@ -3828,9 +3888,9 @@
             ],
             "support": {
                 "issues": "https://github.com/PHPOffice/PhpSpreadsheet/issues",
-                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/1.16.0"
+                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/1.17.1"
             },
-            "time": "2020-12-31T18:03:49+00:00"
+            "time": "2021-03-02T17:54:11+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -5073,16 +5133,16 @@
         },
         {
             "name": "spatie/laravel-settings",
-            "version": "1.0.7",
+            "version": "1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-settings.git",
-                "reference": "aab581673b3895ebf0a149bd4058ec78aedac68e"
+                "reference": "8ec4bcc856bf662c9f124cc6f97808314733f42f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-settings/zipball/aab581673b3895ebf0a149bd4058ec78aedac68e",
-                "reference": "aab581673b3895ebf0a149bd4058ec78aedac68e",
+                "url": "https://api.github.com/repos/spatie/laravel-settings/zipball/8ec4bcc856bf662c9f124cc6f97808314733f42f",
+                "reference": "8ec4bcc856bf662c9f124cc6f97808314733f42f",
                 "shasum": ""
             },
             "require": {
@@ -5136,7 +5196,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-settings/issues",
-                "source": "https://github.com/spatie/laravel-settings/tree/1.0.7"
+                "source": "https://github.com/spatie/laravel-settings/tree/1.0.8"
             },
             "funding": [
                 {
@@ -5148,7 +5208,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-02-19T11:06:50+00:00"
+            "time": "2021-03-03T13:45:41+00:00"
         },
         {
             "name": "spatie/macroable",
@@ -5266,16 +5326,16 @@
         },
         {
             "name": "spatie/ray",
-            "version": "1.20.1",
+            "version": "1.21.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/ray.git",
-                "reference": "f51ef21fe88c4d4628f1656a73db540fdbc28773"
+                "reference": "9ed03dd8d7aa1fed5e947c6a5aa637a54a179009"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/ray/zipball/f51ef21fe88c4d4628f1656a73db540fdbc28773",
-                "reference": "f51ef21fe88c4d4628f1656a73db540fdbc28773",
+                "url": "https://api.github.com/repos/spatie/ray/zipball/9ed03dd8d7aa1fed5e947c6a5aa637a54a179009",
+                "reference": "9ed03dd8d7aa1fed5e947c6a5aa637a54a179009",
                 "shasum": ""
             },
             "require": {
@@ -5325,7 +5385,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/ray/issues",
-                "source": "https://github.com/spatie/ray/tree/1.20.1"
+                "source": "https://github.com/spatie/ray/tree/1.21.1"
             },
             "funding": [
                 {
@@ -5337,7 +5397,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2021-02-26T11:06:59+00:00"
+            "time": "2021-03-03T12:49:16+00:00"
         },
         {
             "name": "spatie/temporary-directory",
@@ -9256,16 +9316,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.4.3",
+            "version": "v1.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "0200ce6e0f697699bce036c42d91f1daab8039a8"
+                "reference": "59ee7e2b2efeb644eabea719186db91d11666733"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/0200ce6e0f697699bce036c42d91f1daab8039a8",
-                "reference": "0200ce6e0f697699bce036c42d91f1daab8039a8",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/59ee7e2b2efeb644eabea719186db91d11666733",
+                "reference": "59ee7e2b2efeb644eabea719186db91d11666733",
                 "shasum": ""
             },
             "require": {
@@ -9312,7 +9372,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2021-02-24T21:20:16+00:00"
+            "time": "2021-03-03T15:22:44+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -9446,16 +9506,16 @@
         },
         {
             "name": "nascent-africa/jetstrap",
-            "version": "v2.2",
+            "version": "v2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nascent-africa/jetstrap.git",
-                "reference": "b4304bbf5a2c2e7aab17e291aaff263ec4f2a7a9"
+                "reference": "45f00c4ff14474315288579c41e5a4d074c1be60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nascent-africa/jetstrap/zipball/b4304bbf5a2c2e7aab17e291aaff263ec4f2a7a9",
-                "reference": "b4304bbf5a2c2e7aab17e291aaff263ec4f2a7a9",
+                "url": "https://api.github.com/repos/nascent-africa/jetstrap/zipball/45f00c4ff14474315288579c41e5a4d074c1be60",
+                "reference": "45f00c4ff14474315288579c41e5a4d074c1be60",
                 "shasum": ""
             },
             "require": {
@@ -9506,7 +9566,7 @@
                 "issues": "https://github.com/nascent-africa/jetstrap/issues",
                 "source": "https://github.com/nascent-africa/jetstrap"
             },
-            "time": "2021-02-27T16:41:22+00:00"
+            "time": "2021-03-02T20:46:59+00:00"
         },
         {
             "name": "nunomaduro/collision",

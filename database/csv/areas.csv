@@ -1,0 +1,10 @@
+id,uuid,name,description,active,factory_id
+1,dc9799ef-8ab2-45bb-b451-32ede5162aef,Commun Electrique,Commun Electrique,1,1
+2,b8494c93-0c41-4418-b9ec-3db9ef8eb186,Raw Materials,Raw Materials,1,1
+3,295d0ea3-5efa-4937-b79d-92a86688f82c,Materiel Feeding,Materiel Feeding,1,1
+4,dc9799ef-8ab2-45bb-b451-32ede5162xfc,Grinding Process,Grinding Process,1,1
+5,02151654-55b0-4131-91e8-0bc0762fccaa,Transport To Storage,Transport To Storage,1,1
+6,944899e3-4cbc-45b7-9a5c-c6690d19ab42,Storage,Storage,1,1
+7,1a0ea802-58d5-43e7-865d-15874c5c3fa4,Packing Plant,Packing Plant,1,1
+8,af76f50c-1315-4489-b38d-55e2489ba9b4,Utilities,Utilities,1,1
+9,22dcb8dd-8b4f-4e47-85f9-5b304582e48a,Commun Laboratoire,Commun Laboratoire,1,1

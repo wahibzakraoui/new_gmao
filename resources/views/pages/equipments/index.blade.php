@@ -1,6 +1,6 @@
 @extends('layouts.metro')
 
-@section('title', 'Areas')
+@section('title', 'Equipments')
 
 @section('content')
 
@@ -12,7 +12,7 @@
             <!--begin::Page Heading-->
             <div class="d-flex align-items-baseline flex-wrap mr-5">
                 <!--begin::Page Title-->
-                <h5 class="text-dark font-weight-bold my-1 mr-5">Factories</h5>
+                <h5 class="text-dark font-weight-bold my-1 mr-5">Equipments</h5>
                 <!--end::Page Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
@@ -20,7 +20,7 @@
                         <a href="/dashboard" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="" class="text-muted">Factories</a>
+                        <a href="" class="text-muted">Equipments</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -143,14 +143,14 @@
     <div class="card card-custom gutter-b">
         <div class="card-header flex-wrap py-3">
             <div class="card-title">
-                <h3 class="card-label">List of current areas:
+                <h3 class="card-label">List of current equipments:
                     <span class="d-block text-muted pt-2 font-size-sm">Including inactive entries.</span>
                 </h3>
             </div>
             <div class="card-toolbar">
-                @can('add area')
+                @can('add equipment')
                 <!--begin::Button-->
-                <a href="{{route('add-area')}}" class="btn btn-primary font-weight-bolder">
+                <a href="{{route('add-equipment')}}" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -174,11 +174,11 @@
             <table class="table table-bordered table-checkable" id="kt_datatable">
                 <thead>
                     <tr>
-                        <th>Area ID</th>
-                        <th>Area Name</th>
+                        <th>Equipment Name</th>
+                        <th>Code</th>
                         <th>Description</th>
-                        <th>Factory</th>
-                        <th>Area Codes</th>
+                        <th>Area Code</th>
+                        <th>Area Name</th>
                         <th>Active</th>
                         <th>Actions</th>
                     </tr>
@@ -215,7 +215,7 @@
 			            <'row'<'col-sm-12'tr>>
                         <'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>`,
                     ajax: {
-                        url: '/areas/list',
+                        url: '{{route("equipments-list")}}',
                         type: 'POST',
                         data: {
                         // parameters for custom backend script demo
@@ -251,11 +251,11 @@
                     },
                 ],
                 columns: [
-                    { data: 'id' },
                     { data: 'name' },
+                    { data: 'code' },
                     { data: 'description' },
-                    { "data": "factoryName", "name": "factories.name"  },
-                    { data: 'areaCodes' },
+                    { data: 'area_code' },
+                    { "data": "areaName", "name": "areas.name"  },
                     { data: 'active' },
                     { data: 'actions', name: 'actions', orderable: false, searchable: false }
                 ],

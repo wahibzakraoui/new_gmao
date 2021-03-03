@@ -1,9 +1,8 @@
 @extends('layouts.metro')
 
-@section('title', 'Areas')
+@section('title', 'New equipment')
 
 @section('content')
-
 <!--begin::Subheader-->
 <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
     <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -12,7 +11,7 @@
             <!--begin::Page Heading-->
             <div class="d-flex align-items-baseline flex-wrap mr-5">
                 <!--begin::Page Title-->
-                <h5 class="text-dark font-weight-bold my-1 mr-5">Factories</h5>
+                <h5 class="text-dark font-weight-bold my-1 mr-5">Equipments</h5>
                 <!--end::Page Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
@@ -20,7 +19,7 @@
                         <a href="/dashboard" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="" class="text-muted">Factories</a>
+                        <a href="" class="text-muted">Equipments</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -139,209 +138,195 @@
         </div>
     </div>
     <!--end::Notice-->
+    <div class="col-xs-12 col-md-12">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+    </div>
+    @if(count($areasList) > 0 && isset($areasList[1]))
     <!--begin::Card-->
     <div class="card card-custom gutter-b">
         <div class="card-header flex-wrap py-3">
             <div class="card-title">
-                <h3 class="card-label">List of current areas:
-                    <span class="d-block text-muted pt-2 font-size-sm">Including inactive entries.</span>
+                <h3 class="card-label">New equipment:
+                    <span class="d-block text-muted pt-2 font-size-sm">Required fields are marked with a star
+                        sign.</span>
                 </h3>
-            </div>
-            <div class="card-toolbar">
-                @can('add area')
-                <!--begin::Button-->
-                <a href="{{route('add-area')}}" class="btn btn-primary font-weight-bolder">
-                    <span class="svg-icon svg-icon-md">
-                        <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                            height="24px" viewBox="0 0 24 24" version="1.1">
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <rect x="0" y="0" width="24" height="24" />
-                                <circle fill="#000000" cx="9" cy="15" r="6" />
-                                <path
-                                    d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
-                                    fill="#000000" opacity="0.3" />
-                            </g>
-                        </svg>
-                        <!--end::Svg Icon-->
-                    </span>New Record</a>
-                <!--end::Button-->
-                @endcan
             </div>
         </div>
         <div class="card-body">
-            <!--begin: Datatable-->
-            <table class="table table-bordered table-checkable" id="kt_datatable">
-                <thead>
-                    <tr>
-                        <th>Area ID</th>
-                        <th>Area Name</th>
-                        <th>Description</th>
-                        <th>Factory</th>
-                        <th>Area Codes</th>
-                        <th>Active</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
+            {{ Form::open(array('route' => array('store-equipment'), 'method' => 'POST', 'id' => 'create_equipment_form')) }}
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-lg-6">
+                        <label>Equipment name <span class="text-danger">*</span></label>
+                        {{ Form::text('name', null, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please enter equipment name</span>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Equipment belongs in area <span class="text-danger">*</span></label>
+                        {{ Form::select('area_id', $areasList , '', ['class' => 'form-control', 'id' => 'areaName']) }}
+                        <span class="form-text text-muted">Please enter area name</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-6">
+                        <label>Description <span class="text-danger">*</span></label>
+                        {{ Form::text('description', null, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please enter a breif description of this equipment</span>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Equipment code <span class="text-danger">*</span></label>
+                        <div class=" col-lg-12">
+                            {{ Form::text('code', null, ['class' => 'form-control']) }}
+                            <span class="form-text text-muted">Please enter code.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-grou-row">
+                    <div class="col-lg-6">
+                        <label>Equipment belongs in area <span class="text-danger">*</span></label>
+                        {{ Form::select('area_code', [] , '', ['class' => 'form-control', 'id' => 'areaCode']) }}
+                        <span class="form-text text-muted">Please enter area code</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-6">
+                        <label class="col-3 col-form-label">Active</label>
+                        <div class="col-3">
+                            <span class="switch switch-outline switch-icon switch-success">
+                                <label>
+                                    {{ Form::checkbox('active', '1', true) }}
+                                    <span></span>
+                                </label>
+                            </span>
+                        </div>
+                        <span class="form-text text-muted">Is this equipment active?</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-lg-6"></div>
+                    <div class="col-lg-6 col-xs-12 mb-5 text-right">
+                        <button type="reset" class="btn btn-lg btn-secondary d-xs-block">Cancel</button>
+                        <button type="submit" class="btn btn-lg btn-primary mr-2 d-xs-block"
+                            id="submit_button">Save</button>
+                    </div>
+                </div>
+            </div>
+            {{ Form::close() }}
 
-                </tbody>
-            </table>
-            <!--end: Datatable-->
+
         </div>
     </div>
     <!--end::Card-->
+    @else
+    <div class="col-lg-12">
+        <!--begin::Callout-->
+        <div class="card card-custom mb-2">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between p-4 flex-lg-wrap flex-xl-nowrap">
+                    <div class="d-flex flex-column mr-5">
+                        <a href="#" class="h4 text-dark text-hover-primary mb-5">No areas defined yet</a>
+                        <p class="text-dark-50">In order to add Equipments, please add an Area first. You can come back to this page later.</p>
+                    </div>
+                    <div class="ml-6 ml-lg-0 ml-xxl-6 flex-shrink-0">
+                        <a href="{{ route('add-area') }}" target="_self"
+                            class="btn font-weight-bolder text-uppercase btn-primary py-4 px-6">Create area</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end::Callout-->
+    </div>
+    @endif
 </div>
-
 <!--end::Content-->
 @stop
 
 @section('my-scripts')
-<script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+<script src="{{asset('assets/js/pages/crud/forms/widgets/select2.js')}}"></script>
 <script>
-    "use strict";
-    var KTDatatablesDataSourceAjaxServer = function () {
-
-        var initTable1 = function () {
-            var table = $('#kt_datatable');
-
-            // begin first table
-            table.DataTable({
-                responsive: true,
-                searchDelay: 500,
-                processing: true,
-                serverSide: true,
-                dom: `<'row'<'col-sm-6 text-left'f><'col-sm-6 text-right'B>>
-			            <'row'<'col-sm-12'tr>>
-                        <'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>`,
-                    ajax: {
-                        url: '/areas/list',
-                        type: 'POST',
-                        data: {
-                        // parameters for custom backend script demo
-                        columnsDef: [
-                            'name', 'code',
-                            'description'],
-                    },
+    FormValidation.formValidation(
+        document.getElementById('create_equipment_form'),
+        {
+            fields: {
+                name: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Factory name is required'
+                        }
+                    }
                 },
-                buttons: [
-                    {
-                        extend: 'print',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3 ]
-                        }
-                    },
-                    {
-                        extend: 'copyHtml5',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3 ]
-                        }
-                    },
-                    {
-                        extend: 'excelHtml5',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3 ]
-                        }
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3 ]
-                        }
-                    },
-                ],
-                columns: [
-                    { data: 'id' },
-                    { data: 'name' },
-                    { data: 'description' },
-                    { "data": "factoryName", "name": "factories.name"  },
-                    { data: 'areaCodes' },
-                    { data: 'active' },
-                    { data: 'actions', name: 'actions', orderable: false, searchable: false }
-                ],
-                columnDefs: [
-                    {
-                        width: '75px',
-                        targets: 5,
-                        render: function (data, type, full, meta) {
-                            var status = {
-                                0: { 'title': 'Inactive', 'state': 'danger' },
-                                1: { 'title': 'Active', 'state': 'success' },
-                            };
-                            if (typeof status[data] === 'undefined') {
-                                return '<span class="label label-danger label-dot mr-2"></span>' +
-                                    '<span class="font-weight-bold text-danger">Inactive</span>';
-                            }
-                            return '<span class="label label-' + status[data].state + ' label-dot mr-2"></span>' +
-                                '<span class="font-weight-bold text-' + status[data].state + '">' + status[data].title + '</span>';
+                code: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Factory code is required.'
                         },
-                    },
-                ],
-            });
-
-            $('#export_print').on('click', function (e) {
-                e.preventDefault();
-                table.button(0).trigger();
-            });
-
-            $('#export_copy').on('click', function (e) {
-                e.preventDefault();
-                table.button(1).trigger();
-            });
-
-            $('#export_excel').on('click', function (e) {
-                e.preventDefault();
-                table.button(2).trigger();
-            });
-
-            $('#export_csv').on('click', function (e) {
-                e.preventDefault();
-                table.button(3).trigger();
-            });
-
-            $('#export_pdf').on('click', function (e) {
-                e.preventDefault();
-                table.button(4).trigger();
-            });
-        };
-
-        return {
-
-            //main function to initiate the module
-            init: function () {
-                initTable1();
+                    }
+                },
+                description: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Factory description is required'
+                        },
+                    }
+                },
+                area_id: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Area ID is required'
+                        },
+                    }
+                },
+                area_code: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Area Code is required'
+                        },
+                    }
+                },
             },
 
-        };
+            plugins: {
+                trigger: new FormValidation.plugins.Trigger(),
+                // Validate fields when clicking the Submit button
+                submitButton: new FormValidation.plugins.SubmitButton(),
+                // Submit the form when all fields are valid
 
-    }();
-
-    jQuery(document).ready(function () {
-        KTDatatablesDataSourceAjaxServer.init();
+                defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+                // Bootstrap Framework Integration
+                bootstrap: new FormValidation.plugins.Bootstrap({
+                    eleInvalidClass: '',
+                    eleValidClass: '',
+                })
+            }
+        }
+    );
+</script>
+<script>
+    $('#kt_select2_12_1, #kt_select2_12_2, #kt_select2_12_3, #kt_select2_12_4').select2({
+        placeholder: "Select an option",
     });
-
-    @if(session('success'))
-        toastr.options = {
-        "closeButton": true,
-        "debug": false,
-        "newestOnTop": false,
-        "progressBar": true,
-        "positionClass": "toast-bottom-right",
-        "preventDuplicates": false,
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-        };
-
-        toastr.success("{{session('success')}}");
-    @endif
-
-
+    $('#areaName').change(function(){
+        var selected_area = $(this).val();
+        if(selected_area != ""){
+            $.get( "{{route('areas-json')}}" + '/' + selected_area, function( data ) {
+                $(data).each(function(index, d){
+                    var newOption = new Option(d.name, d.id, true, true);
+                    $('#areaCode').append(newOption).trigger('change');
+                });
+            });
+        }else{
+            $('#areaCode').empty().trigger('change');
+        }
+    });
 </script>
 @stop

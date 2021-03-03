@@ -27,7 +27,8 @@
         "spatie/laravel-settings": "^1.0",
         "trexology/laravel-inventory": "^3.0",
         "yajra/laravel-datatables": "1.5",
-        "yajra/laravel-datatables-oracle": "~9.0"
+        "yajra/laravel-datatables-oracle": "~9.0",
+        "flynsarmy/csv-seeder": "2.0.*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
