@@ -24,5 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AreasTableSeeder::class);
         $this->call(AreaCodesTableSeeder::class);
         $this->call(EquipmentsTableSeeder::class);
+        $this->call(PeriodicitiesTableSeeder::class);
+        $this->call(PartsTableSeeder::class);
+        $this->call(GamutDraftsTableSeeder::class);
     }
 }

@@ -15,8 +15,8 @@ class CreateEquipmentTable extends Migration
     {
         Schema::create('equipment', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid')->unique();
             $table->string('name', 160);
+            $table->uuid('uuid')->unique();
             $table->string('code', 20);
             $table->mediumText('description');
             $table->boolean('active');

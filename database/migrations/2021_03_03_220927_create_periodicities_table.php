@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAreasTable extends Migration
+class CreatePeriodicitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateAreasTable extends Migration
      */
     public function up()
     {
-        Schema::create('areas', function (Blueprint $table) {
-            $table->id();
+        Schema::create('periodicities', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('name', 160);
-            $table->uuid('uuid')->unique();
             $table->mediumText('description');
-            $table->boolean('active');
-            $table->unsignedBigInteger('factory_id');
-            $table->foreign('factory_id')->references('id')->on('factories');
-            $table->softDeletes();
+            $table->string('code', 60);
+            $table->enum('unit', ['minute', 'hour', 'day',  'week', 'month', 'year']);
+            $table->double('frequency', 25, 2);
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ class CreateAreasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('areas');
+        Schema::dropIfExists('periodicities');
     }
 }

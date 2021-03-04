@@ -4,12 +4,12 @@ use Flynsarmy\CsvSeeder\CsvSeeder;
 
 use Illuminate\Support\Facades\DB;
 
-class AreaCodesTableSeeder extends CsvSeeder {
+class PeriodicitiesTableSeeder extends CsvSeeder {
 
 	public function __construct()
 	{
-		$this->table = 'area_codes';
-		$this->filename = base_path().'/database/csv/area_codes.csv';
+		$this->table = 'periodicities';
+		$this->filename = base_path().'/database/csv/periodicities.csv';
 		$this->should_trim = true;
 	}
 
@@ -20,7 +20,6 @@ class AreaCodesTableSeeder extends CsvSeeder {
 
 		// Uncomment the below to wipe the table clean before populating
 		// DB::table($this->table)->truncate();
-
 		parent::run();
 	}
 }

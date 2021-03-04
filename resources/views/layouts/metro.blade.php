@@ -1524,7 +1524,7 @@
 			<!--begin::Header-->
 			<div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
 				<h3 class="font-weight-bold m-0">User Profile
-				<small class="text-muted font-size-sm ml-2">12 messages</small></h3>
+				<small class="text-muted font-size-sm ml-2">{{env('APP_NAME')}}</small></h3>
 				<a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close">
 					<i class="ki ki-close icon-xs text-muted"></i>
 				</a>
@@ -1534,13 +1534,20 @@
 			<div class="offcanvas-content pr-5 mr-n5">
 				<!--begin::Header-->
 				<div class="d-flex align-items-center mt-5">
+					@if(Auth::user()->profile_photo_path)
 					<div class="symbol symbol-100 mr-5">
-						<div class="symbol-label" style="background-image:url('{{asset('assets/media/users/300_21.jpg')}}')"></div>
+						<div class="symbol-label" style="background-image:url('{{url('/storage/'.Auth::user()->profile_photo_path)}}'"></div>
 						<i class="symbol-badge bg-success"></i>
 					</div>
+					@else
+					<div class="symbol symbol-100 mr-5">
+						<div class="symbol-label" style="background-image:url('https://ui-avatars.com/api/?name={{Auth::user()->name}}&color=7F9CF5&background=EBF4FF&size=256')"></div>
+						<i class="symbol-badge bg-success"></i>
+					</div>
+					@endif
 					<div class="d-flex flex-column">
 						<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ Auth::user()->name }}</a>
-						<div class="text-muted mt-1">Application Developer</div>
+						<div class="text-muted mt-1">{{ Auth::user()->getRoleNames()[0] }}</div>
 						<div class="navi mt-2">
 							<a href="#" class="navi-item">
 								<span class="navi-link p-0 pb-2">

@@ -1,0 +1,98 @@
+id,equipment,type,state,periodicity,area_code,equipment_code,factory_code,gamut_code,active
+1,Convoyeur a bande BC01,Mechanical,Running,Daily,1621,BC01,TAR,BC31Q,1
+2,Convoyeur a bande BC01,Mechanical,Running,Monthly,1621,BC01,TAR,BC31M,1
+3,Convoyeur a bande BC01,Mechanical,Offline,Annual,1621,BC01,TAR,BC31A,1
+4,Convoyeur a bande BC02,Mechanical,Running,Daily,1621,BC02,TAR,BC31Q,1
+5,Convoyeur a bande BC02,Mechanical,Running,Monthly,1621,BC02,TAR,BC31M,1
+6,Convoyeur a bande BC02,Mechanical,Offline,Annual,1621,BC02,TAR,BC31A,1
+7,Doseur a bande calcaire,Mechanical,Running,Daily,1621,WF01,TAR,WF32Q,1
+8,Doseur a bande calcaire,Mechanical,Running,Monthly,1621,WF01,TAR,WF32M,1
+9,Doseur a bande calcaire,Mechanical,Offline,Annual,1621,WF01,TAR,WF32A,1
+10,Doseur a bande clinker,Mechanical,Running,Daily,1621,WF02,TAR,WF32Q,1
+11,Doseur a bande clinker,Mechanical,Running,Monthly,1621,WF02,TAR,WF32M,1
+12,Doseur a bande clinker,Mechanical,Offline,Annual,1621,WF02,TAR,WF32A,1
+13,Doseur a bande Gypse,Mechanical,Running,Daily,1621,WF03,TAR,WF32Q,1
+14,Doseur a bande Gypse,Mechanical,Running,Monthly,1621,WF03,TAR,WF32M,1
+15,Doseur a bande Gypse,Mechanical,Offline,Annual,1621,WF03,TAR,WF32A,1
+16,Tremie calcaire,Mechanical,Offline,Annual,1621,FB01,TAR,FB33A,1
+17,Tremie clinker,Mechanical,Offline,Annual,1621,FB02,TAR,FB33A,1
+18,Tremie gypse,Mechanical,Offline,Annual,1621,FB03,TAR,FB33A,1
+19,Sandwish airlock,Mechanical,Running,Monthly,1621,BC03,TAR,BC34M,1
+20,Sandwish airlock,Mechanical,Running,Quarterly,1621,BC03,TAR,BC34T,1
+21,Sandwish airlock,Mechanical,Offline,Annual,1621,BC03,TAR,BC34A,1
+22,Magnetique separateur,Mechanical,Offline,Weekly,1621,MS01,TAR,MS35H,1
+23,Magnetique separateur,Mechanical,Running,Quarterly,1621,MS01,TAR,MS35T,1
+24,Magnetique separateur,Mechanical,Running,Annual,1621,MS01,TAR,MS35A,1
+25,Magnetique separateur,Mechanical,Offline,Quarterly,1621,MS01,TAR,MS35T,1
+26,Filtre depoussierage matiere premiere,Mechanical,Running,Daily,1621,DE01,TAR,DE36Q,1
+27,Filtre depoussierage matiere premiere,Mechanical,Offline,Monthly,1621,DE01,TAR,DE36M,1
+28,Convoyeur a bande des rejets BC01,Mechanical,Running,Daily,1641,BC01,TAR,BC314Q,1
+29,Convoyeur a bande des rejets BC01,Mechanical,Running,Monthly,1641,BC01,TAR,BC314M,1
+30,Convoyeur a bande des rejets BC01,Mechanical,Offline,Annual,1641,BC01,TAR,BC314A,1
+31,Convoyeur a bande des rejets BC02,Mechanical,Running,Daily,1641,BC02,TAR,BC314Q,1
+32,Convoyeur a bande des rejets BC02,Mechanical,Running,Monthly,1641,BC02,TAR,BC314M,1
+33,Convoyeur a bande des rejets BC02,Mechanical,Offline,Annual,1641,BC02,TAR,BC314A,1
+34,Separateur dynamique,Mechanical,Running,Quarterly,1651,CL01,TAR,CL38T,1
+35,Separateur dynamique,Mechanical,Running,Biannual,1651,CL01,TAR,CL38S,1
+36,Separateur dynamique,Mechanical,Running,Annual,1651,CL01,TAR,CL38A,1
+37,Separateur dynamique,Mechanical,Offline,Monthly,1651,CL01,TAR,CL38M,1
+38,Separateur dynamique,Mechanical,Offline,Quarterly,1651,CL01,TAR,CL38T,1
+39,Separateur dynamique,Mechanical,Offline,Biannual,1651,CL01,TAR,CL38S,1
+40,Separateur dynamique,Mechanical,Offline,Annual,1651,CL01,TAR,CL38A,1
+41,Bruleur,Mechanical,Running,Daily,1631,HG01,TAR,HG311Q,1
+42,Bruleur,Mechanical,Running,Weekly,1631,HG01,TAR,HG311H,1
+43,Bruleur,Mechanical,Offline,Annual,1631,HG01,TAR,HG311A,1
+44,DIspositif de lubrification de reducteur de Commande,Mechanical,Running,Quarterly,1631,LQ01,TAR,LQ310T,1
+45,DIspositif de lubrification de reducteur de Commande,Mechanical,Running,Biannual,1631,LQ01,TAR,LQ310S,1
+46,DIspositif de lubrification de reducteur de Commande,Mechanical,Running,Annual,1631,LQ01,TAR,LQ310A,1
+47,DIspositif de lubrification de reducteur de Commande,Mechanical,Offline,Quarterly,1631,LQ01,TAR,LQ310T,1
+48,DIspositif de lubrification de reducteur de Commande,Mechanical,Offline,Biannual,1631,LQ01,TAR,LQ310S,1
+49,DIspositif de lubrification de reducteur de Commande,Mechanical,Offline,Annual,1631,LQ01,TAR,LQ310A,1
+50,Reducteur de Commande,Mechanical,Offline,Quarterly,1631,GB01,TAR,GB310T,1
+51,Reducteur de Commande,Mechanical,Running,Weekly,1631,GB01,TAR,GB310H,1
+52,Reducteur de Commande,Mechanical,Offline,Monthly,1631,GB01,TAR,GB310M,1
+53,Reducteur de Commande,Mechanical,Offline,Biannual,1631,GB01,TAR,GB310S,1
+54,Reducteur de Commande,Mechanical,Offline,Annual,1631,GB01,TAR,GB310A,1
+55,Reducteur de Commande,Mechanical,Offline,Biannual,1631,GB01,TAR,GB310AA,1
+56,Bascule de bande,Mechanical,Running,Monthly,1621,BS01,TAR,BS313M,1
+57,Broyeur - Armoire Hydraulique HSLM - HSMS,Mechanical,Running,Quarterly,1631,HC01,TAR,HC310T,1
+58,Broyeur - Armoire Hydraulique HSLM - HSMS,Mechanical,Running,Biannual,1631,HC01,TAR,HC310S,1
+59,Broyeur - Armoire Hydraulique HSLM - HSMS,Mechanical,Running,Annual,1631,HC01,TAR,HC310A,1
+60,Broyeur - Armoire Hydraulique HSLM - HSMS,Mechanical,Offline,Quarterly,1631,HC01,TAR,HC310T,1
+61,Broyeur - Armoire Hydraulique HSLM - HSMS,Mechanical,Offline,Biannual,1631,HC01,TAR,HC310S,1
+62,Filtre Proces,Mechanical,Running,Monthly,1651,BF01,TAR,BF309M,1
+63,Filtre Proces,Mechanical,Running,Biannual,1651,BF01,TAR,BF309S,1
+64,Ventilateur Principale,Mechanical,Offline,Biannual,1651,FN01,TAR,FN315S,1
+65,Broyeur - Accumulateurs a vessie,Mechanical,Offline,Quarterly,1631,BA01,TAR,BA310T,1
+66,Broyeur - Accumulateurs a vessie,Mechanical,Offline,Annual,1631,BA01,TAR,BA310A,1
+67,Broyeur - Bati inferieur,Mechanical,Running,Biannual,1631,LF01,TAR,LF310S,1
+68,Broyeur - Bati inferieur,Mechanical,Running,Annual,1631,LF01,TAR,LF310A,1
+69,Broyeur - Bati inferieur,Mechanical,Offline,Quarterly,1631,LF01,TAR,LF310T,1
+70,Broyeur - Bati inferieur,Mechanical,Offline,Biannual,1631,LF01,TAR,LF310S,1
+71,Broyeur - Bati superieur,Mechanical,Running,Biannual,1631,UF01,TAR,UF310S,1
+72,Broyeur - Bati superieur,Mechanical,Offline,Biannual,1631,UF01,TAR,UF310S,1
+73,Broyeur -  Dispositif de pivotement,Mechanical,Running,Annual,1631,SD01,TAR,SD310A,1
+74,Broyeur -  Entrainement LM,Mechanical,Running,Quarterly,1631,LM01,TAR,LM310T,1
+75,Broyeur -  Entrainement LM,Mechanical,Running,Biannual,1631,LM01,TAR,LM310S,1
+76,Broyeur -  Entrainement LM,Mechanical,Offline,Quarterly,1631,LM01,TAR,LM310T,1
+77,Broyeur -  Entrainement LM,Mechanical,Offline,Biannual,1631,LM01,TAR,LM310S,1
+78,Broyeur -  Entrainement LM,Mechanical,Offline,Annual,1631,LM01,TAR,LM310A,1
+79,Broyeur   Levier Oscillant,Mechanical,Offline,Weekly,1631,SL01,TAR,SL310H,1
+80,Broyeur   Levier Oscillant,Mechanical,Offline,Quarterly,1631,SL01,TAR,SL310T,1
+81,Broyeur   Levier Oscillant,Mechanical,Offline,Biannual,1631,SL01,TAR,SL310S,1
+82,Broyeur - Meule Cpl,Mechanical,Offline,Quarterly,1631,GW01,TAR,GW310T,1
+83,Broyeur - Meule Cpl,Mechanical,Offline,Biannual,1631,GW01,TAR,GW310S,1
+84,Broyeur - Systeme de suspension des meules de broyage,Mechanical,Offline,Weekly,1631,SY01,TAR,SY310H,1
+85,Broyeur - Systeme de suspension des meules de broyage,Mechanical,Offline,Monthly,1631,SY01,TAR,SY310M,1
+86,Broyeur - Systeme de suspension des meules de broyage,Mechanical,Offline,Biannual,1631,SY01,TAR,SY310S,1
+87,Broyeur - Systeme de suspension des meules de broyage,Mechanical,Offline,Annual,1631,SY01,TAR,SY310A,1
+88,Broyeur - Systeme de suspension des meules de broyage,Mechanical,Offline,Biannual,1631,SY01,TAR,SY310AA,1
+89,Broyeur - Systeme d'air de barrage,Mechanical,Running,Monthly,1631,AB01,TAR,AB310M,1
+90,Broyeur - Systeme d'air de barrage,Mechanical,Offline,Monthly,1631,AB01,TAR,AB310M,1
+91,Broyeur - Systeme d'air de barrage,Mechanical,Offline,Quarterly,1631,AB01,TAR,AB310T,1
+92,Broyeur - Systeme d'air de barrage,Mechanical,Offline,Biannual,1631,AB01,TAR,AB310S,1
+93,Broyeur - Table Cpl,Mechanical,Offline,Biannual,1631,CT01,TAR,CT310S,1
+94,Convoyeur a vis filtre proces,Mechanical,Running,Weekly,1651,SC01,TAR,SC316H,1
+95,Convoyeur a vis filtre proces,Mechanical,Running,Monthly,1651,SC01,TAR,SC316M,1
+96,Convoyeur a vis filtre proces,Mechanical,Offline,Biannual,1651,SC01,TAR,SC316S,1
+97,Convoyeur a vis filtre proces,Mechanical,Offline,Annual,1651,SC01,TAR,SC316A,1

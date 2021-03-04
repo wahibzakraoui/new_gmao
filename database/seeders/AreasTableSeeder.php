@@ -10,6 +10,7 @@ class AreasTableSeeder extends CsvSeeder {
 	{
 		$this->table = 'areas';
 		$this->filename = base_path().'/database/csv/areas.csv';
+		$this->should_trim = true;
 	}
 
 	public function run()
