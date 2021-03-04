@@ -24,6 +24,8 @@ class CreateGamutDraftsTable extends Migration
             $table->string('factory_code', 160);
             $table->string('gamut_code', 160);
             $table->boolean('active')->default(1);
+            $table->integer('estimated_hours')->default(0)->nullable();
+            $table->integer('assigned_user_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

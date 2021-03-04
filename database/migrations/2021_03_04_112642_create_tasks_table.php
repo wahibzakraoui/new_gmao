@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFactoriesTable extends Migration
+class CreateTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateFactoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('factories', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name', 160);
-            $table->uuid('uuid');
-            $table->string('code', 60);
+        Schema::create('tasks', function (Blueprint $table) {
+            $table->id();
+            $table->string('label');
             $table->mediumText('description');
-            $table->boolean('active');
+            $table->string('quality')->nullable();
+            $table->decimal('quantity', 25, 2)->nullable();
+            $table->unsignedBigInteger('gamut_id');
+            $table->foreign('gamut_id')->references('id')->on('gamuts');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -32,6 +32,6 @@ class CreateFactoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('factories');
+        Schema::dropIfExists('tasks');
     }
 }

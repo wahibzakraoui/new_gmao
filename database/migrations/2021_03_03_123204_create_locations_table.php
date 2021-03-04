@@ -13,12 +13,12 @@ class CreateLocationsTable extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('name');
             $table->integer('parent_id')->nullable()->index();
             $table->integer('left')->nullable()->index();
             $table->integer('right')->nullable()->index();
             $table->integer('depth')->nullable();
-            $table->string('name');
+            $table->timestamps();
 
             /*
              * This field is for scoping categories, use it if you

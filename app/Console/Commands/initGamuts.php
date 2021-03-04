@@ -8,6 +8,7 @@ use App\Models\Gamut;
 use App\Models\GamutDraft;
 use App\Models\Part;
 use App\Models\Periodicity;
+use App\Models\Service;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -51,8 +52,15 @@ class initGamuts extends Command
             $equipment = Equipment::whereCode($draft->equipment_code)->first();
             $part = Part::whereCode($draft->equipment_code)->first();
             $periodicity = Periodicity::whereCode($draft->periodicity)->first();
+            $service = Service::whereName($draft->type)->first();
             
             $now = CarbonImmutable::now()->locale('en_US');
+
+            if($draft->type == "Oil" || $draft->type == "Grease"){
+                $type = "lubrification";
+            }else{
+                $type = "visit";
+            }
 
             if($draft->periodicity == "Daily" || $draft->periodicity == "Weekly")
             {
@@ -86,9 +94,13 @@ class initGamuts extends Command
                 'equipment_id' => $equipment->id ?? null,
                 'part_id' => $part->id ?? null,
                 'area_id' => $equipment->area_id ?? null,
+                'type' => $type ?? null,
                 'periodicity_id' => $periodicity->id ?? null,
                 'state' => $draft->state == "Running" ? "Running" : "Offline",
                 'next_run' => $next_run,
+                'service_id' => $service->id, 
+                'estimated_hours' => $draft->estimated_hours > 0 ? $draft->estimated_hours : 8, 
+                'assigned_user_id' => $draft->assigned_user_id ?? null, 
             ]);
         });
     }

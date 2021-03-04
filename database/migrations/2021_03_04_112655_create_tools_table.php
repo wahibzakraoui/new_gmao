@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFactoriesTable extends Migration
+class CreateToolsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateFactoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('factories', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('tools', function (Blueprint $table) {
+            $table->bigIncrements('id')->unsigned()->index();
             $table->string('name', 160);
-            $table->uuid('uuid');
-            $table->string('code', 60);
-            $table->mediumText('description');
+            $table->uuid('uuid')->unique();
+            $table->string('code', 60);	
             $table->boolean('active');
-            $table->timestamps();
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -32,6 +31,6 @@ class CreateFactoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('factories');
+        Schema::dropIfExists('tools');
     }
 }
