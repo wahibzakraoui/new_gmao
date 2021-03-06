@@ -23,10 +23,10 @@ class CreatePartsTable extends Migration
             $table->foreign('area_id')->references('id')->on('areas');
             $table->string('area_code', 60);
             $table->unsignedBigInteger('equipment_id')->nullable();
-            $table->foreign('equipment_id')->references('id')->on('equipment');
+            $table->foreign('equipment_id')->references('id')->on('equipment')->onDelete('cascade');
             $table->string('equipment_code', 60);
             $table->unsignedBigInteger('criticity_id')->nullable();
-            $table->foreign('criticity_id')->references('id')->on('criticities');	
+            $table->foreign('criticity_id')->references('id')->on('criticities');
             $table->boolean('active');
             $table->softDeletes();
             $table->timestamps();

@@ -1476,7 +1476,7 @@
 										<span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
 										<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ explode(' ', Auth::user()->name)[0] }}</span>
 										<span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
-											<span class="symbol-label font-size-h5 font-weight-bold">{{ substr(Auth::user()->name, 0, 1) }}</span>
+											<span class="symbol-label font-size-h5 font-weight-bold">{{ substr(explode(' ', Auth::user()->name)[0], 0, 1).substr(explode(' ', Auth::user()->name)[1], 0, 1) }}</span>
 										</span>
 									</div>
 								</div>
@@ -1547,7 +1547,7 @@
 					@endif
 					<div class="d-flex flex-column">
 						<a href="/user/profile" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ Auth::user()->name }}</a>
-						<div class="text-muted mt-1">{{ Auth::user()->getRoleNames()[0] }}</div>
+						<div class="text-muted mt-1">{{ Auth::user()->getRoleNames()[0] ?? 'User has no Roles!' }}</div>
 						<div class="navi mt-2">
 							<a href="/user/profile" class="navi-item">
 								<span class="navi-link p-0 pb-2">

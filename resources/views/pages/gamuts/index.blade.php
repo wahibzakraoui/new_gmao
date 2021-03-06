@@ -1,6 +1,6 @@
 @extends('layouts.metro')
 
-@section('title', 'Equipments')
+@section('title', 'Gamuts')
 
 @section('content')
 
@@ -12,7 +12,7 @@
             <!--begin::Page Heading-->
             <div class="d-flex align-items-baseline flex-wrap mr-5">
                 <!--begin::Page Title-->
-                <h5 class="text-dark font-weight-bold my-1 mr-5">Equipments</h5>
+                <h5 class="text-dark font-weight-bold my-1 mr-5">Gamuts</h5>
                 <!--end::Page Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
@@ -20,7 +20,7 @@
                         <a href="/dashboard" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="" class="text-muted">Equipments</a>
+                        <a href="" class="text-muted">Gamuts</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -113,7 +113,7 @@
 </div>
 <!--end::Subheader-->
 <!--begin::Content-->
-<div class="container">
+<div class="container-fluid">
     <!--begin::Notice-->
     <div class="alert alert-custom alert-white alert-shadow gutter-b" role="alert">
         <div class="alert-icon">
@@ -134,8 +134,7 @@
                 <!--end::Svg Icon-->
             </span>
         </div>
-        <div class="alert-text">This page lets you create the different Areas that constitute your infrastructure.
-            <br />An Area will house and contain all the different Equipments.
+        <div class="alert-text">This page lets you manage your primary Gamuts.
         </div>
     </div>
     <!--end::Notice-->
@@ -143,14 +142,14 @@
     <div class="card card-custom gutter-b">
         <div class="card-header flex-wrap py-3">
             <div class="card-title">
-                <h3 class="card-label">List of current equipments:
+                <h3 class="card-label">List of current gamuts:
                     <span class="d-block text-muted pt-2 font-size-sm">Including inactive entries.</span>
                 </h3>
             </div>
             <div class="card-toolbar">
-                @can('add equipment')
+                @can('add gamut')
                 <!--begin::Button-->
-                <a href="{{route('add-equipment')}}" class="btn btn-primary font-weight-bolder">
+                <a href="{{route('add-gamut')}}" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -174,12 +173,17 @@
             <table class="table table-bordered table-checkable" id="kt_datatable">
                 <thead>
                     <tr>
-                        <th>Equipment Name</th>
+                        <th>ID</th>
+                        <th>Designation</th>
                         <th>Code</th>
-                        <th>Description</th>
-                        <th>Area Code</th>
-                        <th>Area Name</th>
-                        <th>Active</th>
+                        <th>Equipment</th>
+                        <th>Area</th>
+                        <th>State</th>
+                        <th>Type</th>
+                        <th>Service</th>
+                        <th>Periodicity</th>
+                        <th width="20px">Active</th>
+                        <th>Next run</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -215,7 +219,7 @@
 			            <'row'<'col-sm-12'tr>>
                         <'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>`,
                     ajax: {
-                        url: '{{route("equipments-list")}}',
+                        url: '/gamuts/list',
                         type: 'POST',
                         data: {
                         // parameters for custom backend script demo
@@ -228,41 +232,46 @@
                     {
                         extend: 'print',
                         exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5 ]
+                            columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
                         }
                     },
                     {
                         extend: 'copyHtml5',
                         exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5 ]
+                            columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
                         }
                     },
                     {
                         extend: 'excelHtml5',
                         exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5 ]
+                            columns: [1, 2, 3, 4, 5, 6, 7, 8, 9 ]
                         }
                     },
                     {
                         extend: 'pdfHtml5',
                         exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5 ]
+                            columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
                         }
                     },
                 ],
                 columns: [
-                    { data: 'name' },
+                    { data: 'id' },
+                    { data: 'designation' },
                     { data: 'code' },
-                    { data: 'description' },
-                    { data: 'area_code' },
+                    { "data": "equipmentName", "name": "equipment.name"  },
                     { "data": "areaName", "name": "areas.name"  },
+                    { data: 'state' },
+                    { data: 'type' },
+                    { "data": "serviceName", "name": "services.name"  },
+                    { "data": "periodicityName", "name": "periodicities.name"  },
                     { data: 'active' },
+                    { data: 'next_run' },
                     { data: 'actions', name: 'actions', orderable: false, searchable: false }
                 ],
                 columnDefs: [
                     {
                         width: '75px',
-                        targets: 5,
+                        targets: 9,
                         render: function (data, type, full, meta) {
                             var status = {
                                 0: { 'title': 'Inactive', 'state': 'danger' },
@@ -274,6 +283,37 @@
                             }
                             return '<span class="label label-' + status[data].state + ' label-dot mr-2"></span>' +
                                 '<span class="font-weight-bold text-' + status[data].state + '">' + status[data].title + '</span>';
+                        },
+                    },
+                    {
+                        width: '75px',
+                        targets: 5,
+                        render: function (data, type, full, meta) {
+                            var status = {
+                                "Offline": { 'title': 'Offline', 'state': 'danger' },
+                                "Running": { 'title': 'Running', 'state': 'success' },
+                            };
+                            if (typeof status[data] === 'undefined') {
+                                return '<span class="label label-danger label-dot mr-2"></span>' +
+                                    '<span class="font-weight-bold text-danger">Offline</span>';
+                            }
+                            return '<span class="label label-' + status[data].state + ' label-dot mr-2"></span>' +
+                                '<span class="font-weight-bold text-' + status[data].state + '">' + status[data].title + '</span>';
+                        },
+                    },
+                    {
+                        width: '75px',
+                        targets: 6,
+                        render: function (data, type, full, meta) {
+                            var status = {
+                                "visit": { 'title': 'Visit', 'state': 'info' },
+                                "lubrification": { 'title': 'Lubrication', 'state': 'warning' },
+                            };
+                            if (typeof status[data] === 'undefined') {
+                                return '<span class="label label-danger label-dot mr-2"></span>' +
+                                    '<span class="font-weight-bold text-danger">Offline</span>';
+                            }
+                            return `<span class="label label-${status[data].state} label-inline mr-2">${status[data].title}</span>`;
                         },
                     },
                 ],

@@ -1,15 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7199bd20-fe7c-47d9-8830-516440482017" name="Default Changelist" comment="" />
+    <list default="true" id="7199bd20-fe7c-47d9-8830-516440482017" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/new_gmao.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/new_gmao.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AreaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AreaController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CriticityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CriticityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EquipmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EquipmentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FactoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FactoryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/GamutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/GamutController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WorkOrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WorkOrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/UpdateEquipmentRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/UpdateEquipmentRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Area.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Area.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/AreaCode.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/AreaCode.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Criticity.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Criticity.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Equipment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Equipment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Factory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Factory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Gamut.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Gamut.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/GamutDraft.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/GamutDraft.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/GamutTool.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/GamutTool.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Part.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Part.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Periodicity.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Periodicity.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Service.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Service.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Task.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Task.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Tool.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Tool.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Work.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Work.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/WorkOrder.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/WorkOrder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_03_04_080806_create_parts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_03_04_080806_create_parts_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_03_04_121039_create_work_orders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_03_04_121039_create_work_orders_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/metro.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/metro.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/equipments/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/equipments/add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/equipments/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/equipments/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/equipments/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/equipments/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -161,6 +212,34 @@
       <path value="$PROJECT_DIR$/vendor/livewire/livewire" />
       <path value="$PROJECT_DIR$/vendor/laravel-notification-channels/telegram" />
       <path value="$PROJECT_DIR$/vendor/dasprid/enum" />
+      <path value="$PROJECT_DIR$/vendor/spatie/image-optimizer" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/maennchen/zipstream-php" />
+      <path value="$PROJECT_DIR$/vendor/league/glide" />
+      <path value="$PROJECT_DIR$/vendor/league/fractal" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/php-enum" />
+      <path value="$PROJECT_DIR$/vendor/ezyang/htmlpurifier" />
+      <path value="$PROJECT_DIR$/vendor/maatwebsite/excel" />
+      <path value="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" />
+      <path value="$PROJECT_DIR$/vendor/intervention/image" />
+      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-html" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/matrix" />
+      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-fractal" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/complex" />
+      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables" />
+      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-editor" />
+      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-buttons" />
+      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-oracle" />
+      <path value="$PROJECT_DIR$/vendor/flynsarmy/csv-seeder" />
+      <path value="$PROJECT_DIR$/vendor/spatie/image" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-medialibrary" />
+      <path value="$PROJECT_DIR$/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/vendor/justinrainbow/json-schema" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-ide-helper" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/seld/jsonlint" />
+      <path value="$PROJECT_DIR$/vendor/seld/phar-utils" />
+      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
     </include_path>
   </component>
   <component name="ProjectId" id="1pA2mXZospzbd1JGJNufkFkek8b" />
@@ -170,6 +249,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -190,32 +270,14 @@
       <option name="presentableId" value="Default" />
       <updated>1614611733852</updated>
       <workItem from="1614611734896" duration="305000" />
+      <workItem from="1615027307181" duration="179000" />
+      <workItem from="1615027510048" duration="1046000" />
+      <workItem from="1615028580118" duration="1269000" />
+      <workItem from="1615029874227" duration="5731000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1614611824548">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1614611824548" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1614611824548">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1614611824548" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1614611824548">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1614611824548" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1614611824548">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1614611824548" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1614611934637">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1614611934637" />
   </component>
 </project>

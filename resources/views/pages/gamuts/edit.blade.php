@@ -1,6 +1,6 @@
 @extends('layouts.metro')
 
-@section('title', 'Edit equipment')
+@section('title', 'Edit area')
 
 @section('content')
 
@@ -12,12 +12,12 @@
             <!--begin::Page Heading-->
             <div class="d-flex align-items-baseline flex-wrap mr-5">
                 <!--begin::Page Title-->
-                <h5 class="text-dark font-weight-bold my-1 mr-5">Equipments</h5>
+                <h5 class="text-dark font-weight-bold my-1 mr-5">Areas</h5>
                 <!--end::Page Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                     <li class="breadcrumb-item">
-                        <a href="/equipments" class="text-muted">Equipments</a>
+                        <a href="/areas" class="text-muted">Areas</a>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="" class="text-muted">Edit</a>
@@ -114,6 +114,31 @@
 <!--end::Subheader-->
 <!--begin::Content-->
 <div class="container">
+    <!--begin::Notice-->
+    <div class="alert alert-custom alert-white alert-shadow gutter-b" role="alert">
+        <div class="alert-icon">
+            <span class="svg-icon svg-icon-primary svg-icon-xl">
+                <!--begin::Svg Icon | path:assets/media/svg/icons/Tools/Compass.svg-->
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                    height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24" />
+                        <path
+                            d="M7.07744993,12.3040451 C7.72444571,13.0716094 8.54044565,13.6920474 9.46808594,14.1079953 L5,23 L4.5,18 L7.07744993,12.3040451 Z M14.5865511,14.2597864 C15.5319561,13.9019016 16.375416,13.3366121 17.0614026,12.6194459 L19.5,18 L19,23 L14.5865511,14.2597864 Z M12,3.55271368e-14 C12.8284271,3.53749572e-14 13.5,0.671572875 13.5,1.5 L13.5,4 L10.5,4 L10.5,1.5 C10.5,0.671572875 11.1715729,3.56793164e-14 12,3.55271368e-14 Z"
+                            fill="#000000" opacity="0.3" />
+                        <path
+                            d="M12,10 C13.1045695,10 14,9.1045695 14,8 C14,6.8954305 13.1045695,6 12,6 C10.8954305,6 10,6.8954305 10,8 C10,9.1045695 10.8954305,10 12,10 Z M12,13 C9.23857625,13 7,10.7614237 7,8 C7,5.23857625 9.23857625,3 12,3 C14.7614237,3 17,5.23857625 17,8 C17,10.7614237 14.7614237,13 12,13 Z"
+                            fill="#000000" fill-rule="nonzero" />
+                    </g>
+                </svg>
+                <!--end::Svg Icon-->
+            </span>
+        </div>
+        <div class="alert-text">This page lets you create the different Areas that constitute your infrastructure.
+            <br />An Area will house and contain all the different Equipments.
+        </div>
+    </div>
+    <!--end::Notice-->
     <div class="col-xs-12 col-md-12">
         @if ($errors->any())
         <div class="alert alert-danger">
@@ -129,64 +154,88 @@
     <div class="card card-custom gutter-b">
         <div class="card-header flex-wrap py-3">
             <div class="card-title">
-                <h3 class="card-label">Edit equipment:
+                <h3 class="card-label">Edit gamut:
                     <span class="d-block text-muted pt-2 font-size-sm">Required fields are marked with a star
                         sign.</span>
                 </h3>
             </div>
         </div>
         <div class="card-body">
-            {{ Form::model($equipment, array('route' => array('update-equipment', $equipment->id), 'method' => 'POST', 'id' =>
-            'edit_equipment_form', 'files' => 'true')) }}
+            {{ Form::model($gamut, array('route' => array('update-gamut', $gamut->id), 'method' => 'POST', 'id' =>
+            'edit_area_form')) }}
             <div class="card-body">
                 <div class="form-group row">
                     <div class="col-lg-6">
-                        <label>Equipment name <span class="text-danger">*</span></label>
-                        {{ Form::text('name', null, ['class' => 'form-control']) }}
-                        <span class="form-text text-muted">Please enter equipment name</span>
+                        <label>Gamut designation <span class="text-danger">*</span></label>
+                        {{ Form::text('designation', null, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please enter designation</span>
                     </div>
                     <div class="col-lg-6">
-                        <label>Equipment belongs in area <span class="text-danger">*</span></label>
-                        {{ Form::select('area_id', $areasList , $equipment->area_id, ['class' => 'form-control selectpicker', 'id' => 'areaName', 'data-size' => 7, 'data-live-search' => 'true']) }}
-                        <span class="form-text text-muted">Please enter area name</span>
+                        <label>Gamut code <span class="text-danger">*</span></label>
+                        {{ Form::text('code', null, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please enter code</span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6">
-                        <label>Description <span class="text-danger">*</span></label>
-                        {{ Form::text('description', null, ['class' => 'form-control']) }}
-                        <span class="form-text text-muted">Please enter a breif description of this equipment</span>
+                        <label>Gamut belongs in factory <span class="text-danger">*</span></label>
+                        {{ Form::select('factory_id', $factoriesList , $gamut->factory_id, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please enter factory</span>
                     </div>
                     <div class="col-lg-6">
-                        <label>Equipment code <span class="text-danger">*</span></label>
-                        <div class=" col-lg-12">
-                            {{ Form::text('code', null, ['class' => 'form-control']) }}
-                            <span class="form-text text-muted">Please enter code.</span>
-                        </div>
+                        <label>Gamut state <span class="text-danger">*</span></label>
+                        {{ Form::select('state', ['Running' => 'Running', 'Offline' => 'Offline'] , $gamut->state, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please specify the equipment state when this gamut should apply </span>
                     </div>
                 </div>
-                <div class="form-group row fv-plugins-icon-container">
+                <div class="form-group row">
                     <div class="col-lg-6">
-                        <label>Equipment belongs in area code <span class="text-danger">*</span></label>
-                        {{ Form::select('area_code', $equipment->area->codes->pluck('code', 'code') , $equipment->area_code, ['class' => 'form-control', 'id' => 'areaCode']) }}
-                        <span class="form-text text-muted">Please enter area code</span>
+                        <label>Gamut type <span class="text-danger">*</span></label>
+                        {{ Form::select('type', ['visit' => 'Visit', 'lubrification' => 'Lubrication'] , $gamut->type, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please enter factory</span>
                     </div>
                     <div class="col-lg-6">
-                        <div class="image-input image-input-outline" id="kt_image_1">
-                            <div class="image-input-wrapper" style="background-image: url({{$equipment->getFirstMediaUrl('equipment')}})">
-                            </div>
-                            <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                data-action="change" data-toggle="tooltip" title="" data-original-title="Change image">
-                                <i class="fa fa-pen icon-sm text-muted"></i>
-                                <input type="file" name="photo" accept=".png, .jpg, .jpeg" />
-                                <input type="hidden" name="photo_remove" />
-                            </label>
-                            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
-                                <i class="ki ki-bold-close icon-xs text-muted"></i>
-                            </span>
-                            <label>Equipment photo </label>
-                        </div>
+                        <label>Equipment <span class="text-danger">*</span></label>
+                        {{ Form::select('equipment_id', $equipmentList , $gamut->equipment_id, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please specify the equipment</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-6">
+                        <label>Part <span class="text-danger"></span></label>
+                        {{ Form::select('part_id', $partsList , $gamut->part_id, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please specify the part if any.</span>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Area <span class="text-danger">*</span></label>
+                        {{ Form::select('area_id', $areasList , $gamut->area_id, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please enter area</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-6">
+                        <label>Periodicity <span class="text-danger"></span></label>
+                        {{ Form::select('periodicity_id', $periodicitiesList , $gamut->periodicity_id, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please specify the period it takes to generate a work order.</span>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Concerned Service <span class="text-danger">*</span></label>
+                        {{ Form::select('service_id', $servicesList , $gamut->service_id, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please enter the concerned service</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @can('assign workorders')
+                    <div class="col-lg-6">
+                        <label>Assign to user <span class="text-danger"></span></label>
+                        {{ Form::select('assigned_user_id', $usersList , $gamut->assigned_user_id, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please specify the user if you want to pre-hand this task to them.</span>
+                    </div>
+                    @endcan
+                    <div class="col-lg-6">
+                        <label>Estimated work hours <span class="text-danger">*</span></label>
+                        {{ Form::text('estimated_hours', null, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please enter the estimated task length in hours</span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -200,7 +249,7 @@
                                 </label>
                             </span>
                         </div>
-                        <span class="form-text text-muted">Is this area active?</span>
+                        <span class="form-text text-muted">Is this gamut active?</span>
                     </div>
                 </div>
             </div>
@@ -234,37 +283,23 @@
                 name: {
                     validators: {
                         notEmpty: {
-                            message: 'Factory name is required'
+                            message: 'Name is required'
                         }
-                    }
-                },
-                code: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Factory code is required.'
-                        },
                     }
                 },
                 description: {
                     validators: {
                         notEmpty: {
-                            message: 'Factory description is required'
+                            message: 'Description is required'
                         },
-                    }
+                    },
                 },
-                area_id: {
+                factory_id: {
                     validators: {
                         notEmpty: {
-                            message: 'Area ID is required'
+                            message: 'Description is required'
                         },
-                    }
-                },
-                area_code: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Area Code is required'
-                        },
-                    }
+                    },
                 },
             },
 
@@ -284,24 +319,8 @@
     );
 </script>
 <script>
-    var avatar1 = new KTImageInput('kt_image_1');
-    $('#areaName').change(function(){
-        var selected_area = $(this).val();
-        if(selected_area != ""){
-            $('#areaCode').empty();
-            $('#areaCode').attr('disabled', 'disabled');
-            $.get( "{{route('areas-json')}}" + '/' + selected_area, function( data ) {
-                $(data).each(function(index, d){
-                    var newOption = new Option(d.name, d.id, true, true);
-                    $('#areaCode').append(newOption).trigger('change');
-                });
-            }).then(function(){
-                $('#areaCode').attr('disabled', false);
-            });
-            
-        }else{
-            $('#areaCode').empty().trigger('change');
-        }
+    $('#kt_select2_12_1, #kt_select2_12_2, #kt_select2_12_3, #kt_select2_12_4').select2({
+        placeholder: "Select an option",
     });
 </script>
 @stop

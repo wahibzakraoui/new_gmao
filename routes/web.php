@@ -6,6 +6,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FactoryController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\EquipmentController;
+use App\Http\Controllers\WorkOrderController;
+use App\Http\Controllers\GamutController;
 use App\Models\Factory;
 
 
@@ -81,4 +83,31 @@ Route::prefix('equipments')->middleware(['auth:sanctum', 'verified'])->group(fun
     Route::get('/edit/{equipment}', [EquipmentController::class, 'edit'])->name('edit-equipment');
     Route::post('/update/{equipment}', [EquipmentController::class, 'update'])->name('update-equipment');
     Route::post('/delete/{equipment}', [EquipmentController::class, 'destroy'])->name('delete-equipment');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Work Order Routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::prefix('work_orders')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/pdf/{workOrder}', [WorkOrderController::class, 'pdf'])->name('workorder-pdf');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Gamuts Routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::prefix('gamuts')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/', [GamutController::class, 'index'])->name('gamuts');
+    Route::post('/list', [GamutController::class, 'list'])->name('gamuts-list');
+    Route::get('/add', [GamutController::class, 'create'])->name('add-gamut');
+    Route::post('/add', [GamutController::class, 'store'])->name('store-gamut');
+    Route::get('/edit/{gamut}', [GamutController::class, 'edit'])->name('edit-gamut');
+    Route::post('/update/{gamut}', [GamutController::class, 'update'])->name('update-gamut');
+    Route::post('/delete/{gamut}', [GamutController::class, 'destroy'])->name('delete-gamut');
+    Route::get('/pdf/{gamut}', [GamutController::class, 'pdf'])->name('gamut-pdf');
 });

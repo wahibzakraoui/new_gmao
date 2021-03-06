@@ -16,10 +16,10 @@
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                     <li class="breadcrumb-item">
-                        <a href="/dashboard" class="text-muted">Dashboard</a>
+                        <a href="{{route('dashboard')}}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="" class="text-muted">Equipments</a>
+                        <a href="{{route('equipments')}}" class="text-muted">Equipments</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -161,7 +161,7 @@
             </div>
         </div>
         <div class="card-body">
-            {{ Form::open(array('route' => array('store-equipment'), 'method' => 'POST', 'id' => 'create_equipment_form')) }}
+            {{ Form::open(array('route' => array('store-equipment'), 'method' => 'POST', 'id' => 'create_equipment_form', 'files' => true)) }}
             <div class="card-body">
                 <div class="form-group row">
                     <div class="col-lg-6">
@@ -171,7 +171,8 @@
                     </div>
                     <div class="col-lg-6">
                         <label>Equipment belongs in area <span class="text-danger">*</span></label>
-                        {{ Form::select('area_id', $areasList , '', ['class' => 'form-control', 'id' => 'areaName']) }}
+                        {{ Form::select('area_id', $areasList , '', ['class' => 'form-control selectpicker', 'id' =>
+                        'areaName', 'data-size' => 7, 'data-live-search' => 'true']) }}
                         <span class="form-text text-muted">Please enter area name</span>
                     </div>
                 </div>
@@ -189,11 +190,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-grou-row">
+                <div class="form-group row fv-plugins-icon-container">
                     <div class="col-lg-6">
-                        <label>Equipment belongs in area <span class="text-danger">*</span></label>
-                        {{ Form::select('area_code', [] , '', ['class' => 'form-control', 'id' => 'areaCode']) }}
+                        <label>Equipment belongs in area code <span class="text-danger">*</span></label>
+                        {{ Form::select('area_code', [] , '', ['class' => 'form-control', 'id' => 'areaCode' ,
+                        'disabled' => 'disabled']) }}
                         <span class="form-text text-muted">Please enter area code</span>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="image-input image-input-outline" id="kt_image_1">
+                            <div class="image-input-wrapper" style="background-image: url()">
+                            </div>
+                            <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                data-action="change" data-toggle="tooltip" title="" data-original-title="Change image">
+                                <i class="fa fa-pen icon-sm text-muted"></i>
+                                <input type="file" name="photo" accept=".png, .jpg, .jpeg" />
+                                <input type="hidden" name="photo_remove" />
+                            </label>
+                            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                <i class="ki ki-bold-close icon-xs text-muted"></i>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -235,7 +253,8 @@
                 <div class="d-flex align-items-center justify-content-between p-4 flex-lg-wrap flex-xl-nowrap">
                     <div class="d-flex flex-column mr-5">
                         <a href="#" class="h4 text-dark text-hover-primary mb-5">No areas defined yet</a>
-                        <p class="text-dark-50">In order to add Equipments, please add an Area first. You can come back to this page later.</p>
+                        <p class="text-dark-50">In order to add Equipments, please add an Area first. You can come back
+                            to this page later.</p>
                     </div>
                     <div class="ml-6 ml-lg-0 ml-xxl-6 flex-shrink-0">
                         <a href="{{ route('add-area') }}" target="_self"
@@ -312,19 +331,22 @@
     );
 </script>
 <script>
-    $('#kt_select2_12_1, #kt_select2_12_2, #kt_select2_12_3, #kt_select2_12_4').select2({
-        placeholder: "Select an option",
-    });
-    $('#areaName').change(function(){
-        var selected_area = $(this).val();
-        if(selected_area != ""){
-            $.get( "{{route('areas-json')}}" + '/' + selected_area, function( data ) {
-                $(data).each(function(index, d){
-                    var newOption = new Option(d.name, d.id, true, true);
-                    $('#areaCode').append(newOption).trigger('change');
+    var avatar1 = new KTImageInput('kt_image_1');
+    $('#areaName').change(function () {
+        const selected_area = $(this).val();
+        const self = $('#areaCode');
+        if (selected_area != "") {
+            self.empty().attr('disabled', 'disabled');
+            $.get("{{route('areas-json')}}" + '/' + selected_area, function (data) {
+                $(data).each(function (index, d) {
+                    const newOption = new Option(d.name, d.id, true, true);
+                    self.append(newOption).trigger('change');
                 });
+            }).then(function () {
+                self.attr('disabled', false);
             });
-        }else{
+
+        } else {
             $('#areaCode').empty().trigger('change');
         }
     });

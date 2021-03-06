@@ -4,14 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateAreaRequest;
 use App\Http\Requests\CreateAreaRequest;
+use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Factory;
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Redirector;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\View;
 use App\Exceptions\PermissionDeniedException;
 use App\Models\Area;
 use App\Models\AreaCode;
 use Illuminate\Support\Str;
+
 
 class AreaController extends Controller
 {
@@ -20,19 +26,31 @@ class AreaController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
+     * @throws PermissionDeniedException
      */
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         /* User does not have permission */
-        if(!auth()->user()->can("view {$this->module}")){
+        if(!auth()->user()->can("view {$this->module}")) {
             throw new PermissionDeniedException($request);
         }
-        return view("pages.{$this->module}.index");
+        return response(
+            view("pages.{$this->module}.index")
+        );
     }
 
-    public function list(Request $request){
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     * @throws PermissionDeniedException
+     * @throws Exception
+     */
+    public function list(Request $request): JsonResponse
+    {
         /* User does not have permission */
         if(!auth()->user()->can("view {$this->module}")){
             throw new PermissionDeniedException($request);
@@ -40,8 +58,8 @@ class AreaController extends Controller
 
         return DataTables::of(Area::leftJoin('factories', 'areas.factory_id', '=', 'factories.id')
         ->select([
-            'areas.id', 
-            'areas.name', 
+            'areas.id',
+            'areas.name',
             'areas.description',
             'factories.name as factoryName',
             'areas.active',
@@ -50,10 +68,10 @@ class AreaController extends Controller
             $query->orderBy('id', $order);
         })
         ->addColumn('areaCodes', function ($area) {
-            return View::make("pages.{$this->module}.datatables.areacodes")->with('area', $area)->render();;
+                return View::make("pages.{$this->module}.datatables.areacodes")->with('area', $area)->render();
         })
         ->addColumn('actions', function ($area) {
-            return View::make("pages.{$this->module}.datatables.actions")->with('area', $area)->render();;
+                return View::make("pages.{$this->module}.datatables.actions")->with('area', $area)->render();
         })
         ->rawColumns(['actions', 'areaCodes'])
         ->make(true);
@@ -62,23 +80,29 @@ class AreaController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
+     * @throws PermissionDeniedException
      */
-    public function create(Request $request)
+    public function create(Request $request): Response
     {
         /* User does not have permission */
         if(!auth()->user()->can("create {$this->module}")){
             throw new PermissionDeniedException($request);
         }
-        return view("pages.{$this->module}.add")
-        ->with('factoriesList', Factory::All()->pluck('name', 'id'));
+        return response(
+            view("pages.{$this->module}.add")
+                ->with('factoriesList', Factory::All()
+                ->pluck('name', 'id'))
+        );
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateAreaRequest $request
+     * @return RedirectResponse|Response|Redirector
+     * @throws PermissionDeniedException
      */
     public function store(CreateAreaRequest $request)
     {
@@ -104,26 +128,33 @@ class AreaController extends Controller
             });
             return redirect($this->module)->with('success', 'Area added successfully!');
         }
+        return redirect($this->module);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $id
+     * @return Response
+     * @throws PermissionDeniedException
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, int $id): Response
     {
         if(!auth()->user()->can("view {$this->module}")){
             throw new PermissionDeniedException($request);
         }
+        // To do - return view
+        return response($id);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Area $area
+     * @return \Illuminate\Contracts\View\View|Response
+     * @throws PermissionDeniedException
      */
     public function edit(Request $request , Area $area)
     {
@@ -138,9 +169,10 @@ class AreaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateAreaRequest $request
+     * @param Area $area
+     * @return RedirectResponse|Response|Redirector
+     * @throws PermissionDeniedException
      */
     public function update(UpdateAreaRequest $request, Area $area)
     {
@@ -161,14 +193,17 @@ class AreaController extends Controller
                 return redirect($this->module)->with('success', 'Area edited successfully!');
             }
         }
-
+        return redirect($this->module);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Area $area
+     * @return RedirectResponse|Response|Redirector
+     * @throws PermissionDeniedException
+     * @throws Exception
      */
     public function destroy(Request $request, Area $area)
     {
@@ -179,23 +214,25 @@ class AreaController extends Controller
                 return redirect($this->module)->with('deleted', true)->with('success', 'Area deleted successfully!');
             }
         }
-
+        return redirect($this->module);
     }
 
     /**
-     * Get specified area codes.
+     * Get specified area codes in JSON.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Area $area
+     * @return JsonResponse
      */
-    public function getAreaCodesJSON(Request $request, Area $area){
+    public function getAreaCodesJSON(Area $area): JsonResponse
+    {
         $result = $area->codes->map(function($code){
             return [
                 'name' => $code->code,
                 'id' => $code->code,
             ];
         });
-        return $result;
+        if(!empty($result)) return response()->json($result);
+        return response()->json([]);
     }
 
 }

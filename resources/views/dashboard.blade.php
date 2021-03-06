@@ -136,7 +136,7 @@
 <div class="d-flex flex-column-fluid">
     <!--begin::Container-->
     <div class="container">
-        <!--begin::Errors-->
+        <!--begin::SessionErrors-->
         @if(Session::has('message-body'))
         <div class="row">
             <div class="col-lg-12">
@@ -149,7 +149,33 @@
             </div>
         </div>
         @endif
-        <!--End::Errors-->
+        <!--End::SessionErrors-->
+        <!--begin::RoleErrors-->
+        @if(Auth()->user()->getRoleNames()->count() < 1)
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card card-custom card-stretch gutter-b">
+                        <div class="card-body d-flex p-0">
+                            <div class="flex-grow-1 bg-info p-12 pb-40 card-rounded flex-grow-1 bgi-no-repeat" style="background-position: right bottom; background-size: 35% auto; background-image: url(assets/media/svg/humans/custom-6.svg)">
+                                <h3 class="display-2 text-inverse-info pb-5 font-weight-bolder">Oh snap!</h3>
+                                <br>
+                                <h3 class="text-inverse-info pb-5 font-weight-bolder">You do not have any permissions!</h3>
+                                <p class="text-inverse-info pb-5 font-size-h6">This account is not properly set up yet. <br>
+                                    <br>If this is a new account, please contact
+                                    <br>your administrator to get your permissions sorted out.
+                                    <br>
+                                </p>
+                                <p class="text-inverse-info pb-5 font-size-h6">An alert of this incident is already on its way to the Administrator.
+                                    <br>
+                                </p>
+                                <a href="mailto:y.abdellaoui@cemosciment.ma" class="btn btn-success font-weight-bold py-2 px-6">Contact Administrator</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    @endif
+    <!--End::RoleErrors-->
     </div>
     <!--end::Container-->
 </div>
