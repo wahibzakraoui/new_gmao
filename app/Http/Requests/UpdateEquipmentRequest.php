@@ -24,7 +24,12 @@ class UpdateEquipmentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string',
+            'code' => 'required|string',
+            'description' => 'required|string',
+            'area_id' => 'required|numeric',
+            'area_code' => 'required|string',
+            'active' => 'nullable|numeric'
         ];
     }
 }

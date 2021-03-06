@@ -1,6 +1,6 @@
 @extends('layouts.metro')
 
-@section('title', 'New area')
+@section('title', __('area.areas'))
 
 @section('content')
 <!--begin::Subheader-->
@@ -11,15 +11,15 @@
             <!--begin::Page Heading-->
             <div class="d-flex align-items-baseline flex-wrap mr-5">
                 <!--begin::Page Title-->
-                <h5 class="text-dark font-weight-bold my-1 mr-5">Areas</h5>
+                <h5 class="text-dark font-weight-bold my-1 mr-5">@lang('area.areas')</h5>
                 <!--end::Page Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                     <li class="breadcrumb-item">
-                        <a href="/dashboard" class="text-muted">Dashboard</a>
+                        <a href="/dashboard" class="text-muted">@lang('dashboard.dashboard')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="" class="text-muted">Areas</a>
+                        <a href="" class="text-muted">@lang('area.areas')</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -133,30 +133,19 @@
                 <!--end::Svg Icon-->
             </span>
         </div>
-        <div class="alert-text">This page lets you create the different Areas that constitute your infrastructure.
-            <br />An Area will house and contain all the different Equipments.
+        <div class="alert-text">@lang('area.page_notice')
         </div>
     </div>
     <!--end::Notice-->
     <div class="col-xs-12 col-md-12">
         @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @else
-        <div class="alert alert-custom alert-default d-none" id="alert" role="alert">
-            <div class="alert-icon"><i class="flaticon-warning text-primary"></i></div>
-            <div class="alert-text">
-                Assurez-vous que toutes ces donnees sont correctes. Vous etes aussi
-                responsable
-                du suivi de la
-                relisation des test labo de ce lot.
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-        </div>
         @endif
     </div>
     @if(count($factoriesList) > 0)
@@ -164,9 +153,8 @@
     <div class="card card-custom gutter-b">
         <div class="card-header flex-wrap py-3">
             <div class="card-title">
-                <h3 class="card-label">New area:
-                    <span class="d-block text-muted pt-2 font-size-sm">Required fields are marked with a star
-                        sign.</span>
+                <h3 class="card-label">@lang('area.new'):
+                    <span class="d-block text-muted pt-2 font-size-sm">@lang('misc.required_fields_notice')</span>
                 </h3>
             </div>
         </div>
@@ -175,9 +163,9 @@
             <div class="card-body">
                 <div class="form-group row">
                     <div class="col-lg-6">
-                        <label>Area name <span class="text-danger">*</span></label>
+                        <label>@lang('area.name') <span class="text-danger">*</span></label>
                         {{ Form::text('name', null, ['class' => 'form-control']) }}
-                        <span class="form-text text-muted">Please enter area name</span>
+                        <span class="form-text text-muted">@lang('misc.please_enter') @lang('area.name')</span>
                     </div>
                     <div class="col-lg-6">
                         <label>Area belongs in factory <span class="text-danger">*</span></label>

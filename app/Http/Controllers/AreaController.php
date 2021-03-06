@@ -126,7 +126,7 @@ class AreaController extends Controller
                 $code = ['area_id' => $id ,'code' => $code];
                 AreaCode::create($code);
             });
-            return redirect($this->module)->with('success', 'Area added successfully!');
+            return redirect($this->module)->with('success', __('area.area_added_success'));
         }
         return redirect($this->module);
     }
@@ -190,7 +190,7 @@ class AreaController extends Controller
                     $code = ['area_id' => $id ,'code' => $code];
                     AreaCode::create($code);
                 });
-                return redirect($this->module)->with('success', 'Area edited successfully!');
+                return redirect($this->module)->with('success', __('area.area_edited_success'));
             }
         }
         return redirect($this->module);
@@ -211,7 +211,7 @@ class AreaController extends Controller
             throw new PermissionDeniedException($request);
         }else{
             if($area->codes()->delete() && $area->delete()){
-                return redirect($this->module)->with('deleted', true)->with('success', 'Area deleted successfully!');
+                return redirect($this->module)->with('deleted', true)->with('success', __('area.area_deleted_success'));
             }
         }
         return redirect($this->module);
