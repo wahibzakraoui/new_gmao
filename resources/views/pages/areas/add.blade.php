@@ -154,7 +154,7 @@
         <div class="card-header flex-wrap py-3">
             <div class="card-title">
                 <h3 class="card-label">@lang('area.new'):
-                    <span class="d-block text-muted pt-2 font-size-sm">@lang('misc.required_fields_notice')</span>
+                    <span class="d-block text-muted pt-2 font-size-sm">@lang('lang.required_fields_notice')</span>
                 </h3>
             </div>
         </div>
@@ -165,33 +165,33 @@
                     <div class="col-lg-6">
                         <label>@lang('area.name') <span class="text-danger">*</span></label>
                         {{ Form::text('name', null, ['class' => 'form-control']) }}
-                        <span class="form-text text-muted">@lang('misc.please_enter') @lang('area.name')</span>
+                        <span class="form-text text-muted">@lang('lang.please_enter') @lang('area.name')</span>
                     </div>
                     <div class="col-lg-6">
-                        <label>Area belongs in factory <span class="text-danger">*</span></label>
-                        {{ Form::select('factory_id', $factoriesList , '', ['class' => 'form-control']) }}
-                        <span class="form-text text-muted">Please enter area name</span>
+                        <label>@lang('area.area_belongs_in_factory') <span class="text-danger">*</span></label>
+                        {{ Form::select('factory_id', $factoriesList , '', ['class' => 'form-control selectpicker']) }}
+                        <span class="form-text text-muted">@lang('lang.please_enter') @lang('area.name')</span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6">
-                        <label>Description <span class="text-danger">*</span></label>
+                        <label>@lang('area.description') <span class="text-danger">*</span></label>
                         {{ Form::text('description', null, ['class' => 'form-control']) }}
-                        <span class="form-text text-muted">Please enter a breif description of this area</span>
+                        <span class="form-text text-muted">@lang('lang.please_enter') @lang('area.description')</span>
                     </div>
                     <div class="col-lg-6">
-                        <label>Area codes</label>
+                        <label>@lang('area.codes')</label>
                         <div class=" col-lg-12">
                             <select class="form-control select2" id="kt_select2_11" multiple name="codes[]">
                                 <option label="Label"></option>
                             </select>
-                            <span class="form-text text-muted">Please enter code and press "ENTER" key on your keyboard.</span>
+                            <span class="form-text text-muted">@lang('lang.please_enter') @lang('area.codes') @lang('lang.and_press_enter')</span>
                         </div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6">
-                        <label class="col-3 col-form-label">Active</label>
+                        <label class="col-3 col-form-label">@lang('lang.active')</label>
                         <div class="col-3">
                             <span class="switch switch-outline switch-icon switch-success">
                                 <label>
@@ -200,7 +200,7 @@
                                 </label>
                             </span>
                         </div>
-                        <span class="form-text text-muted">Is this area active?</span>
+                        <span class="form-text text-muted">@lang('lang.is_this_item_active')</span>
                     </div>
                 </div>
             </div>
@@ -208,9 +208,9 @@
                 <div class="row">
                     <div class="col-lg-6"></div>
                     <div class="col-lg-6 col-xs-12 mb-5 text-right">
-                        <button type="reset" class="btn btn-lg btn-secondary d-xs-block">Cancel</button>
+                        <button type="reset" class="btn btn-lg btn-secondary d-xs-block">@lang('lang.cancel')</button>
                         <button type="submit" class="btn btn-lg btn-primary mr-2 d-xs-block"
-                            id="submit_button">Save</button>
+                            id="submit_button">@lang('lang.save')</button>
                     </div>
                 </div>
             </div>
@@ -227,12 +227,12 @@
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between p-4 flex-lg-wrap flex-xl-nowrap">
                     <div class="d-flex flex-column mr-5">
-                        <a href="#" class="h4 text-dark text-hover-primary mb-5">No factory defined yet</a>
-                        <p class="text-dark-50">In order to add Areas, please add a Factory first. You can cme back to this page later.</p>
+                        <a href="#" class="h4 text-dark text-hover-primary mb-5">@lang('factory.no_factory_defined_yet')</a>
+                        <p class="text-dark-50">@lang('factory.please_define_factory')</p>
                     </div>
                     <div class="ml-6 ml-lg-0 ml-xxl-6 flex-shrink-0">
                         <a href="{{ route('add-factory') }}" target="_self"
-                            class="btn font-weight-bolder text-uppercase btn-primary py-4 px-6">Create a Factory</a>
+                            class="btn font-weight-bolder text-uppercase btn-primary py-4 px-6">@lang('factory.create_a_factory')</a>
                     </div>
                 </div>
             </div>
@@ -248,29 +248,29 @@
 <script src="{{asset('assets/js/pages/crud/forms/widgets/select2.js')}}"></script>
 <script>
     FormValidation.formValidation(
-        document.getElementById('create_factory_form'),
+        document.getElementById('create_area_form'),
         {
             fields: {
                 name: {
                     validators: {
                         notEmpty: {
-                            message: 'Factory name is required'
+                            message: '@lang('area.area_name_validation')'
                         }
-                    }
-                },
-                code: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Factory code is required.'
-                        },
                     }
                 },
                 description: {
                     validators: {
                         notEmpty: {
-                            message: 'Factory description is required'
+                            message: '@lang('area.area_description_validation')'
                         },
-                    }
+                    },
+                },
+                factory_id: {
+                    validators: {
+                        notEmpty: {
+                            message: '@lang('area.factory_id_validation')'
+                        },
+                    },
                 },
             },
 
@@ -289,10 +289,5 @@
             }
         }
     );
-</script>
-<script>
-    $('#kt_select2_12_1, #kt_select2_12_2, #kt_select2_12_3, #kt_select2_12_4').select2({
-        placeholder: "Select an option",
-    });
 </script>
 @stop

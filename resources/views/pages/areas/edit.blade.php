@@ -1,6 +1,6 @@
 @extends('layouts.metro')
 
-@section('title', 'Edit area')
+@section('title', __('area.edit_area'))
 
 @section('content')
 
@@ -17,10 +17,10 @@
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                     <li class="breadcrumb-item">
-                        <a href="/areas" class="text-muted">Areas</a>
+                        <a href="/areas" class="text-muted">@lang('area.areas')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="" class="text-muted">Edit</a>
+                        <a href="" class="text-muted">@lang('area.edit_area')</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -31,7 +31,7 @@
         <!--begin::Toolbar-->
         <div class="d-flex align-items-center">
             <!--begin::Actions-->
-            <a href="#" class="btn btn-light-primary font-weight-bolder btn-sm">Actions</a>
+            <a href="#" class="btn btn-light-primary font-weight-bolder btn-sm">@lang('lang.actions')</a>
             <!--end::Actions-->
             <!--begin::Dropdown-->
             <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
@@ -134,9 +134,7 @@
                 <!--end::Svg Icon-->
             </span>
         </div>
-        <div class="alert-text">This page lets you create the different Areas that constitute your infrastructure.
-            <br />An Area will house and contain all the different Equipments.
-        </div>
+        <div class="alert-text">@lang('area.page_notice')</div>
     </div>
     <!--end::Notice-->
     <div class="col-xs-12 col-md-12">
@@ -154,9 +152,8 @@
     <div class="card card-custom gutter-b">
         <div class="card-header flex-wrap py-3">
             <div class="card-title">
-                <h3 class="card-label">Edit area:
-                    <span class="d-block text-muted pt-2 font-size-sm">Required fields are marked with a star
-                        sign.</span>
+                <h3 class="card-label">@lang('area.edit_area'):
+                    <span class="d-block text-muted pt-2 font-size-sm">@lang('lang.required_fields_notice')</span>
                 </h3>
             </div>
         </div>
@@ -166,25 +163,25 @@
             <div class="card-body">
                 <div class="form-group row">
                     <div class="col-lg-6">
-                        <label>Area name <span class="text-danger">*</span></label>
+                        <label>@lang('area.name') <span class="text-danger">*</span></label>
                         {{ Form::text('name', null, ['class' => 'form-control']) }}
-                        <span class="form-text text-muted">Please enter area name</span>
+                        <span class="form-text text-muted">@lang('lang.please_enter') @lang('area.name')</span>
                     </div>
                     <div class="col-lg-6">
-                        <label>Area belongs in factory <span class="text-danger">*</span></label>
+                        <label>@lang('area.area_belongs_in_factory') <span class="text-danger">*</span></label>
                         {{ Form::select('factory_id', $factoriesList , $area->factory_id, ['class' => 'form-control'])
                         }}
-                        <span class="form-text text-muted">Please enter area name</span>
+                        <span class="form-text text-muted">@lang('lang.please_enter') @lang('area.name')</span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6">
-                        <label>Description <span class="text-danger">*</span></label>
+                        <label>@lang('area.description') <span class="text-danger">*</span></label>
                         {{ Form::text('description', null, ['class' => 'form-control']) }}
-                        <span class="form-text text-muted">Please enter a breif description of this area</span>
+                        <span class="form-text text-muted">@lang('lang.please_enter') @lang('area.description')</span>
                     </div>
                     <div class="col-lg-6">
-                        <label>Area codes</label>
+                        <label>@lang('area.codes')</label>
                         <div class=" col-lg-12">
                             <select class="form-control select2" id="kt_select2_11" multiple name="codes[]">
                                 <option label="Label"></option>
@@ -192,14 +189,14 @@
                                     <option value="{{$c->code}}" selected="selected">{{$c->code}}</option>
                                 @endforeach
                             </select>
-                            <span class="form-text text-muted">Please type each code and press "ENTER" key on your keyboard.</span>
+                            <span class="form-text text-muted">@lang('lang.please_enter') @lang('area.codes') @lang('lang.and_press_enter')</span>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="form-group row">
                     <div class="col-lg-6">
-                        <label class="col-3 col-form-label">Active</label>
+                        <label class="col-3 col-form-label">@lang('lang.active')</label>
                         <div class="col-3">
                             <span class="switch switch-outline switch-icon switch-success">
                                 <label>
@@ -208,7 +205,7 @@
                                 </label>
                             </span>
                         </div>
-                        <span class="form-text text-muted">Is this area active?</span>
+                        <span class="form-text text-muted">@lang('lang.is_this_item_active')</span>
                     </div>
                 </div>
             </div>
@@ -216,8 +213,8 @@
                 <div class="row">
                     <div class="col-lg-6"></div>
                     <div class="col-lg-6 col-xs-12 mb-5 text-right">
-                        <button type="reset" class="btn btn-lg btn-secondary d-xs-block">Cancel</button>
-                        <button type="submit" class="btn btn-lg btn-primary mr-2 d-xs-block">Save</button>
+                        <button type="reset" class="btn btn-lg btn-secondary d-xs-block">@lang('lang.cancel')</button>
+                        <button type="submit" class="btn btn-lg btn-primary mr-2 d-xs-block">@lang('lang.save')</button>
                     </div>
                 </div>
             </div>
@@ -242,21 +239,21 @@
                 name: {
                     validators: {
                         notEmpty: {
-                            message: 'Name is required'
+                            message: '@lang('area.area_name_validation')'
                         }
                     }
                 },
                 description: {
                     validators: {
                         notEmpty: {
-                            message: 'Description is required'
+                            message: '@lang('area.area_description_validation')'
                         },
                     },
                 },
                 factory_id: {
                     validators: {
                         notEmpty: {
-                            message: 'Description is required'
+                            message: '@lang('area.factory_id_validation')'
                         },
                     },
                 },

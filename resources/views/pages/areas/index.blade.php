@@ -1,6 +1,6 @@
 @extends('layouts.metro')
 
-@section('title', 'Areas')
+@section('title', __('area.areas'))
 
 @section('content')
 
@@ -12,15 +12,15 @@
             <!--begin::Page Heading-->
             <div class="d-flex align-items-baseline flex-wrap mr-5">
                 <!--begin::Page Title-->
-                <h5 class="text-dark font-weight-bold my-1 mr-5">Factories</h5>
+                <h5 class="text-dark font-weight-bold my-1 mr-5">@lang('area.areas')</h5>
                 <!--end::Page Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                     <li class="breadcrumb-item">
-                        <a href="/dashboard" class="text-muted">Dashboard</a>
+                        <a href="/dashboard" class="text-muted">@lang('dashboard.dashboard')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="" class="text-muted">Factories</a>
+                        <a href="" class="text-muted">@lang('area.areas')</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -31,7 +31,7 @@
         <!--begin::Toolbar-->
         <div class="d-flex align-items-center">
             <!--begin::Actions-->
-            <a href="#" class="btn btn-light-primary font-weight-bolder btn-sm">Actions</a>
+            <a href="#" class="btn btn-light-primary font-weight-bolder btn-sm">@lang('lang.actions')</a>
             <!--end::Actions-->
             <!--begin::Dropdown-->
             <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
@@ -134,8 +134,7 @@
                 <!--end::Svg Icon-->
             </span>
         </div>
-        <div class="alert-text">This page lets you create the different Areas that constitute your infrastructure.
-            <br />An Area will house and contain all the different Equipments.
+        <div class="alert-text">@lang('area.page_notice')
         </div>
     </div>
     <!--end::Notice-->

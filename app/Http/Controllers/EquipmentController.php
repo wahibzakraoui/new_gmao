@@ -148,7 +148,9 @@ class EquipmentController extends Controller
         if(!auth()->user()->can("view {$this->module}")){
             throw new PermissionDeniedException($request);
         }
-        return response()->view('dashboard')->with('id', $id);
+        return response(
+            view('dashboard')->with('id', $id)
+        );
     }
 
     /**
