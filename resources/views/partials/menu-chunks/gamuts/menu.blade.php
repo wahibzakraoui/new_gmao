@@ -31,7 +31,7 @@
                 </span>
             </li>
             <li class="menu-item {{ Route::currentRouteName() == 'gamuts' ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                <a href="#" class="menu-link">
+                <a href="{{route('gamuts')}}" class="menu-link">
                     <i class="menu-bullet menu-bullet-dot">
                         <span></span>
                     </i>
