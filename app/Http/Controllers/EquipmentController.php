@@ -22,7 +22,7 @@ use Illuminate\Support\Str;
 
 class EquipmentController extends Controller
 {
-    private $module = "equipments";
+    private string $module = "equipments";
 
     /**
      * Display a listing of the resource.
@@ -33,10 +33,9 @@ class EquipmentController extends Controller
      */
     public function index(Request $request) : Response
     {
-        /* User does not have permission */
-        if(!auth()->user()->can("view {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'view', $this->module);
+
         return response(
             view("pages.{$this->module}.index")
         );
@@ -51,10 +50,8 @@ class EquipmentController extends Controller
      */
     public function list(Request $request) : JsonResponse{
 
-        /* User does not have permission */
-        if(!auth()->user()->can("view {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'view', $this->module);
 
         try {
             return DataTables::of(Equipment::leftJoin('areas', 'equipment.area_id', '=', 'areas.id')
@@ -86,10 +83,9 @@ class EquipmentController extends Controller
      */
     public function create(Request $request): Response
     {
-        /* User does not have permission */
-        if(!auth()->user()->can("create {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'create', $this->module);
+
         return response(
             view("pages.{$this->module}.add")
             ->with('areasList', Area::All()->pluck('name', 'id')->prepend(''))
@@ -105,9 +101,8 @@ class EquipmentController extends Controller
      */
     public function store(CreateEquipmentRequest $request)
     {
-        if(!auth()->user()->can("create {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'create', $this->module);
 
         $request->validated();
         $equipment = Equipment::create([
@@ -142,12 +137,13 @@ class EquipmentController extends Controller
      * @param int $id
      * @return Response
      * @throws PermissionDeniedException
+     * @todo Return a working view
      */
     public function show(Request $request, int $id): Response
     {
-        if(!auth()->user()->can("view {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'view', $this->module);
+
         return response(
             view('dashboard')->with('id', $id)
         );
@@ -163,9 +159,9 @@ class EquipmentController extends Controller
      */
     public function edit(Request $request , Equipment $equipment): Response
     {
-        if(!auth()->user()->can("edit {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'edit', $this->module);
+
         return response(
             view("pages.{$this->module}.edit")
                 ->with(Str::singular($this->module), $equipment)
@@ -185,21 +181,19 @@ class EquipmentController extends Controller
      */
     public function update(UpdateEquipmentRequest $request, Equipment $equipment)
     {
-        /* User does not have permission */
-        if(!auth()->user()->can("edit {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }else{
-            /* User does have permission */
-            $request->validated();
-            if($equipment->update($request->only(['name', 'code', 'description', 'active', 'area_id', 'area_code'])))
-            {
-                if($request->hasFile('photo')){
-                    $equipment->clearMediaCollection('equipment');
-                    $equipment->addMedia($request->file('photo'))
-                    ->toMediaCollection('equipment');
-                }
-                return redirect($this->module.'/edit/'.$equipment->id)->with('success', 'Equipment edited successfully!');
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'edit', $this->module);
+
+        /* User does have permission */
+        $request->validated();
+        if($equipment->update($request->only(['name', 'code', 'description', 'active', 'area_id', 'area_code'])))
+        {
+            if($request->hasFile('photo')){
+                $equipment->clearMediaCollection('equipment');
+                $equipment->addMedia($request->file('photo'))
+                ->toMediaCollection('equipment');
             }
+            return redirect($this->module.'/edit/'.$equipment->id)->with('success', 'Equipment edited successfully!');
         }
         return redirect($this->module);
     }
@@ -215,14 +209,13 @@ class EquipmentController extends Controller
      */
     public function destroy(Request $request, Equipment $equipment)
     {
-        if(!auth()->user()->can("delete {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }else{
-            if($equipment->delete()){
-                return redirect($this->module)->with('deleted', true)->with('success', 'Equipment deleted successfully!');
-            }
-            return redirect($this->module);
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'delete', $this->module);
+
+        if($equipment->delete()){
+            return redirect($this->module)->with('deleted', true)->with('success', 'Equipment deleted successfully!');
         }
 
+        return redirect($this->module);
     }
 }

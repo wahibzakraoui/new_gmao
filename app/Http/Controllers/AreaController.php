@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateAreaRequest;
@@ -21,7 +22,7 @@ use Illuminate\Support\Str;
 
 class AreaController extends Controller
 {
-    private $module = "areas";
+    protected string $module = "areas";
 
     /**
      * Display a listing of the resource.
@@ -32,10 +33,9 @@ class AreaController extends Controller
      */
     public function index(Request $request): Response
     {
-        /* User does not have permission */
-        if(!auth()->user()->can("view {$this->module}")) {
-            throw new PermissionDeniedException($request);
-        }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'view', $this->module);
+
         return response(
             view("pages.{$this->module}.index")
         );
@@ -51,10 +51,8 @@ class AreaController extends Controller
      */
     public function list(Request $request): JsonResponse
     {
-        /* User does not have permission */
-        if(!auth()->user()->can("view {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'view', $this->module);
 
         return DataTables::of(Area::leftJoin('factories', 'areas.factory_id', '=', 'factories.id')
         ->select([
@@ -86,10 +84,9 @@ class AreaController extends Controller
      */
     public function create(Request $request): Response
     {
-        /* User does not have permission */
-        if(!auth()->user()->can("create {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'create', $this->module);
+
         return response(
             view("pages.{$this->module}.add")
                 ->with('factoriesList', Factory::All()
@@ -106,9 +103,8 @@ class AreaController extends Controller
      */
     public function store(CreateAreaRequest $request)
     {
-        if(!auth()->user()->can("create {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'create', $this->module);
 
         $request->validated();
         $area = Area::create([
@@ -138,13 +134,13 @@ class AreaController extends Controller
      * @param int $id
      * @return Response
      * @throws PermissionDeniedException
+     * @todo Return a working view
      */
     public function show(Request $request, int $id): Response
     {
-        if(!auth()->user()->can("view {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }
-        // To do - return view
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'view', $this->module);
+
         return response($id);
     }
 
@@ -158,9 +154,9 @@ class AreaController extends Controller
      */
     public function edit(Request $request , Area $area)
     {
-        if(!auth()->user()->can("edit {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'edit', $this->module);
+
         return view("pages.{$this->module}.edit")
         ->with(Str::singular($this->module), $area)
         ->with('factoriesList', Factory::All()->pluck('name', 'id'));
@@ -176,22 +172,20 @@ class AreaController extends Controller
      */
     public function update(UpdateAreaRequest $request, Area $area)
     {
-        /* User does not have permission */
-        if(!auth()->user()->can("edit {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }else{
-            /* User does have permission */
-            $request->validated();
-            if($area->update($request->only(['name', 'description', 'active', 'factory_id'])))
-            {
-                $area->codes()->delete();
-                collect($request->get('codes'))->each(function($code) use ($area){
-                    $id = $area->id;
-                    $code = ['area_id' => $id ,'code' => $code];
-                    AreaCode::create($code);
-                });
-                return redirect($this->module)->with('success', __('area.area_edited_success'));
-            }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'edit', $this->module);
+
+        /* User does have permission */
+        $request->validated();
+        if($area->update($request->only(['name', 'description', 'active', 'factory_id'])))
+        {
+            $area->codes()->delete();
+            collect($request->get('codes'))->each(function($code) use ($area){
+                $id = $area->id;
+                $code = ['area_id' => $id ,'code' => $code];
+                AreaCode::create($code);
+            });
+            return redirect($this->module)->with('success', __('area.area_edited_success'));
         }
         return redirect($this->module);
     }
@@ -207,12 +201,11 @@ class AreaController extends Controller
      */
     public function destroy(Request $request, Area $area)
     {
-        if(!auth()->user()->can("delete {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }else{
-            if($area->codes()->delete() && $area->delete()){
-                return redirect($this->module)->with('deleted', true)->with('success', __('area.area_deleted_success'));
-            }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'delete', $this->module);
+
+        if($area->delete() && $area->codes()->delete() ){
+            return redirect($this->module)->with('deleted', true)->with('success', __('area.area_deleted_success'));
         }
         return redirect($this->module);
     }
@@ -220,18 +213,25 @@ class AreaController extends Controller
     /**
      * Get specified area codes in JSON.
      *
+     * @param Request $request
      * @param Area $area
      * @return JsonResponse
+     * @throws PermissionDeniedException
      */
-    public function getAreaCodesJSON(Area $area): JsonResponse
+    public function getAreaCodesJSON(Request $request, Area $area): JsonResponse
     {
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'view', $this->module);
+
         $result = $area->codes->map(function($code){
             return [
                 'name' => $code->code,
                 'id' => $code->code,
             ];
         });
-        if(!empty($result)) return response()->json($result);
+        if(!empty($result)) {
+            return response()->json($result);
+        }
         return response()->json([]);
     }
 

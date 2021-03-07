@@ -2628,6 +2628,17 @@
 				)
 			</script>
 		@endif
+        @if(env('APP_ENV', 'local') === "production")
+        <script type="text/javascript">
+            window._mfq = window._mfq || [];
+            (function() {
+                var mf = document.createElement("script");
+                mf.type = "text/javascript"; mf.defer = true;
+                mf.src = "//cdn.mouseflow.com/projects/7bafe13b-2bf2-4b0f-aea3-73be48367821.js";
+                document.getElementsByTagName("head")[0].appendChild(mf);
+            })();
+        </script>
+        @endif
 		@yield('my-scripts')
 		<!--end::Page Scripts-->
 	</body>

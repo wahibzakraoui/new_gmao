@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
 
 class FactoryController extends Controller
 {
-    private $module = "factories";
+    private string $module = "factories";
 
     /**
      * Display a listing of the resource.
@@ -29,10 +29,9 @@ class FactoryController extends Controller
      */
     public function index(Request $request) : Response
     {
-        /* User does not have permission */
-        if(!auth()->user()->can("view {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'view', $this->module);
+
         return response()->view("pages.{$this->module}.index");
     }
 
@@ -44,10 +43,8 @@ class FactoryController extends Controller
     public function list(Request $request): JsonResponse
     {
 
-        /* User does not have permission */
-        if(!auth()->user()->can("view {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'view', $this->module);
 
         try {
             return DataTables::eloquent(Factory::query())
@@ -70,10 +67,9 @@ class FactoryController extends Controller
      */
     public function create(Request $request): Response
     {
-        /* User does not have permission */
-        if(!auth()->user()->can("create {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'create', $this->module);
+
         return response()->view("pages.{$this->module}.add");
     }
 
@@ -86,9 +82,9 @@ class FactoryController extends Controller
      */
     public function store(UpdateFactoryRequest $request)
     {
-        if(!auth()->user()->can("create {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'create', $this->module);
+
         $request->validated();
         if(Factory::create([
             'uuid' => Str::uuid(),
@@ -112,9 +108,9 @@ class FactoryController extends Controller
      */
     public function show(Request $request): Response
     {
-        if(!auth()->user()->can("view {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'view', $this->module);
+
         return response()->view('dashboard');
     }
 
@@ -128,9 +124,9 @@ class FactoryController extends Controller
      */
     public function edit(Request $request ,Factory $factory): Response
     {
-        if(!auth()->user()->can("edit {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'edit', $this->module);
+
         return response(
             view("pages.{$this->module}.edit")->with(Str::singular($this->module), $factory->firstOrFail())
         );
@@ -146,16 +142,14 @@ class FactoryController extends Controller
      */
     public function update(UpdateFactoryRequest $request, Factory $factory)
     {
-        /* User does not have permission */
-        if(!auth()->user()->can("edit {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }else{
-            /* User does have permission */
-            $request->validated();
-            if($factory->firstOrFail()->update($request->all()))
-            {
-                return redirect($this->module)->with('success', 'Factory edited successfully!');
-            }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'edit', $this->module);
+
+        /* User does have permission */
+        $request->validated();
+        if($factory->firstOrFail()->update($request->all()))
+        {
+            return redirect($this->module)->with('success', 'Factory edited successfully!');
         }
         return redirect($this->module);
     }
@@ -171,12 +165,11 @@ class FactoryController extends Controller
      */
     public function destroy(Request $request, Factory $factory): RedirectResponse
     {
-        if(!auth()->user()->can("delete {$this->module}")){
-            throw new PermissionDeniedException($request);
-        }else{
-            if($factory->firstOrFail()->delete()){
-                return redirect($this->module)->with('deleted', true)->with('success', 'Factory deleted successfully!');
-            }
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'delete', $this->module);
+
+        if($factory->delete()){
+            return redirect($this->module)->with('deleted', true)->with('success', 'Factory deleted successfully!');
         }
         return redirect($this->module);
     }

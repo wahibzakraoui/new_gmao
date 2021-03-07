@@ -1,6 +1,6 @@
 @extends('layouts.metro')
 
-@section('title', 'Dashboard')
+@section('title', __('dashboard.dashboard'))
 
 @section('content')
 <!--begin::Content-->

@@ -1,17 +1,21 @@
-<?php
+<?php /** @noinspection PhpComposerExtensionStubsInspection */
 
 namespace App\Exceptions;
 
 use Exception;
+use HttpException;
 use Throwable;
 
 class PermissionDeniedException extends Exception
 {
-    public function render($request){
-        $request->session()->flash('message-header', 'Permission refusee'); 
-        $request->session()->flash('message-body', 'Vous ne disposez pas des droits necessaires afin de visiter cette ressource'); 
-        $request->session()->flash('message-footer', 'Demandez acces a votre administrateur'); 
-        $request->session()->flash('alert-class', 'alert-danger'); 
-        return redirect('dashboard');
+    /**
+     * @param $request
+     * @return HttpException
+     * @noinspection PhpVoidFunctionResultUsedInspection
+     * @noinspection PhpIncompatibleReturnTypeInspection
+     */
+    public function render($request): HttpException
+    {
+        return abort(403);
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.metro')
 
-@section('title', 'Edit equipment')
+@section('title', __('equipment.edit_equipment'))
 
 @section('content')
 
@@ -12,15 +12,15 @@
             <!--begin::Page Heading-->
             <div class="d-flex align-items-baseline flex-wrap mr-5">
                 <!--begin::Page Title-->
-                <h5 class="text-dark font-weight-bold my-1 mr-5">Equipments</h5>
+                <h5 class="text-dark font-weight-bold my-1 mr-5">@lang('equipment.equipment')</h5>
                 <!--end::Page Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                     <li class="breadcrumb-item">
-                        <a href="/equipments" class="text-muted">Equipments</a>
+                        <a href="{{route('equipments')}}" class="text-muted">@lang('equipment.equipment')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="" class="text-muted">Edit</a>
+                        <a href="" class="text-muted">@lang('lang.edit')</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -31,7 +31,7 @@
         <!--begin::Toolbar-->
         <div class="d-flex align-items-center">
             <!--begin::Actions-->
-            <a href="#" class="btn btn-light-primary font-weight-bolder btn-sm">Actions</a>
+            <a href="#" class="btn btn-light-primary font-weight-bolder btn-sm">@lang('lang.actions')</a>
             <!--end::Actions-->
             <!--begin::Dropdown-->
             <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
@@ -129,9 +129,8 @@
     <div class="card card-custom gutter-b">
         <div class="card-header flex-wrap py-3">
             <div class="card-title">
-                <h3 class="card-label">Edit equipment:
-                    <span class="d-block text-muted pt-2 font-size-sm">Required fields are marked with a star
-                        sign.</span>
+                <h3 class="card-label">@lang('lang.edit') @lang('equipment.equipment'):
+                    <span class="d-block text-muted pt-2 font-size-sm">@lang('lang.required_fields_notice')</span>
                 </h3>
             </div>
         </div>
@@ -143,25 +142,25 @@
                     <div class="col-lg-6">
                         <label>Equipment name <span class="text-danger">*</span></label>
                         {{ Form::text('name', null, ['class' => 'form-control']) }}
-                        <span class="form-text text-muted">Please enter equipment name</span>
+                        <span class="form-text text-muted">@lang('lang.please_enter') @lang('equipment.name_validation')</span>
                     </div>
                     <div class="col-lg-6">
                         <label>Equipment belongs in area <span class="text-danger">*</span></label>
                         {{ Form::select('area_id', $areasList , $equipment->area_id, ['class' => 'form-control selectpicker', 'id' => 'areaName', 'data-size' => 7, 'data-live-search' => 'true']) }}
-                        <span class="form-text text-muted">Please enter area name</span>
+                        <span class="form-text text-muted">@lang('lang.please_enter') @lang('area.name')</span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6">
                         <label>Description <span class="text-danger">*</span></label>
                         {{ Form::text('description', null, ['class' => 'form-control']) }}
-                        <span class="form-text text-muted">Please enter a breif description of this equipment</span>
+                        <span class="form-text text-muted">@lang('lang.please_enter') @lang('equipment.description_validation')</span>
                     </div>
                     <div class="col-lg-6">
                         <label>Equipment code <span class="text-danger">*</span></label>
                         <div class=" col-lg-12">
                             {{ Form::text('code', null, ['class' => 'form-control']) }}
-                            <span class="form-text text-muted">Please enter code.</span>
+                            <span class="form-text text-muted">@lang('lang.please_enter') @lang('equipment.equipment_code').</span>
                         </div>
                     </div>
                 </div>
@@ -169,7 +168,7 @@
                     <div class="col-lg-6">
                         <label>Equipment belongs in area code <span class="text-danger">*</span></label>
                         {{ Form::select('area_code', $equipment->area->codes->pluck('code', 'code') , $equipment->area_code, ['class' => 'form-control', 'id' => 'areaCode']) }}
-                        <span class="form-text text-muted">Please enter area code</span>
+                        <span class="form-text text-muted">@lang('lang.please_enter') @lang('area.codes')</span>
                     </div>
                     <div class="col-lg-6">
                         <div class="image-input image-input-outline" id="kt_image_1">
@@ -185,13 +184,13 @@
                                 data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
                                 <i class="ki ki-bold-close icon-xs text-muted"></i>
                             </span>
-                            <label>Equipment photo </label>
+                            <label>@lang('equipment.photo') </label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6">
-                        <label class="col-3 col-form-label">Active</label>
+                        <label class="col-3 col-form-label">@lang('lang.active')</label>
                         <div class="col-3">
                             <span class="switch switch-outline switch-icon switch-success">
                                 <label>
@@ -200,7 +199,7 @@
                                 </label>
                             </span>
                         </div>
-                        <span class="form-text text-muted">Is this area active?</span>
+                        <span class="form-text text-muted">@lang('lang.is_this_item_active')</span>
                     </div>
                 </div>
             </div>
@@ -208,8 +207,8 @@
                 <div class="row">
                     <div class="col-lg-6"></div>
                     <div class="col-lg-6 col-xs-12 mb-5 text-right">
-                        <button type="reset" class="btn btn-lg btn-secondary d-xs-block">Cancel</button>
-                        <button type="submit" class="btn btn-lg btn-primary mr-2 d-xs-block">Save</button>
+                        <button type="reset" class="btn btn-lg btn-secondary d-xs-block">@lang('lang.cancel')</button>
+                        <button type="submit" class="btn btn-lg btn-primary mr-2 d-xs-block">@lang('lang.save')</button>
                     </div>
                 </div>
             </div>
@@ -228,41 +227,41 @@
 <script src="{{asset('assets/js/pages/crud/forms/widgets/select2.js')}}"></script>
 <script>
     FormValidation.formValidation(
-        document.getElementById('edit_area_form'),
+        document.getElementById('edit_equipment_form'),
         {
             fields: {
                 name: {
                     validators: {
                         notEmpty: {
-                            message: 'Factory name is required'
+                            message: '@lang('equipment.name_validation')'
                         }
                     }
                 },
                 code: {
                     validators: {
                         notEmpty: {
-                            message: 'Factory code is required.'
+                            message: '@lang('equipment.factory_validation')'
                         },
                     }
                 },
                 description: {
                     validators: {
                         notEmpty: {
-                            message: 'Factory description is required'
+                            message: '@lang('equipment.description_validation')'
                         },
                     }
                 },
                 area_id: {
                     validators: {
                         notEmpty: {
-                            message: 'Area ID is required'
+                            message: '@lang('equipment.area_id_validation')'
                         },
                     }
                 },
                 area_code: {
                     validators: {
                         notEmpty: {
-                            message: 'Area Code is required'
+                            message: '@lang('equipment.area_code_validation')'
                         },
                     }
                 },
@@ -284,23 +283,23 @@
     );
 </script>
 <script>
-    var avatar1 = new KTImageInput('kt_image_1');
-    $('#areaName').change(function(){
-        var selected_area = $(this).val();
-        if(selected_area != ""){
-            $('#areaCode').empty();
-            $('#areaCode').attr('disabled', 'disabled');
-            $.get( "{{route('areas-json')}}" + '/' + selected_area, function( data ) {
-                $(data).each(function(index, d){
-                    var newOption = new Option(d.name, d.id, true, true);
-                    $('#areaCode').append(newOption).trigger('change');
+    const avatar1 = new KTImageInput('kt_image_1');
+    $('#areaName').change(function () {
+        const selected_area = $(this).val();
+        const self = $('#areaCode');
+        if (selected_area !== "") {
+            self.empty().attr('disabled', 'disabled');
+            $.get("{{route('areas-json')}}" + '/' + selected_area, function (data) {
+                $(data).each(function (index, d) {
+                    const newOption = new Option(d.name, d.id, true, true);
+                    self.append(newOption).trigger('change');
                 });
-            }).then(function(){
-                $('#areaCode').attr('disabled', false);
+            }).then(function () {
+                self.attr('disabled', false);
             });
-            
-        }else{
-            $('#areaCode').empty().trigger('change');
+
+        } else {
+            self.empty().trigger('change');
         }
     });
 </script>

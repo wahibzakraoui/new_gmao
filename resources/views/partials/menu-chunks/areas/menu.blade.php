@@ -19,7 +19,7 @@
         <ul class="menu-subnav">
             <li class="menu-item menu-item-parent" aria-haspopup="true">
                 <span class="menu-link">
-                    <span class="menu-text">Areas</span>
+                    <span class="menu-text">@lang('area.areas')</span>
                 </span>
             </li>
             <li class="menu-item {{ Route::currentRouteName() == 'areas' ? 'menu-item-active' : '' }}" aria-haspopup="true">
@@ -27,7 +27,7 @@
                     <i class="menu-bullet menu-bullet-dot">
                         <span></span>
                     </i>
-                    <span class="menu-text">List of areas</span>
+                    <span class="menu-text">@lang('area.list_of_areas')</span>
                 </a>
             </li>
             <li class="menu-item {{ Route::currentRouteName() == 'add-area' ? 'menu-item-active' : '' }}" aria-haspopup="true">
@@ -35,7 +35,7 @@
                     <i class="menu-bullet menu-bullet-dot">
                         <span></span>
                     </i>
-                    <span class="menu-text">Add area</span>
+                    <span class="menu-text">@lang('area.new_area')</span>
                 </a>
             </li>
         </ul>

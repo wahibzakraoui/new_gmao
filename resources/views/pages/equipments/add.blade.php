@@ -331,11 +331,11 @@
     );
 </script>
 <script>
-    var avatar1 = new KTImageInput('kt_image_1');
+    const avatar1 = new KTImageInput('kt_image_1');
     $('#areaName').change(function () {
         const selected_area = $(this).val();
         const self = $('#areaCode');
-        if (selected_area != "") {
+        if (selected_area !== "") {
             self.empty().attr('disabled', 'disabled');
             $.get("{{route('areas-json')}}" + '/' + selected_area, function (data) {
                 $(data).each(function (index, d) {
@@ -347,7 +347,7 @@
             });
 
         } else {
-            $('#areaCode').empty().trigger('change');
+            self.empty().trigger('change');
         }
     });
 </script>
