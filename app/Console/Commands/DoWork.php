@@ -43,7 +43,7 @@ class DoWork extends Command
     public function handle(): int
     {
         $today = Carbon::now()->timezone('Africa/Casablanca')->startOfDay();
-        $gamuts = Gamut::whereNextRun(null)
+        $gamuts = Gamut::whereNextRun(null)->whereActive(1)
         ->orWhere('next_run', '<=', $today->startOfDay()->format('Y-m-d H:i:s'))->get();
 
         $gamuts->map(function($gamut){

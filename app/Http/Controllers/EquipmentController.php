@@ -113,7 +113,6 @@ class EquipmentController extends Controller
             'area_id' => $request->get('area_id'),
             'area_code' => $request->get('area_code'),
             'active' => $request->get('active') ?? false,
-
         ]);
 
         if($equipment)
@@ -186,7 +185,16 @@ class EquipmentController extends Controller
 
         /* User does have permission */
         $request->validated();
-        if($equipment->update($request->only(['name', 'code', 'description', 'active', 'area_id', 'area_code'])))
+        if($equipment->update(
+            [
+                'name' => $request->get('name'),
+                'code' => $request->get('code'),
+                'description' => $request->get('description'),
+                'area_id' => $request->get('area_id'),
+                'area_code' => $request->get('area_code'),
+                'active' => $request->get('active') ?? false,
+            ]
+        ))
         {
             if($request->hasFile('photo')){
                 $equipment->clearMediaCollection('equipment');

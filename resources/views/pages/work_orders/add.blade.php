@@ -1,9 +1,8 @@
 @extends('layouts.metro')
 
-@section('title', 'Edit area')
+@section('title', 'New Work Order')
 
 @section('content')
-
 <!--begin::Subheader-->
 <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
     <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -12,15 +11,15 @@
             <!--begin::Page Heading-->
             <div class="d-flex align-items-baseline flex-wrap mr-5">
                 <!--begin::Page Title-->
-                <h5 class="text-dark font-weight-bold my-1 mr-5">Areas</h5>
+                <h5 class="text-dark font-weight-bold my-1 mr-5">Work Orders</h5>
                 <!--end::Page Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                     <li class="breadcrumb-item">
-                        <a href="/areas" class="text-muted">Areas</a>
+                        <a href="{{route('dashboard')}}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="" class="text-muted">Edit</a>
+                        <a href="{{route('equipments')}}" class="text-muted">Work Orders</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -134,9 +133,7 @@
                 <!--end::Svg Icon-->
             </span>
         </div>
-        <div class="alert-text">This page lets you create the different Areas that constitute your infrastructure.
-            <br />An Area will house and contain all the different Equipments.
-        </div>
+        <div class="alert-text">You can report a problem with any equipment or part. An agent will review and assign your work order to one of the technical teams.</div>
     </div>
     <!--end::Notice-->
     <div class="col-xs-12 col-md-12">
@@ -150,92 +147,68 @@
         </div>
         @endif
     </div>
+    @if(count($areasList) > 0 && isset($areasList[1]))
     <!--begin::Card-->
     <div class="card card-custom gutter-b">
         <div class="card-header flex-wrap py-3">
             <div class="card-title">
-                <h3 class="card-label">Edit gamut:
-                    <span class="d-block text-muted pt-2 font-size-sm">Required fields are marked with a star
-                        sign.</span>
+                <h3 class="card-label">New Work Order:
+                    <span class="d-block text-muted pt-2 font-size-sm">Required fields are marked with a star sign.</span>
                 </h3>
             </div>
         </div>
         <div class="card-body">
-            {{ Form::model($gamut, array('route' => array('update-gamut', $gamut->id), 'method' => 'POST', 'id' =>
-            'edit_area_form')) }}
+            {{ Form::open(array('route' => array('store-work_order'), 'method' => 'POST', 'id' => 'create_equipment_form', 'files' => true)) }}
             <div class="card-body">
                 <div class="form-group row">
                     <div class="col-lg-6">
-                        <label>Gamut designation <span class="text-danger">*</span></label>
-                        {{ Form::text('designation', null, ['class' => 'form-control']) }}
-                        <span class="form-text text-muted">Please enter designation</span>
+                        <label>Equipment name <span class="text-danger">*</span></label>
+                        {{ Form::text('name', null, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please enter equipment name</span>
                     </div>
                     <div class="col-lg-6">
-                        <label>Gamut code <span class="text-danger">*</span></label>
-                        {{ Form::text('code', null, ['class' => 'form-control']) }}
-                        <span class="form-text text-muted">Please enter code</span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-6">
-                        <label>Gamut belongs in factory <span class="text-danger">*</span></label>
-                        {{ Form::select('factory_id', $factoriesList , $gamut->factory_id, ['class' => 'form-control selectpicker']) }}
-                        <span class="form-text text-muted">Please enter factory</span>
-                    </div>
-                    <div class="col-lg-6">
-                        <label>Gamut state <span class="text-danger">*</span></label>
-                        {{ Form::select('state', ['Running' => 'Running', 'Offline' => 'Offline'] , $gamut->state, ['class' => 'form-control selectpicker']) }}
-                        <span class="form-text text-muted">Please specify the equipment state when this gamut should apply </span>
+                        <label>Equipment belongs in area <span class="text-danger">*</span></label>
+                        {{ Form::select('area_id', $areasList , '', ['class' => 'form-control selectpicker', 'id' =>
+                        'areaName', 'data-size' => 7, 'data-live-search' => 'true']) }}
+                        <span class="form-text text-muted">Please enter area name</span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6">
-                        <label>Gamut type <span class="text-danger">*</span></label>
-                        {{ Form::select('type', ['visit' => 'Visit', 'lubrification' => 'Lubrication'] , $gamut->type, ['class' => 'form-control selectpicker']) }}
-                        <span class="form-text text-muted">Please enter factory</span>
+                        <label>Description <span class="text-danger">*</span></label>
+                        {{ Form::text('description', null, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please enter a breif description of this equipment</span>
                     </div>
                     <div class="col-lg-6">
-                        <label>Equipment <span class="text-danger">*</span></label>
-                        {{ Form::select('equipment_id', $equipmentList , $gamut->equipment_id, ['class' => 'form-control selectpicker', 'data-size' => 7, 'data-live-search' => 'true']) }}
-                        <span class="form-text text-muted">Please specify the equipment</span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-6">
-                        <label>Part <span class="text-danger"></span></label>
-                        {{ Form::select('part_id', $partsList , $gamut->part_id, ['class' => 'form-control selectpicker']) }}
-                        <span class="form-text text-muted">Please specify the part if any.</span>
-                    </div>
-                    <div class="col-lg-6">
-                        <label>Area <span class="text-danger">*</span></label>
-                        {{ Form::select('area_id', $areasList , $gamut->area_id, ['class' => 'form-control selectpicker']) }}
-                        <span class="form-text text-muted">Please enter area</span>
+                        <label>Equipment code <span class="text-danger">*</span></label>
+                        <div class=" col-lg-12">
+                            {{ Form::text('code', null, ['class' => 'form-control']) }}
+                            <span class="form-text text-muted">Please enter code.</span>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row fv-plugins-icon-container">
                     <div class="col-lg-6">
-                        <label>Periodicity <span class="text-danger"></span></label>
-                        {{ Form::select('periodicity_id', $periodicitiesList , $gamut->periodicity_id, ['class' => 'form-control selectpicker']) }}
-                        <span class="form-text text-muted">Please specify the period it takes to generate a work order.</span>
+                        <label>Equipment belongs in area code <span class="text-danger">*</span></label>
+                        {{ Form::select('area_code', [] , '', ['class' => 'form-control', 'id' => 'areaCode' ,
+                        'disabled' => 'disabled']) }}
+                        <span class="form-text text-muted">Please enter area code</span>
                     </div>
                     <div class="col-lg-6">
-                        <label>Concerned Service <span class="text-danger">*</span></label>
-                        {{ Form::select('service_id', $servicesList , $gamut->service_id, ['class' => 'form-control selectpicker']) }}
-                        <span class="form-text text-muted">Please enter the concerned service</span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    @can('assign workorders')
-                    <div class="col-lg-6">
-                        <label>Assign to user <span class="text-danger"></span></label>
-                        {{ Form::select('assigned_user_id', $usersList , $gamut->assigned_user_id, ['class' => 'form-control selectpicker']) }}
-                        <span class="form-text text-muted">Please specify the user if you want to pre-hand this task to them.</span>
-                    </div>
-                    @endcan
-                    <div class="col-lg-6">
-                        <label>Estimated work hours <span class="text-danger">*</span></label>
-                        {{ Form::text('estimated_hours', null, ['class' => 'form-control']) }}
-                        <span class="form-text text-muted">Please enter the estimated task length in hours</span>
+                        <div class="image-input image-input-outline" id="kt_image_1">
+                            <div class="image-input-wrapper" style="background-image: url()">
+                            </div>
+                            <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                data-action="change" data-toggle="tooltip" title="" data-original-title="Change image">
+                                <i class="fa fa-pen icon-sm text-muted"></i>
+                                <input type="file" name="photo" accept=".png, .jpg, .jpeg" />
+                                <input type="hidden" name="photo_remove" />
+                            </label>
+                            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                <i class="ki ki-bold-close icon-xs text-muted"></i>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -244,12 +217,12 @@
                         <div class="col-3">
                             <span class="switch switch-outline switch-icon switch-success">
                                 <label>
-                                    {{ Form::checkbox('active') }}
+                                    {{ Form::checkbox('active', '1', true) }}
                                     <span></span>
                                 </label>
                             </span>
                         </div>
-                        <span class="form-text text-muted">Is this gamut active?</span>
+                        <span class="form-text text-muted">Is this equipment active?</span>
                     </div>
                 </div>
             </div>
@@ -258,7 +231,8 @@
                     <div class="col-lg-6"></div>
                     <div class="col-lg-6 col-xs-12 mb-5 text-right">
                         <button type="reset" class="btn btn-lg btn-secondary d-xs-block">Cancel</button>
-                        <button type="submit" class="btn btn-lg btn-primary mr-2 d-xs-block">Save</button>
+                        <button type="submit" class="btn btn-lg btn-primary mr-2 d-xs-block"
+                            id="submit_button">Save</button>
                     </div>
                 </div>
             </div>
@@ -268,8 +242,28 @@
         </div>
     </div>
     <!--end::Card-->
+    @else
+    <div class="col-lg-12">
+        <!--begin::Callout-->
+        <div class="card card-custom mb-2">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between p-4 flex-lg-wrap flex-xl-nowrap">
+                    <div class="d-flex flex-column mr-5">
+                        <a href="#" class="h4 text-dark text-hover-primary mb-5">No areas defined yet</a>
+                        <p class="text-dark-50">In order to add Equipments, please add an Area first. You can come back
+                            to this page later.</p>
+                    </div>
+                    <div class="ml-6 ml-lg-0 ml-xxl-6 flex-shrink-0">
+                        <a href="{{ route('add-area') }}" target="_self"
+                            class="btn font-weight-bolder text-uppercase btn-primary py-4 px-6">Create area</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end::Callout-->
+    </div>
+    @endif
 </div>
-
 <!--end::Content-->
 @stop
 
@@ -277,29 +271,43 @@
 <script src="{{asset('assets/js/pages/crud/forms/widgets/select2.js')}}"></script>
 <script>
     FormValidation.formValidation(
-        document.getElementById('edit_area_form'),
+        document.getElementById('create_equipment_form'),
         {
             fields: {
                 name: {
                     validators: {
                         notEmpty: {
-                            message: 'Name is required'
+                            message: 'Factory name is required'
                         }
+                    }
+                },
+                code: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Factory code is required.'
+                        },
                     }
                 },
                 description: {
                     validators: {
                         notEmpty: {
-                            message: 'Description is required'
+                            message: 'Factory description is required'
                         },
-                    },
+                    }
                 },
-                factory_id: {
+                area_id: {
                     validators: {
                         notEmpty: {
-                            message: 'Description is required'
+                            message: 'Area ID is required'
                         },
-                    },
+                    }
+                },
+                area_code: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Area Code is required'
+                        },
+                    }
                 },
             },
 
@@ -308,6 +316,7 @@
                 // Validate fields when clicking the Submit button
                 submitButton: new FormValidation.plugins.SubmitButton(),
                 // Submit the form when all fields are valid
+
                 defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
                 // Bootstrap Framework Integration
                 bootstrap: new FormValidation.plugins.Bootstrap({
@@ -319,8 +328,24 @@
     );
 </script>
 <script>
-    $('#kt_select2_12_1, #kt_select2_12_2, #kt_select2_12_3, #kt_select2_12_4').select2({
-        placeholder: "Select an option",
+    const avatar1 = new KTImageInput('kt_image_1');
+    $('#areaName').change(function () {
+        const selected_area = $(this).val();
+        const self = $('#areaCode');
+        if (selected_area !== "") {
+            self.empty().attr('disabled', 'disabled');
+            $.get("{{route('areas-json')}}" + '/' + selected_area, function (data) {
+                $(data).each(function (index, d) {
+                    const newOption = new Option(d.name, d.id, true, true);
+                    self.append(newOption).trigger('change');
+                });
+            }).then(function () {
+                self.attr('disabled', false);
+            });
+
+        } else {
+            self.empty().trigger('change');
+        }
     });
 </script>
 @stop

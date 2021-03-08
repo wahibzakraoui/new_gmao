@@ -39,7 +39,7 @@
                 </a>
             </li>
             <li class="menu-item {{ Route::currentRouteName() == 'add-gamut' ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                <a href="#" class="menu-link">
+                <a href="{{route('add-gamut')}}" class="menu-link">
                     <i class="menu-bullet menu-bullet-dot">
                         <span></span>
                     </i>

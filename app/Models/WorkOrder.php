@@ -52,4 +52,10 @@ use Illuminate\Database\Eloquent\Model;
 class WorkOrder extends Model
 {
     use HasFactory;
+    public function gamut(){
+        return $this->belongsTo(Gamut::class);
+    }
+    public function scopeFinished($query){
+        return $query->whereStatus('finished');
+    }
 }

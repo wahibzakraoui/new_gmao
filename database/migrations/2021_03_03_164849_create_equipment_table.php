@@ -19,7 +19,7 @@ class CreateEquipmentTable extends Migration
             $table->uuid('uuid')->unique();
             $table->string('code', 20);
             $table->mediumText('description');
-            $table->boolean('active');
+            $table->boolean('active')->nullable();
             $table->unsignedBigInteger('area_id');
             $table->foreign('area_id')->references('id')->on('areas');
             $table->string('area_code');

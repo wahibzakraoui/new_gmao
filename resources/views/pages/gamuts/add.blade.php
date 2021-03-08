@@ -171,34 +171,80 @@
             </div>
         </div>
         <div class="card-body">
-            {{ Form::open(array('route' => array('store-area'), 'method' => 'POST', 'id' => 'create_area_form')) }}
+            {{ Form::open(array('route' => array('store-gamut'), 'method' => 'POST', 'id' => 'create_gamut_form')) }}
             <div class="card-body">
                 <div class="form-group row">
                     <div class="col-lg-6">
-                        <label>Area name <span class="text-danger">*</span></label>
-                        {{ Form::text('name', null, ['class' => 'form-control']) }}
-                        <span class="form-text text-muted">Please enter area name</span>
+                        <label>Gamut designation <span class="text-danger">*</span></label>
+                        {{ Form::text('designation', null, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please enter designation</span>
                     </div>
                     <div class="col-lg-6">
-                        <label>Area belongs in factory <span class="text-danger">*</span></label>
-                        {{ Form::select('factory_id', $factoriesList , '', ['class' => 'form-control']) }}
-                        <span class="form-text text-muted">Please enter area name</span>
+                        <label>Gamut code <span class="text-danger">*</span></label>
+                        {{ Form::text('code', null, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please enter code</span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6">
-                        <label>Description <span class="text-danger">*</span></label>
-                        {{ Form::text('description', null, ['class' => 'form-control']) }}
-                        <span class="form-text text-muted">Please enter a breif description of this area</span>
+                        <label>Gamut belongs in factory <span class="text-danger">*</span></label>
+                        {{ Form::select('factory_id', $factoriesList , null, ['class' => 'form-control selectpicker']) }}
+                        <span class="form-text text-muted">Please enter factory</span>
                     </div>
                     <div class="col-lg-6">
-                        <label>Area codes</label>
-                        <div class=" col-lg-12">
-                            <select class="form-control select2" id="kt_select2_11" multiple name="codes[]">
-                                <option label="Label"></option>
-                            </select>
-                            <span class="form-text text-muted">Please enter code and press "ENTER" key on your keyboard.</span>
+                        <label>Gamut state <span class="text-danger">*</span></label>
+                        {{ Form::select('state', ['Running' => 'Running', 'Offline' => 'Offline'] , null, ['class' => 'form-control selectpicker']) }}
+                        <span class="form-text text-muted">Please specify the equipment state when this gamut should apply </span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-6">
+                        <label>Gamut type <span class="text-danger">*</span></label>
+                        {{ Form::select('type', ['visit' => 'Visit', 'lubrification' => 'Lubrication'] , null, ['class' => 'form-control selectpicker']) }}
+                        <span class="form-text text-muted">Please enter factory</span>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Equipment <span class="text-danger">*</span></label>
+                        {{ Form::select('equipment_id', $equipmentList , null, ['class' => 'form-control selectpicker', 'data-size' => 7, 'data-live-search' => 'true']) }}
+                        <span class="form-text text-muted">Please specify the equipment</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-6">
+                        <label>Part <span class="text-danger"></span></label>
+                        {{ Form::select('part_id', $partsList , null, ['class' => 'form-control selectpicker']) }}
+                        <span class="form-text text-muted">Please specify the part if any.</span>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Area <span class="text-danger">*</span></label>
+                        {{ Form::select('area_id', $areasList , null, ['class' => 'form-control selectpicker']) }}
+                        <span class="form-text text-muted">Please enter area</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-6">
+                        <label>Periodicity <span class="text-danger"></span></label>
+                        {{ Form::select('periodicity_id', $periodicitiesList , null, ['class' => 'form-control selectpicker']) }}
+                        <span class="form-text text-muted">Please specify the period it takes to generate a work order.</span>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Concerned Service <span class="text-danger">*</span></label>
+                        {{ Form::select('service_id', $servicesList , null, ['class' => 'form-control selectpicker']) }}
+                        <span class="form-text text-muted">Please enter the concerned service</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @can('assign workorders')
+                        <div class="col-lg-6">
+                            <label>Assign to user <span class="text-danger"></span></label>
+                            {{ Form::select('assigned_user_id', $usersList , null, ['class' => 'form-control selectpicker']) }}
+                            <span class="form-text text-muted">Please specify the user if you want to pre-hand this task to them.</span>
                         </div>
+                    @endcan
+                    <div class="col-lg-6">
+                        <label>Estimated work hours <span class="text-danger">*</span></label>
+                        {{ Form::text('estimated_hours', null, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please enter the estimated task length in hours</span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -207,12 +253,12 @@
                         <div class="col-3">
                             <span class="switch switch-outline switch-icon switch-success">
                                 <label>
-                                    {{ Form::checkbox('active', '1', true) }}
+                                    {{ Form::checkbox('active') }}
                                     <span></span>
                                 </label>
                             </span>
                         </div>
-                        <span class="form-text text-muted">Is this area active?</span>
+                        <span class="form-text text-muted">Is this gamut active?</span>
                     </div>
                 </div>
             </div>
@@ -260,27 +306,27 @@
 <script src="{{asset('assets/js/pages/crud/forms/widgets/select2.js')}}"></script>
 <script>
     FormValidation.formValidation(
-        document.getElementById('create_factory_form'),
+        document.getElementById('create_gamut_form'),
         {
             fields: {
-                name: {
+                designation: {
                     validators: {
                         notEmpty: {
-                            message: 'Factory name is required'
+                            message: 'Gamut designation is required'
                         }
                     }
                 },
                 code: {
                     validators: {
                         notEmpty: {
-                            message: 'Factory code is required.'
+                            message: 'Gamut code is required.'
                         },
                     }
                 },
-                description: {
+                factory_id: {
                     validators: {
                         notEmpty: {
-                            message: 'Factory description is required'
+                            message: 'Factory ID is required'
                         },
                     }
                 },

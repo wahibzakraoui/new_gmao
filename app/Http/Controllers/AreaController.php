@@ -176,7 +176,12 @@ class AreaController extends Controller
 
         /* User does have permission */
         $request->validated();
-        if ($area->update($request->only(['name', 'description', 'active', 'factory_id']))) {
+        if ($area->update([
+            'name' => $request->get('name'),
+            'description' => $request->get('description'),
+            'factory_id' => $request->get('factory_id'),
+            'active' => $request->get('active') ?: null,
+        ])){
             $area->codes()->delete();
             collect($request->get('codes'))->each(function ($code) use ($area) {
                 $id = $area->id;

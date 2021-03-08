@@ -18,7 +18,7 @@ class CreateAreasTable extends Migration
             $table->string('name', 160);
             $table->uuid('uuid')->unique();
             $table->mediumText('description');
-            $table->boolean('active');
+            $table->boolean('active')->nullable();
             $table->unsignedBigInteger('factory_id');
             $table->foreign('factory_id')->references('id')->on('factories');
             $table->softDeletes();

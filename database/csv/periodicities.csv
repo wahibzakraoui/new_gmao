@@ -4,5 +4,5 @@ id,name,description,code,unit,frequency
 3,Monthly,A Monthly task. Runs every 1 Months.,Monthly,month,1
 4,Quarterly,A quarterly task. Runs every 3 Months,Quarterly,month,3
 5,Semestrial,A semi-annually task. Runs twice a year.,Semestrial,month,6
-6,Annual,A yearly task. Runs every 1 years.,Annual,year,1
+6,Yearly,A yearly task. Runs every 1 years.,Yearly,year,1
 7,Biannual,"A Bi-Annual task, Runs every 2 years.",Biannual,year,2

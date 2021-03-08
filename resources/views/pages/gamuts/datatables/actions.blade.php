@@ -1,6 +1,9 @@
 
 <div class="btn-toolbar" role="toolbar" aria-label="...">
     <div class="btn-group mr-2" role="group" aria-label="...">
+        @can('view gamuts')
+            <a href="{{route('show-gamut', $gamut->id)}}" class="btn btn-outline-secondary btn-icon" data-toggle="tooltip" data-theme="dark" title="Delete"><i class="la la-eye"></i></a>
+        @endcan
         @can('edit gamuts')
         <a href="{{route('edit-gamut', $gamut->id)}}" class="btn btn-outline-secondary btn-icon" data-toggle="tooltip" data-theme="dark" title="Delete"><i class="la la-edit"></i></a>
         @endcan

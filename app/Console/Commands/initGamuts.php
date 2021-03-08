@@ -53,7 +53,7 @@ class initGamuts extends Command
             $part = Part::whereCode($draft->equipment_code)->first();
             $periodicity = Periodicity::whereCode($draft->periodicity)->first();
             $service = Service::whereName($draft->type)->first();
-            
+
             $now = CarbonImmutable::now()->locale('en_US');
 
             if($draft->type == "Oil" || $draft->type == "Grease"){
@@ -78,7 +78,7 @@ class initGamuts extends Command
             {
                 $next_run = $now->startOfQuarter($now)->subDays(90)->format('Y-m-d H:i:s');
             }
-            elseif($draft->periodicity == "Annual")
+            elseif($draft->periodicity == "Yearly")
             {
                 $next_run = $now->startOfYear($now)->format('Y-m-d H:i:s');
             }else{
@@ -98,9 +98,9 @@ class initGamuts extends Command
                 'periodicity_id' => $periodicity->id ?? null,
                 'state' => $draft->state == "Running" ? "Running" : "Offline",
                 'next_run' => $next_run,
-                'service_id' => $service->id, 
-                'estimated_hours' => $draft->estimated_hours > 0 ? $draft->estimated_hours : 8, 
-                'assigned_user_id' => $draft->assigned_user_id ?? null, 
+                'service_id' => $service->id,
+                'estimated_hours' => $draft->estimated_hours > 0 ? $draft->estimated_hours : 8,
+                'assigned_user_id' => $draft->assigned_user_id ?? null,
             ]);
         });
     }

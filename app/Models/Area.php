@@ -59,4 +59,8 @@ class Area extends Model
     {
         return $this->hasMany(Part::class);
     }
+    public function gamuts(): HasMany
+    {
+        return $this->hasMany(Gamut::class);
+    }
 }

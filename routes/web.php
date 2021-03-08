@@ -9,6 +9,7 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\WorkOrderController;
 use App\Http\Controllers\GamutController;
+use App\Http\Controllers\TaskController;
 use App\Models\Factory;
 
 
@@ -104,16 +105,6 @@ Route::prefix('parts')->middleware(['auth:sanctum', 'verified'])->group(function
 
 /*
 |--------------------------------------------------------------------------
-| Work Order Routes
-|--------------------------------------------------------------------------
-|
-*/
-Route::prefix('work_orders')->middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::get('/pdf/{workOrder}', [WorkOrderController::class, 'pdf'])->name('workorder-pdf');
-});
-
-/*
-|--------------------------------------------------------------------------
 | Gamuts Routes
 |--------------------------------------------------------------------------
 |
@@ -121,10 +112,40 @@ Route::prefix('work_orders')->middleware(['auth:sanctum', 'verified'])->group(fu
 Route::prefix('gamuts')->middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', [GamutController::class, 'index'])->name('gamuts');
     Route::post('/list', [GamutController::class, 'list'])->name('gamuts-list');
+    Route::get('/show/{gamut}', [GamutController::class, 'show'])->name('show-gamut');
     Route::get('/add', [GamutController::class, 'create'])->name('add-gamut');
     Route::post('/add', [GamutController::class, 'store'])->name('store-gamut');
     Route::get('/edit/{gamut}', [GamutController::class, 'edit'])->name('edit-gamut');
     Route::post('/update/{gamut}', [GamutController::class, 'update'])->name('update-gamut');
     Route::post('/delete/{gamut}', [GamutController::class, 'destroy'])->name('delete-gamut');
     Route::get('/pdf/{gamut}', [GamutController::class, 'pdf'])->name('gamut-pdf');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Work Order Routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::prefix('work_orders')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/', [WorkOrderController::class, 'index'])->name('work_orders');
+    Route::post('/list', [WorkOrderController::class, 'list'])->name('work_orders-list');
+    Route::get('/show/{work_order}', [WorkOrderController::class, 'show'])->name('show-work_order');
+    Route::get('/add', [WorkOrderController::class, 'create'])->name('add-work_order');
+    Route::post('/add', [WorkOrderController::class, 'store'])->name('store-work_order');
+    Route::get('/edit/{workOrder}', [WorkOrderController::class, 'edit'])->name('edit-work_order');
+    Route::post('/update/{workOrder}', [WorkOrderController::class, 'update'])->name('update-work_order');
+    Route::post('/delete/{workOrder}', [WorkOrderController::class, 'destroy'])->name('delete-work_order');
+    Route::get('/pdf/{workOrder}', [WorkOrderController::class, 'pdf'])->name('work_order-pdf');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Tasks Routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::prefix('tasks')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::post('/add', [TaskController::class, 'store'])->name('store-task');
+    Route::post('/delete/{task}', [TaskController::class, 'destroy'])->name('delete-task');
 });

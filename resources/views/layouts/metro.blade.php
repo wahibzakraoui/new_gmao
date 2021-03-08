@@ -1536,7 +1536,7 @@
 				<div class="d-flex align-items-center mt-5">
 					@if(Auth::user()->profile_photo_path)
 					<div class="symbol symbol-100 mr-5">
-						<div class="symbol-label" style="background-image:url('{{url('/storage/'.Auth::user()->profile_photo_path)}}'"></div>
+						<div class="symbol-label" style="background-image:url('{{url('/storage/'.Auth::user()->profile_photo_path)}}')"></div>
 						<i class="symbol-badge bg-success"></i>
 					</div>
 					@else

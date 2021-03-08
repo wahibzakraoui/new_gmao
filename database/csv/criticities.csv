@@ -1,0 +1,3 @@
+id,name,uuid,code,description,type
+1,Piece de securite,214bbd3f-6fa2-4cc0-b841-7c2dd33263a0,Pi-Sec,Dont 1 piece est requise a tout moment,1
+2,Piece stockee,9df0daf3-8237-4ca3-96c8-8da441b6033a,Pi-Sto,Piece disponible en stock,1

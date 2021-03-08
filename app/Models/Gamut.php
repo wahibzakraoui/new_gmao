@@ -1,9 +1,12 @@
-<?php
+<?php /** @noinspection PhpMissingFieldTypeInspection */
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Gamut
@@ -27,9 +30,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $runs
  * @property int|null $active
  * @property string|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Periodicity|null $periodicity
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Periodicity|null $periodicity
  * @method static \Illuminate\Database\Eloquent\Builder|Gamut newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Gamut newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Gamut query()
@@ -60,8 +63,59 @@ class Gamut extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $dates = ['next_run'];
 
-    public function periodicity(){
+    /**
+     * @return BelongsTo
+     */
+    public function periodicity(): BelongsTo
+    {
         return $this->belongsTo(Periodicity::class);
     }
+
+    /**
+     * @return HasMany
+     */
+    public function work_orders(): HasMany
+    {
+        return $this->hasMany(WorkOrder::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function factory(): BelongsTo
+    {
+        return $this->belongsTo(Factory::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function area(): BelongsTo
+    {
+        return $this->belongsTo(Area::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function equipment(): BelongsTo
+    {
+        return $this->belongsTo(Equipment::class);
+    }
+
+    public function done(){
+        return $this->hasMany(WorkOrder::class)->finished();
+    }
+
+
 }

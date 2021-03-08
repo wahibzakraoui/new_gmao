@@ -45,8 +45,11 @@ class Equipment extends Model implements HasMedia
     use HasFactory;
     use InteractsWithMedia;
     protected $guarded = [];
-    
+
     public function area(){
         return $this->belongsTo(Area::class);
+    }
+    public function gamuts(){
+        return $this->hasMany(Gamut::class);
     }
 }

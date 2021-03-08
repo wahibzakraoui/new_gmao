@@ -24,7 +24,20 @@ class CreateGamutRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'designation' => 'required|string',
+            'code' => 'required|string',
+            'state' => 'required|string|in:Running,Offline',
+            'type' => 'required|string|in:visit,lubrification',
+            'factory_id' => 'required|numeric',
+            'equipment_id' => 'required|numeric',
+            'part_id' => 'numeric',
+            'area_id' => 'required|string',
+            'periodicity_id' => 'required|numeric',
+            'work_instructions' => 'string',
+            'estimated_hours' => 'numeric',
+            'service_id' => 'required|numeric',
+            'assigned_user_id' => 'nullable|numeric',
+            'active' => 'nullable|numeric',
         ];
     }
 }

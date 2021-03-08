@@ -25,8 +25,8 @@
             @can('add gamuts')
                 @include('partials.menu-chunks.gamuts.menu')
             @endcan
-            @can('add periodicities')
-                @include('partials.menu-chunks.periodicities.menu')
+            @can('add workorders')
+                @include('partials.menu-chunks.work_orders.menu')
             @endcan
             <!--end::Menu Nav-->
         </ul>

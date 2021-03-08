@@ -28,5 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PartsTableSeeder::class);
         $this->call(ServicesTableSeeder::class);
         $this->call(GamutDraftsTableSeeder::class);
+        $this->call(CriticitiesTableSeeder::class);
     }
 }
