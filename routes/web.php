@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PartController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\DashboardController;
@@ -83,6 +84,22 @@ Route::prefix('equipments')->middleware(['auth:sanctum', 'verified'])->group(fun
     Route::get('/edit/{equipment}', [EquipmentController::class, 'edit'])->name('edit-equipment');
     Route::post('/update/{equipment}', [EquipmentController::class, 'update'])->name('update-equipment');
     Route::post('/delete/{equipment}', [EquipmentController::class, 'destroy'])->name('delete-equipment');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Parts Routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::prefix('parts')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/', [PartController::class, 'index'])->name('parts');
+    Route::post('/list', [PartController::class, 'list'])->name('parts-list');
+    Route::get('/add', [PartController::class, 'create'])->name('add-part');
+    Route::post('/add', [PartController::class, 'store'])->name('store-part');
+    Route::get('/edit/{part}', [PartController::class, 'edit'])->name('edit-part');
+    Route::post('/update/{part}', [PartController::class, 'update'])->name('update-part');
+    Route::post('/delete/{part}', [PartController::class, 'destroy'])->name('delete-part');
 });
 
 /*

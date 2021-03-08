@@ -147,7 +147,12 @@ class FactoryController extends Controller
 
         /* User does have permission */
         $request->validated();
-        if($factory->firstOrFail()->update($request->all()))
+        if($factory->update([
+            'name' => $request->get('name'),
+            'code' => $request->get('code'),
+            'description' =>  $request->get('description'),
+            'active' => $request->get('active'),
+        ]))
         {
             return redirect($this->module)->with('success', 'Factory edited successfully!');
         }

@@ -41,6 +41,7 @@ class Controller extends BaseController
      * @param $module
      * @return bool
      * @throws PermissionDeniedException
+     * @noinspection NullPointerExceptionInspection
      */
     protected function checkPerms(Request $request, $action, $module) : bool{
         if(!auth()->user()->can("{$action} {$module}")){

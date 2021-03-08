@@ -18,4 +18,5 @@ return [
     'area_belongs_in_factory' => 'Area belongs in factory',
     'factory_id_validation' => 'Factory is required',
     'list_of_areas' => 'List of areas',
+    'complementary_code' => 'Complementary code',
 ];

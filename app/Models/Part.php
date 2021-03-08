@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * App\Models\Part
@@ -41,7 +43,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Part whereUuid($value)
  * @mixin \Eloquent
  */
-class Part extends Model
+class Part extends Model implements HasMedia
 {
     use HasFactory;
+    use InteractsWithMedia;
+    protected $guarded = [];
+    public function area(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Area::class);
+    }
 }

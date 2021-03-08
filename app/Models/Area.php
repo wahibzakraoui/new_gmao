@@ -54,4 +54,9 @@ class Area extends Model
     {
         return $this->hasMany(Equipment::class);
     }
+
+    public function parts(): HasMany
+    {
+        return $this->hasMany(Part::class);
+    }
 }

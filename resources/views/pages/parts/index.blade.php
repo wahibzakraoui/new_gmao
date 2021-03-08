@@ -1,6 +1,6 @@
 @extends('layouts.metro')
 
-@section('title', __('area.areas'))
+@section('title', __('parts.parts'))
 
 @section('content')
 
@@ -12,7 +12,7 @@
             <!--begin::Page Heading-->
             <div class="d-flex align-items-baseline flex-wrap mr-5">
                 <!--begin::Page Title-->
-                <h5 class="text-dark font-weight-bold my-1 mr-5">@lang('area.areas')</h5>
+                <h5 class="text-dark font-weight-bold my-1 mr-5">@lang('parts.parts')</h5>
                 <!--end::Page Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
@@ -20,7 +20,7 @@
                         <a href="/dashboard" class="text-muted">@lang('dashboard.dashboard')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="" class="text-muted">@lang('area.areas')</a>
+                        <a href="" class="text-muted">@lang('parts.parts')</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -134,22 +134,21 @@
                 <!--end::Svg Icon-->
             </span>
         </div>
-        <div class="alert-text">@lang('area.page_notice')
-        </div>
+        <div class="alert-text">@lang('parts.notice')</div>
     </div>
     <!--end::Notice-->
     <!--begin::Card-->
     <div class="card card-custom gutter-b">
         <div class="card-header flex-wrap py-3">
             <div class="card-title">
-                <h3 class="card-label">List of current areas:
-                    <span class="d-block text-muted pt-2 font-size-sm">Including inactive entries.</span>
+                <h3 class="card-label">@lang('parts.list_of_current_parts')
+                    <span class="d-block text-muted pt-2 font-size-sm">@lang('lang.including_inactive')</span>
                 </h3>
             </div>
             <div class="card-toolbar">
-                @can('add area')
+                @can('add equipment')
                 <!--begin::Button-->
-                <a href="{{route('add-area')}}" class="btn btn-primary font-weight-bolder">
+                <a href="{{route('add-equipment')}}" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -170,16 +169,18 @@
         </div>
         <div class="card-body">
             <!--begin: Datatable-->
-            <table class="table table-separate table-head-custom table-checkable" id="kt_datatable">
+            <table class="table table-bordered table-checkable" id="kt_datatable">
                 <thead>
                     <tr>
-                        <th>Area ID</th>
-                        <th>Area Name</th>
-                        <th>Description</th>
-                        <th>Factory</th>
-                        <th>Area Codes</th>
-                        <th>Active</th>
-                        <th>Actions</th>
+                        <th>@lang('parts.name')</th>
+                        <th>@lang('lang.code')</th>
+                        <th>@lang('parts.complementary_code')</th>
+                        <th>@lang('area.name')</th>
+                        <th>@lang('area.codes')</th>
+                        <th>@lang('equipment.equipment')</th>
+                        <th>@lang('equipment.equipment_code')</th>
+                        <th>@lang('lang.active')</th>
+                        <th>@lang('lang.actions')</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -214,54 +215,56 @@
 			            <'row'<'col-sm-12'tr>>
                         <'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>`,
                     ajax: {
-                        url: '/areas/list',
+                        url: '{{route("parts-list")}}',
                         type: 'POST',
                         data: {
                         // parameters for custom backend script demo
                         columnsDef: [
                             'name', 'code',
-                            'description'],
+                            'complementary_code'],
                     },
                 },
                 buttons: [
                     {
                         extend: 'print',
                         exportOptions: {
-                            columns: [ 1, 2, 3, 4, 5 ]
+                            columns: [ 0, 1, 2, 3, 4, 5 ]
                         }
                     },
                     {
                         extend: 'copyHtml5',
                         exportOptions: {
-                            columns: [ 1, 2, 3, 4, 5 ]
+                            columns: [ 0, 1, 2, 3, 4, 5 ]
                         }
                     },
                     {
                         extend: 'excelHtml5',
                         exportOptions: {
-                            columns: [ 1, 2, 3, 4, 5 ]
+                            columns: [ 0, 1, 2, 3, 4, 5 ]
                         }
                     },
                     {
                         extend: 'pdfHtml5',
                         exportOptions: {
-                            columns: [ 1, 2, 3, 4, 5 ]
+                            columns: [ 0, 1, 2, 3, 4, 5 ]
                         }
                     },
                 ],
                 columns: [
-                    { data: 'id' },
                     { data: 'name' },
-                    { data: 'description' },
-                    { "data": "factoryName", "name": "factories.name"  },
-                    { data: 'areaCodes' },
+                    { data: 'code' },
+                    { data: 'complementary_code' },
+                    { "data": "areaName", "name": "areas.name"  },
+                    { data: 'area_code' },
+                    { "data": "equipmentName", "name": "equipment.name"  },
+                    { data: 'equipment_code' },
                     { data: 'active' },
                     { data: 'actions', name: 'actions', orderable: false, searchable: false }
                 ],
                 columnDefs: [
                     {
                         width: '75px',
-                        targets: 5,
+                        targets: 7,
                         render: function (data, type, full, meta) {
                             var status = {
                                 0: { 'title': 'Inactive', 'state': 'danger' },
@@ -340,7 +343,5 @@
 
         toastr.success("{{session('success')}}");
     @endif
-
-
 </script>
 @stop

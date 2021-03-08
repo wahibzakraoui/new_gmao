@@ -19,7 +19,7 @@ class CreateFactoriesTable extends Migration
             $table->uuid('uuid');
             $table->string('code', 60);
             $table->mediumText('description');
-            $table->boolean('active');
+            $table->boolean('active')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

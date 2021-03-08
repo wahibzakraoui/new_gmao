@@ -55,24 +55,24 @@ class AreaController extends Controller
         $this->checkPerms($request, 'view', $this->module);
 
         return DataTables::of(Area::leftJoin('factories', 'areas.factory_id', '=', 'factories.id')
-        ->select([
-            'areas.id',
-            'areas.name',
-            'areas.description',
-            'factories.name as factoryName',
-            'areas.active',
-        ]))
-        ->orderColumn('areas.id', function ($query, $order) {
-            $query->orderBy('id', $order);
-        })
-        ->addColumn('areaCodes', function ($area) {
+            ->select([
+                'areas.id',
+                'areas.name',
+                'areas.description',
+                'factories.name as factoryName',
+                'areas.active',
+            ]))
+            ->orderColumn('areas.id', function ($query, $order) {
+                $query->orderBy('id', $order);
+            })
+            ->addColumn('areaCodes', function ($area) {
                 return View::make("pages.{$this->module}.datatables.areacodes")->with('area', $area)->render();
-        })
-        ->addColumn('actions', function ($area) {
+            })
+            ->addColumn('actions', function ($area) {
                 return View::make("pages.{$this->module}.datatables.actions")->with('area', $area)->render();
-        })
-        ->rawColumns(['actions', 'areaCodes'])
-        ->make(true);
+            })
+            ->rawColumns(['actions', 'areaCodes'])
+            ->make(true);
     }
 
     /**
@@ -90,7 +90,7 @@ class AreaController extends Controller
         return response(
             view("pages.{$this->module}.add")
                 ->with('factoriesList', Factory::All()
-                ->pluck('name', 'id'))
+                    ->pluck('name', 'id'))
         );
     }
 
@@ -115,11 +115,10 @@ class AreaController extends Controller
             'active' => $request->get('active') ?? false,
         ]);
 
-        if($area)
-        {
-            collect($request->get('codes'))->each(function($code) use ($area){
+        if ($area) {
+            collect($request->get('codes'))->each(function ($code) use ($area) {
                 $id = $area->id;
-                $code = ['area_id' => $id ,'code' => $code];
+                $code = ['area_id' => $id, 'code' => $code];
                 AreaCode::create($code);
             });
             return redirect($this->module)->with('success', __('area.area_added_success'));
@@ -152,14 +151,14 @@ class AreaController extends Controller
      * @return \Illuminate\Contracts\View\View|Response
      * @throws PermissionDeniedException
      */
-    public function edit(Request $request , Area $area)
+    public function edit(Request $request, Area $area)
     {
         /* check if User does not have permission */
         $this->checkPerms($request, 'edit', $this->module);
 
         return view("pages.{$this->module}.edit")
-        ->with(Str::singular($this->module), $area)
-        ->with('factoriesList', Factory::All()->pluck('name', 'id'));
+            ->with(Str::singular($this->module), $area)
+            ->with('factoriesList', Factory::All()->pluck('name', 'id'));
     }
 
     /**
@@ -177,12 +176,11 @@ class AreaController extends Controller
 
         /* User does have permission */
         $request->validated();
-        if($area->update($request->only(['name', 'description', 'active', 'factory_id'])))
-        {
+        if ($area->update($request->only(['name', 'description', 'active', 'factory_id']))) {
             $area->codes()->delete();
-            collect($request->get('codes'))->each(function($code) use ($area){
+            collect($request->get('codes'))->each(function ($code) use ($area) {
                 $id = $area->id;
-                $code = ['area_id' => $id ,'code' => $code];
+                $code = ['area_id' => $id, 'code' => $code];
                 AreaCode::create($code);
             });
             return redirect($this->module)->with('success', __('area.area_edited_success'));
@@ -204,7 +202,7 @@ class AreaController extends Controller
         /* check if User does not have permission */
         $this->checkPerms($request, 'delete', $this->module);
 
-        if($area->delete() && $area->codes()->delete() ){
+        if ($area->delete() && $area->codes()->delete()) {
             return redirect($this->module)->with('deleted', true)->with('success', __('area.area_deleted_success'));
         }
         return redirect($this->module);
@@ -223,13 +221,13 @@ class AreaController extends Controller
         /* check if User does not have permission */
         $this->checkPerms($request, 'view', $this->module);
 
-        $result = $area->codes->map(function($code){
+        $result = $area->codes->map(function ($code) {
             return [
                 'name' => $code->code,
                 'id' => $code->code,
             ];
         });
-        if(!empty($result)) {
+        if (!empty($result)) {
             return response()->json($result);
         }
         return response()->json([]);

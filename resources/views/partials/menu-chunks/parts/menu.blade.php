@@ -1,5 +1,5 @@
-<li class="menu-item menu-item-submenu {{ Route::currentRouteName() == 'parts' || Route::currentRouteName() == 'add-equipment' ? 'menu-item-open' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
-    <a href="javascript:;" class="menu-link menu-toggle">
+<li class="menu-item menu-item-submenu {{ Route::currentRouteName() === 'parts' || Route::currentRouteName() === 'add-part' ? 'menu-item-open' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+    <a href="javascript:" class="menu-link menu-toggle">
         <span class="svg-icon menu-icon">
         <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\General\Settings-2.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -19,20 +19,20 @@
                     <span class="menu-text">Parts</span>
                 </span>
             </li>
-            <li class="menu-item {{ Route::currentRouteName() == 'parts' ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                <a href="#" class="menu-link">
+            <li class="menu-item {{ Route::currentRouteName() === 'parts' ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                <a href="{{route('parts')}}" class="menu-link">
                     <i class="menu-bullet menu-bullet-dot">
                         <span></span>
                     </i>
-                    <span class="menu-text">List of parts</span>
+                    <span class="menu-text">@lang('parts.list')</span>
                 </a>
             </li>
-            <li class="menu-item {{ Route::currentRouteName() == 'add-part' ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                <a href="#" class="menu-link">
+            <li class="menu-item {{ Route::currentRouteName() === 'add-part' ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                <a href="{{route('add-part')}}" class="menu-link">
                     <i class="menu-bullet menu-bullet-dot">
                         <span></span>
                     </i>
-                    <span class="menu-text">Add part</span>
+                    <span class="menu-text">@lang('parts.add_part')</span>
                 </a>
             </li>
         </ul>

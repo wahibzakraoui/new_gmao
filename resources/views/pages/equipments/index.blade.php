@@ -171,7 +171,7 @@
         </div>
         <div class="card-body">
             <!--begin: Datatable-->
-            <table class="table table-bordered table-checkable" id="kt_datatable">
+            <table class="table table-separate table-head-custom table-checkable" id="kt_datatable">
                 <thead>
                     <tr>
                         <th>Equipment Name</th>
@@ -275,6 +275,10 @@
                             return '<span class="label label-' + status[data].state + ' label-dot mr-2"></span>' +
                                 '<span class="font-weight-bold text-' + status[data].state + '">' + status[data].title + '</span>';
                         },
+                    },
+                    {
+                        width: '100px',
+                        targets: 6,
                     },
                 ],
             });
