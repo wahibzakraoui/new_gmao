@@ -17,4 +17,5 @@ return [
     'including_inactive' => 'Including inactive entries.',
     'code' => 'Code',
     'is_required' => 'is required',
+    'email' => 'Email',
 ];

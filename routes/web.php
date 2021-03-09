@@ -10,7 +10,10 @@ use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\WorkOrderController;
 use App\Http\Controllers\GamutController;
 use App\Http\Controllers\TaskController;
+use \App\Http\Controllers\UserController;
 use App\Models\Factory;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 
 /*
@@ -28,7 +31,14 @@ Route::get('/', function () {
     return redirect('dashboard');
 });
 Route::get('/locale/{locale}', [\App\Http\Controllers\LocalizationController::class, 'index'])->name('locale');
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->name('verification.notice');
 
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/dashboard');
+})->middleware(['auth', 'signed'])->name('verification.verify');
 /*
 |--------------------------------------------------------------------------
 | Dashboard Routes
@@ -149,5 +159,21 @@ Route::prefix('work_orders')->middleware(['auth:sanctum', 'verified'])->group(fu
 */
 Route::prefix('tasks')->middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/add', [TaskController::class, 'store'])->name('store-task');
-    Route::post('/delete/{task}', [TaskController::class, 'destroy'])->name('delete-task');
+    Route::post('/delete/{user}', [TaskController::class, 'destroy'])->name('delete-user');
 });
+/*
+|--------------------------------------------------------------------------
+| Users Routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::prefix('users')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/', [UserController::class, 'index'])->name('users');
+    Route::post('/list', [UserController::class, 'list'])->name('users-list');
+    Route::get('/add', [UserController::class, 'create'])->name('add-user');
+    Route::post('/add', [UserController::class, 'store'])->name('store-user');
+    Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit-user');
+    Route::post('/update/{user}', [UserController::class, 'update'])->name('update-user');
+    Route::post('/delete/{user}', [UserController::class, 'destroy'])->name('delete-task');
+});
+

@@ -16,6 +16,7 @@ class VerifyCsrfToken extends Middleware
         'areas/list',
         'equipments/list',
         'parts/list',
+        'users/list',
         'gamuts/list',
         'work_orders/list',
         'gamuts/list_work_orders/*',

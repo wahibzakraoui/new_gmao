@@ -119,9 +119,31 @@ class RoleTableSeeder extends Seeder
 
         // create roles and assign created permissions
         // this can be done as separate statements
-        $role = Role::create(['name' => 'electrical technician']);
-        $role->givePermissionTo('view workorders');
-        $role->givePermissionTo('execute workorders');
+        Role::create(['name' => 'Preparateur WO'])
+            ->givePermissionTo('create workorders')
+            ->givePermissionTo('edit workorders')
+            ->givePermissionTo('assign workorders')
+            ->givePermissionTo('postpone workorders')
+            ->givePermissionTo('cancel workorders')
+            ->givePermissionTo('delete workorders')
+            ->givePermissionTo('view workorders');
+
+        Role::create(['name' => 'Electrical Technician'])
+            ->givePermissionTo('create workorders')
+            ->givePermissionTo('execute workorders')
+            ->givePermissionTo('view workorders');
+
+        Role::create(['name' => 'Mechanical Technician'])
+            ->givePermissionTo('create workorders')
+            ->givePermissionTo('execute workorders')
+            ->givePermissionTo('view workorders');
+
+        Role::create(['name' => 'Lubrication Technician'])
+            ->givePermissionTo('create workorders')
+            ->givePermissionTo('execute workorders')
+            ->givePermissionTo('view workorders');
+
+
 
         $role = Role::create(['name' => 'Super Admin']);
         $role->givePermissionTo(Permission::all());
