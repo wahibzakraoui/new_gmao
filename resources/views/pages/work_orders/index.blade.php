@@ -1,6 +1,6 @@
 @extends('layouts.metro')
 
-@section('title', 'Equipments')
+@section('title', 'Work Orders')
 
 @section('content')
 
@@ -12,7 +12,7 @@
             <!--begin::Page Heading-->
             <div class="d-flex align-items-baseline flex-wrap mr-5">
                 <!--begin::Page Title-->
-                <h5 class="text-dark font-weight-bold my-1 mr-5">Equipments</h5>
+                <h5 class="text-dark font-weight-bold my-1 mr-5">Work Orders</h5>
                 <!--end::Page Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
@@ -20,7 +20,7 @@
                         <a href="/dashboard" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="" class="text-muted">Equipments</a>
+                        <a href="" class="text-muted">Work Orders</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -134,21 +134,18 @@
                 <!--end::Svg Icon-->
             </span>
         </div>
-        <div class="alert-text">This page lets you create the different Areas that constitute your infrastructure.
-            <br />An Area will house and contain all the different Equipments.
-        </div>
     </div>
     <!--end::Notice-->
     <!--begin::Card-->
     <div class="card card-custom gutter-b">
         <div class="card-header flex-wrap py-3">
             <div class="card-title">
-                <h3 class="card-label">List of current equipments:
+                <h3 class="card-label">List of current Work Orders:
                     <span class="d-block text-muted pt-2 font-size-sm">Including inactive entries.</span>
                 </h3>
             </div>
             <div class="card-toolbar">
-                @can('add equipment')
+                @can('add workorders')
                 <!--begin::Button-->
                 <a href="{{route('add-equipment')}}" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
@@ -164,7 +161,7 @@
                             </g>
                         </svg>
                         <!--end::Svg Icon-->
-                    </span>New Record</a>
+                    </span>New Work Order</a>
                 <!--end::Button-->
                 @endcan
             </div>

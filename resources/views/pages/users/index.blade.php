@@ -134,7 +134,7 @@
                 <!--end::Svg Icon-->
             </span>
         </div>
-        <div class="alert-text">@lang('area.page_notice')
+        <div class="alert-text">Manage system users.
         </div>
     </div>
     <!--end::Notice-->
@@ -142,8 +142,8 @@
     <div class="card card-custom gutter-b">
         <div class="card-header flex-wrap py-3">
             <div class="card-title">
-                <h3 class="card-label">List of current areas:
-                    <span class="d-block text-muted pt-2 font-size-sm">Including inactive entries.</span>
+                <h3 class="card-label">List of current system users:
+
                 </h3>
             </div>
             <div class="card-toolbar">
@@ -171,6 +171,7 @@
                         <th>ID</th>
                         <th>name</th>
                         <th>Email</th>
+                        <th>Service</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -243,6 +244,7 @@
                     { data: 'id' },
                     { data: 'name' },
                     { data: 'email' },
+                    { data: 'service' },
                     { data: 'actions', name: 'actions', orderable: false, searchable: false }
                 ],
                 columnDefs: [

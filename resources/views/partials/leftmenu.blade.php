@@ -28,6 +28,9 @@
             @can('add workorders')
                 @include('partials.menu-chunks.work_orders.menu')
             @endcan
+            @can('manage users')
+                @include('partials.menu-chunks.users.menu')
+            @endcan
             <!--end::Menu Nav-->
         </ul>
         <!--end::Menu Nav-->

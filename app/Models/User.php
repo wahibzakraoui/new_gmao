@@ -75,6 +75,16 @@ class User extends Authenticatable implements MustVerifyEmail
     use TwoFactorAuthenticatable;
 
     /**
+     * Override Laravel notify and Send the email verification notification - I did this to use ShouldQueue.
+     * @todo more improvements
+     * @return void
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new \App\Notifications\Auth\VerifyEmail);
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

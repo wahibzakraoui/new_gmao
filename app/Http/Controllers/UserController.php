@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Fortify\CreateNewUser;
+use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Actions\Fortify\UpdateUserPassword;
 use App\Exceptions\PermissionDeniedException;
 use App\Http\Requests\UpdateEquipmentRequest;
 use App\Models\Area;
@@ -63,10 +65,11 @@ class UserController extends Controller
                 ->select([
                     'users.id',
                     'users.name',
-                    'users.email'
+                    'users.email',
+                    'users.service'
                 ]))
-                ->addColumn('actions', function ($equipment) {
-                    return '';
+                ->addColumn('actions', function ($user) {
+                    return View::make("pages.{$this->module}.datatables.actions")->with('user', $user)->render();
                 })
                 ->rawColumns(['actions'])
                 ->make(true);
@@ -117,18 +120,24 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param UpdateEquipmentRequest $request
-     * @param Equipment $equipment
+     * @param Request $request
+     * @param User $user
      * @return Application|RedirectResponse|Response|Redirector
-     * @throws FileDoesNotExist
      * @throws PermissionDeniedException
      */
-    public function update(UpdateEquipmentRequest $request, User $user)
+    public function update(request $request, User $user)
     {
         /* check if User does not have permission */
         $this->checkPerms($request, 'edit', $this->module);
-
-
+        //dd($request);
+        $userProfileAction = new UpdateUserProfileInformation();
+        $userProfileAction->update($user, $request->all());
+        if($request->has('password') && $request->filled('password')){
+            $userPasswordAction = new UpdateUserPassword();
+            $userPasswordAction->update($user, $request->all());
+        }
+        $user->syncRoles([$request->get('role_id')]);
+        return redirect('users')->with('user', $user);
     }
 
     /**
@@ -142,4 +151,29 @@ class UserController extends Controller
         $user->assignRole([$request->get('role_id')]);
         return redirect('users')->with('user', $user);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Request $request
+     * @param User $user
+     * @return Application|RedirectResponse|Response|Redirector
+     * @throws PermissionDeniedException
+     * @throws Exception
+     */
+    public function destroy(Request $request, User $user)
+    {
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'delete', $this->module);
+
+        if($user->getRoleNames()->first() === 'Super Admin') {
+            return redirect($this->module);
+        }
+
+        if($user->delete()){
+            return redirect($this->module)->with('deleted', true)->with('success', 'User deleted successfully!');
+        }
+        return redirect($this->module);
+    }
+
 }

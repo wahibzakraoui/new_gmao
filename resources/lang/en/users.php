@@ -5,4 +5,5 @@ return [
     'add_user' => 'Add user',
     'users' => 'Users',
     'fullname' => 'User full name',
+    'list' => 'Users',
 ];

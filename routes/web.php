@@ -174,6 +174,6 @@ Route::prefix('users')->middleware(['auth:sanctum', 'verified'])->group(function
     Route::post('/add', [UserController::class, 'store'])->name('store-user');
     Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit-user');
     Route::post('/update/{user}', [UserController::class, 'update'])->name('update-user');
-    Route::post('/delete/{user}', [UserController::class, 'destroy'])->name('delete-task');
+    Route::post('/delete/{user}', [UserController::class, 'destroy'])->name('delete-user');
 });
 
