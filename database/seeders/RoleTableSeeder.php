@@ -72,14 +72,14 @@ class RoleTableSeeder extends Seeder
         Permission::create(['name' => 'delete gamuts']);
 
         // create workorders permissions
-        Permission::create(['name' => 'view workorders']);
-        Permission::create(['name' => 'create workorders']);
-        Permission::create(['name' => 'edit workorders']);
-        Permission::create(['name' => 'delete workorders']);
-        Permission::create(['name' => 'execute workorders']);
-        Permission::create(['name' => 'postpone workorders']);
-        Permission::create(['name' => 'cancel workorders']);
-        Permission::create(['name' => 'assign workorders']);
+        Permission::create(['name' => 'view work_orders']);
+        Permission::create(['name' => 'create work_orders']);
+        Permission::create(['name' => 'edit work_orders']);
+        Permission::create(['name' => 'delete work_orders']);
+        Permission::create(['name' => 'execute work_orders']);
+        Permission::create(['name' => 'postpone work_orders']);
+        Permission::create(['name' => 'cancel work_orders']);
+        Permission::create(['name' => 'assign work_orders']);
 
         // create work permissions
         Permission::create(['name' => 'view work']);
@@ -120,28 +120,28 @@ class RoleTableSeeder extends Seeder
         // create roles and assign created permissions
         // this can be done as separate statements
         Role::create(['name' => 'Preparateur WO'])
-            ->givePermissionTo('create workorders')
-            ->givePermissionTo('edit workorders')
-            ->givePermissionTo('assign workorders')
-            ->givePermissionTo('postpone workorders')
-            ->givePermissionTo('cancel workorders')
-            ->givePermissionTo('delete workorders')
-            ->givePermissionTo('view workorders');
+            ->givePermissionTo('create work_orders')
+            ->givePermissionTo('edit work_orders')
+            ->givePermissionTo('assign work_orders')
+            ->givePermissionTo('postpone work_orders')
+            ->givePermissionTo('cancel work_orders')
+            ->givePermissionTo('delete work_orders')
+            ->givePermissionTo('view work_orders');
 
         Role::create(['name' => 'Electrical Technician'])
-            ->givePermissionTo('create workorders')
-            ->givePermissionTo('execute workorders')
-            ->givePermissionTo('view workorders');
+            ->givePermissionTo('create work_orders')
+            ->givePermissionTo('execute work_orders')
+            ->givePermissionTo('view work_orders');
 
         Role::create(['name' => 'Mechanical Technician'])
-            ->givePermissionTo('create workorders')
-            ->givePermissionTo('execute workorders')
-            ->givePermissionTo('view workorders');
+            ->givePermissionTo('create work_orders')
+            ->givePermissionTo('execute work_orders')
+            ->givePermissionTo('view work_orders');
 
         Role::create(['name' => 'Lubrication Technician'])
-            ->givePermissionTo('create workorders')
-            ->givePermissionTo('execute workorders')
-            ->givePermissionTo('view workorders');
+            ->givePermissionTo('create work_orders')
+            ->givePermissionTo('execute work_orders')
+            ->givePermissionTo('view work_orders');
 
 
 

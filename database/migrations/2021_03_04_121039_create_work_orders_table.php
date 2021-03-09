@@ -28,7 +28,7 @@ class CreateWorkOrdersTable extends Migration
             $table->foreignId('requested_by')->nullable()->constrained('users');
             $table->dateTime('deadline')->nullable();
             $table->set('type', ['gamut', 'complementary_wo', 'corrective_maintenance']);
-            $table->set('status', ['pending', 'assigned', 'finished']);
+            $table->set('status', ['pending', 'assigned', 'finished_with_remarks','finished']);
             $table->dateTime('date_completed')->nullable();
             $table->softDeletes();
             $table->timestamps();

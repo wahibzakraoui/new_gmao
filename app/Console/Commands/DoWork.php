@@ -56,6 +56,7 @@ class DoWork extends Command
             $workOrder->equipment_id = $gamut->equipment_id;
             $workOrder->part_id = $gamut->part_id;
             $workOrder->gamut_id = $gamut->id;
+            $workOrder->service_id = $gamut->service_id;
             $workOrder->type = 'gamut';
             $workOrder->deadline = $today->addHours(8)->addHours($gamut->estimated_hours);
             $workOrder->status = 'pending';

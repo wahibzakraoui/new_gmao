@@ -61,7 +61,7 @@ class TaskController extends Controller
         $this->checkPerms($request,'delete', $this->module);
 
         if($task->delete()){
-            return redirect('gamuts/show/' . $task->id)->with('deleted', true)->with('success', 'Task deleted successfully!');
+            return redirect('gamuts/show/' . $request->get('gamut_id'))->with('deleted', true)->with('success', 'Task deleted successfully!');
         }
         return redirect('gamuts');
     }

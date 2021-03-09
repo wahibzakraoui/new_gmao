@@ -298,7 +298,7 @@
                         targets: 3,
                         render: function (data, type, full, meta) {
                             if(data !== 'undefined')
-                            return `<a href="#" class="btn btn-light-warning font-weight-bold mr-2">${data}</a>`;
+                            return `<a href="" class="btn btn-light-warning font-weight-bold mr-2">${data}</a>`;
                         },
                     },
                 ],

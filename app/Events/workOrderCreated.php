@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\WorkOrder;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -13,15 +14,15 @@ use Illuminate\Queue\SerializesModels;
 class workOrderCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
+    public $workOrder;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(WorkOrder $workOrder)
     {
-        //
+        $this->workOrder = $workOrder;
     }
 
     /**
@@ -31,6 +32,6 @@ class workOrderCreated
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel('work-orders-channel');
     }
 }

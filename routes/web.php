@@ -159,7 +159,7 @@ Route::prefix('work_orders')->middleware(['auth:sanctum', 'verified'])->group(fu
 */
 Route::prefix('tasks')->middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/add', [TaskController::class, 'store'])->name('store-task');
-    Route::post('/delete/{user}', [TaskController::class, 'destroy'])->name('delete-user');
+    Route::post('/delete/{task}', [TaskController::class, 'destroy'])->name('delete-task');
 });
 /*
 |--------------------------------------------------------------------------

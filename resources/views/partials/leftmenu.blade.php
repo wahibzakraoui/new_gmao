@@ -25,7 +25,7 @@
             @can('add gamuts')
                 @include('partials.menu-chunks.gamuts.menu')
             @endcan
-            @can('add workorders')
+            @can('view work_orders')
                 @include('partials.menu-chunks.work_orders.menu')
             @endcan
             @can('manage users')

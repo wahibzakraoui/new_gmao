@@ -52,6 +52,12 @@ use Illuminate\Database\Eloquent\Model;
 class WorkOrder extends Model
 {
     use HasFactory;
+
+    /**
+     * @var mixed
+     */
+    private $service_id;
+
     public function gamut(){
         return $this->belongsTo(Gamut::class);
     }

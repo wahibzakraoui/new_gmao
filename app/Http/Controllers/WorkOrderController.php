@@ -44,24 +44,47 @@ class WorkOrderController extends Controller
         $this->checkPerms($request, 'view', $this->module);
 
         try {
-            return DataTables::of(WorkOrder::
-                leftJoin('equipment', 'equipment.id', '=', 'work_orders.equipment_id')
-                ->leftJoin('gamuts', 'gamuts.id', '=', 'work_orders.gamut_id')
-                ->leftJoin('services', 'services.id', '=', 'work_orders.service_id')
-                ->leftJoin('users', 'users.id', '=', 'work_orders.assigned_user_id')
-                ->select([
-                    'work_orders.id',
-                    'work_orders.designation',
-                    'work_orders.id as number',
-                    'equipment.name as equipmentName',
-                    'gamuts.code as gamutCode',
-                    'users.name as userName',
-                    'work_orders.type',
-                    'work_orders.status',
-                ]))
-                ->addColumn('actions', function ($equipment) {
+                if($request->user()->hasRole('Super Admin')){
+                    $query = DataTables::of(WorkOrder::
+                    leftJoin('equipment', 'equipment.id', '=', 'work_orders.equipment_id')
+                        ->leftJoin('gamuts', 'gamuts.id', '=', 'work_orders.gamut_id')
+                        ->leftJoin('services', 'services.id', '=', 'work_orders.service_id')
+                        ->leftJoin('users', 'users.id', '=', 'work_orders.assigned_user_id')
+                        ->select([
+                            'work_orders.id',
+                            'work_orders.designation',
+                            'work_orders.id as number',
+                            'equipment.name as equipmentName',
+                            'gamuts.code as gamutCode',
+                            'users.name as userName',
+                            'work_orders.assigned_user_id',
+                            'work_orders.type',
+                            'work_orders.status',
+                        ])
+                    );
+                }else{
+                    $query = DataTables::of(WorkOrder::
+                    leftJoin('equipment', 'equipment.id', '=', 'work_orders.equipment_id')
+                        ->leftJoin('gamuts', 'gamuts.id', '=', 'work_orders.gamut_id')
+                        ->leftJoin('services', 'services.id', '=', 'work_orders.service_id')
+                        ->leftJoin('users', 'users.id', '=', 'work_orders.assigned_user_id')
+                        ->select([
+                            'work_orders.id',
+                            'work_orders.designation',
+                            'work_orders.id as number',
+                            'equipment.name as equipmentName',
+                            'gamuts.code as gamutCode',
+                            'users.name as userName',
+                            'work_orders.assigned_user_id',
+                            'work_orders.type',
+                            'work_orders.status',
+                        ])
+                        ->where('work_orders.assigned_user_id', '=', $request->user()->id)
+                    );
+                }
+             return $query->addColumn('actions', function ($equipment) {
                     return '';
-                })
+             })
                 ->rawColumns(['actions'])
                 ->make(true);
         } catch (\Exception $e) {

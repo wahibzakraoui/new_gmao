@@ -36,8 +36,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         } else {
             $user->forceFill([
                 'name' => $input['name'],
-                'service_id' => $input['service_id'],
-                'service' => Service::find($input['service_id'])->first()->name,
+                /*'service_id' => $input['service_id'],
+                'service' => Service::find($input['service_id'])->first()->name ?? null,*/
                 'email' => $input['email'],
             ])->save();
         }

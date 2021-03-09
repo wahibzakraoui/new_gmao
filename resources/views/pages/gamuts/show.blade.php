@@ -522,6 +522,7 @@
                                                                     @can('delete gamuts')
                                                                         <li class="navi-item">
                                                                             {{ Form::open(array('route' => ['delete-task', $task->id], 'id' => 'delete_form')) }}
+                                                                            <input type="hidden" name="gamut_id" value="{{$gamut->id}}">
                                                                             <button type="submit" class="btn btn-light-success font-weight-bold mr-2">
                                                                             <span class="navi-text">
                                                                                 <span
