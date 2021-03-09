@@ -58,4 +58,7 @@ class WorkOrder extends Model
     public function scopeFinished($query){
         return $query->whereStatus('finished');
     }
+    public function scopeBtc($query){
+        return $query->where('parent_id', '!=', null);
+    }
 }

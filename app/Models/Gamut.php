@@ -117,5 +117,9 @@ class Gamut extends Model
         return $this->hasMany(WorkOrder::class)->finished();
     }
 
+    public function btcs(){
+        return $this->hasMany(WorkOrder::class)->btc();
+    }
+
 
 }

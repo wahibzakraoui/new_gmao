@@ -18,5 +18,6 @@ class VerifyCsrfToken extends Middleware
         'parts/list',
         'gamuts/list',
         'work_orders/list',
+        'gamuts/list_work_orders/*',
     ];
 }

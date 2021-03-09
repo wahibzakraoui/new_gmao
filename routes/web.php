@@ -25,7 +25,7 @@ use App\Models\Factory;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('dashboard');
 });
 Route::get('/locale/{locale}', [\App\Http\Controllers\LocalizationController::class, 'index'])->name('locale');
 
@@ -113,6 +113,7 @@ Route::prefix('parts')->middleware(['auth:sanctum', 'verified'])->group(function
 Route::prefix('gamuts')->middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', [GamutController::class, 'index'])->name('gamuts');
     Route::post('/list', [GamutController::class, 'list'])->name('gamuts-list');
+    Route::post('/list_work_orders/{gamut}', [GamutController::class, 'list_work_orders'])->name('gamut-work_orders-list');
     Route::get('/show/{gamut}', [GamutController::class, 'show'])->name('show-gamut');
     Route::get('/add', [GamutController::class, 'create'])->name('add-gamut');
     Route::post('/add', [GamutController::class, 'store'])->name('store-gamut');

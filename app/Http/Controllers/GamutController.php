@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gamut;
+use App\Models\WorkOrder;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -252,6 +253,47 @@ class GamutController extends Controller
             return redirect($this->module)->with('deleted', true)->with('success', 'Gamut deleted successfully!');
         }
         return redirect('gamuts');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @param Gamut $gamut
+     * @return JsonResponse
+     * @throws PermissionDeniedException
+     */
+    public function list_work_orders(Request $request, Gamut $gamut) : JsonResponse{
+
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'view', $this->module);
+
+        try {
+            return DataTables::of(WorkOrder::
+            leftJoin('equipment', 'equipment.id', '=', 'work_orders.equipment_id')
+                ->leftJoin('gamuts', 'gamuts.id', '=', 'work_orders.gamut_id')
+                ->leftJoin('services', 'services.id', '=', 'work_orders.service_id')
+                ->leftJoin('users', 'users.id', '=', 'work_orders.assigned_user_id')
+                ->where('work_orders.gamut_id', '=', $gamut->id)
+                ->select([
+                    'work_orders.id',
+                    'work_orders.designation',
+                    'work_orders.id as number',
+                    'equipment.name as equipmentName',
+                    'gamuts.code as gamutCode',
+                    'users.name as userName',
+                    'work_orders.type',
+                    'work_orders.status',
+                ]))
+                ->addColumn('actions', function ($equipment) {
+                    return '';
+                })
+                ->rawColumns(['actions'])
+                ->make(true);
+        } catch (\Exception $e) {
+
+        }
+        return response()->json([]);
     }
 
 
