@@ -27,6 +27,7 @@ use App\Models\Factory;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/locale/{locale}', [\App\Http\Controllers\LocalizationController::class, 'index'])->name('locale');
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +44,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardCon
 |--------------------------------------------------------------------------
 |
 */
-Route::prefix('factories')->middleware(['auth:sanctum', 'verified'])->group(function () {
+Route::prefix('factories')->middleware(['auth:sanctum', 'verified', 'localization'])->group(function () {
     Route::get('/', [FactoryController::class, 'index'])->name('factories');
     Route::post('/list', [FactoryController::class, 'list'])->name('factories-list');
     Route::get('/add', [FactoryController::class, 'create'])->name('add-factory');

@@ -1436,7 +1436,7 @@
 									<!--begin::Toggle-->
 									<div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
 										<div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1">
-											<img class="h-20px w-20px rounded-sm" src="{{asset('assets/media/svg/flags/226-united-states.svg')}}" alt="" />
+											<img class="h-20px w-20px rounded-sm" src="{{session()->get('locale') === "en" ? asset('assets/media/svg/flags/226-united-states.svg') : asset('assets/media/svg/flags/195-france.svg')}}" alt="" />
 										</div>
 									</div>
 									<!--end::Toggle-->
@@ -1446,7 +1446,7 @@
 										<ul class="navi navi-hover py-4">
 											<!--begin::Item-->
 											<li class="navi-item">
-												<a href="#" class="navi-link">
+												<a href="{{route('locale','en')}}" class="navi-link">
 													<span class="symbol symbol-20 mr-3">
 														<img src="{{asset('assets/media/svg/flags/226-united-states.svg')}}" alt="" />
 													</span>
@@ -1456,7 +1456,7 @@
 											<!--end::Item-->
 											<!--begin::Item-->
 											<li class="navi-item">
-												<a href="#" class="navi-link">
+												<a href="{{route('locale','fr')}}" class="navi-link">
 													<span class="symbol symbol-20 mr-3">
 														<img src="{{asset('assets/media/svg/flags/195-france.svg')}}" alt="" />
 													</span>

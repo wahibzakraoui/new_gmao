@@ -67,7 +67,7 @@ class GamutController extends Controller
                     'gamuts.id',
                     'gamuts.designation',
                     'gamuts.code',
-                    'equipment.name as equipmentName',
+                     DB::raw("CONCAT(equipment.name,' - ',equipment.area_code) AS equipmentName"),
                     'areas.name as areaName',
                     'gamuts.state',
                     'gamuts.type',
@@ -92,7 +92,7 @@ class GamutController extends Controller
      * Display the specified resource.
      *
      * @param Request $request
-     * @param int $id
+     * @param Gamut $gamut
      * @return Response
      * @throws PermissionDeniedException
      * @todo Return a working view
@@ -105,6 +105,8 @@ class GamutController extends Controller
         return response(
             view("pages.{$this->module}.show")
             ->with('gamut', $gamut)
+            ->with('gamut_all_work_orders_count', $gamut->work_orders->count() ?: 1)
+            ->with('gamut_done_work_orders_count', $gamut->done->count() ?: 0)
         );
     }
 

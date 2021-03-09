@@ -77,7 +77,7 @@
                         <!--begin: Pic-->
                         <div class="flex-shrink-0 mr-7 mt-lg-0 mt-3">
                             <div class="symbol symbol-50 symbol-lg-120">
-                                <img alt="Equipment" src="{{$gamut->equipment->getFirstMediaUrl('equipment')}}" />
+                                <img alt="Equipment" style="object-fit: cover;" src="{{$gamut->equipment->getFirstMediaUrl('equipment')}}" />
                             </div>
                             <div class="symbol symbol-50 symbol-lg-120 symbol-primary d-none">
                                 <span class="font-size-h3 symbol-label font-weight-boldest">{{$gamut->code}}></span>
@@ -90,7 +90,7 @@
                             <div class="d-flex align-items-center justify-content-between flex-wrap">
                                 <div class="mr-3">
                                     <!--begin::Name-->
-                                    <a href="#"
+                                    <a target="_blank" href="{{route('edit-equipment', $gamut->equipment_id)}}"
                                        class="d-flex align-items-center text-dark text-hover-primary font-size-h5 font-weight-bold mr-3">{{$gamut->code}} - {{$gamut->designation}}
                                         @if($gamut->active)
                                             <i class="flaticon2-correct text-success icon-md ml-2"></i></a>
@@ -187,10 +187,10 @@
                                     <div class="flex-grow-1 flex-shrink-0 w-150px w-xl-300px mt-4 mt-sm-0">
                                         <span class="font-weight-bold">Success rate</span>
                                         <div class="progress progress-xs mt-2 mb-2">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: {{($gamut->done->count() / $gamut->work_orders->count() *100)}}%;"
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: {{($gamut_done_work_orders_count / $gamut_all_work_orders_count *100)}}%;"
                                                  aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <span class="font-weight-bolder text-dark">{{($gamut->done->count() / $gamut->work_orders->count() *100)}}%</span>
+                                        <span class="font-weight-bolder text-dark">{{($gamut_done_work_orders_count / $gamut_all_work_orders_count *100)}}%</span>
                                     </div>
                                 </div>
                             </div>
@@ -939,8 +939,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                    <textarea name="description" class="form-control form-control-lg form-control-solid"
-                                              id="exampleTextarea" rows="3" placeholder="Type notes"></textarea>
+                                    <textarea id="kt-tinymce-1" name="description" class="tox-targe form-control form-control-lg form-control-solid"
+                                               rows="3" placeholder="Type notes"></textarea>
                                     </div>
                                     <div class="row">
                                         <div class="col">
@@ -956,7 +956,7 @@
                                         @foreach($gamut->tasks as $task)
                                             <div class="timeline-item">
                                             <div class="timeline-media">
-                                                <i class="flaticon2-layers text-warning"></i>
+                                                {{$loop->iteration}}
                                             </div>
                                             <div class="timeline-content">
                                                 <div class="d-flex align-items-center justify-content-between mb-3">
@@ -1003,7 +1003,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <p class="p-0">{{$task->description}}</p>
+                                                <p class="p-0">{!! html_entity_decode($task->description) !!}</p>
                                             </div>
                                         </div>
                                         @endforeach
@@ -1025,5 +1025,33 @@
 @stop
 
 @section('my-scripts')
+    <script src="{{asset('assets/plugins/custom/tinymce/tinymce.bundle.js')}}"></script>
+    <script src="{{asset('assets/js/pages/crud/forms/editors/tinymce.js')}}"></script>
+    <script>
+        var KTTinymce = function () {
+            // Private functions
+            var demos = function () {
+                tinymce.init({
+                    selector: '#kt-tinymce-1',
+                    menubar: false,
+                    toolbar: ['styleselect fontselect fontsizeselect',
+                        'undo redo | cut copy paste | bold italic | link image | alignleft aligncenter alignright alignjustify',
+                        'bullist numlist | outdent indent | blockquote subscript superscript | advlist | autolink | lists charmap | print preview |  code'],
+                    plugins : 'advlist autolink link image lists charmap print preview code'
+                });
+            }
 
+            return {
+                // public functions
+                init: function() {
+                    demos();
+                }
+            };
+        }();
+
+        // Initialization
+        jQuery(document).ready(function() {
+            KTTinymce.init();
+        });
+    </script>
 @stop
