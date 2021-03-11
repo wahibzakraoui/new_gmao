@@ -3,21 +3,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateAreaRequest;
+use App\Actions\Kerp\CreateNewArea;
+use App\Actions\Kerp\UpdateArea;
+use App\Exceptions\PermissionDeniedException;
 use App\Http\Requests\CreateAreaRequest;
+use App\Http\Requests\UpdateAreaRequest;
+use App\Models\Area;
+use App\Models\Factory;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Models\Factory;
 use Illuminate\Http\Response;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Redirector;
-use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\View;
-use App\Exceptions\PermissionDeniedException;
-use App\Models\Area;
-use App\Models\AreaCode;
 use Illuminate\Support\Str;
+use Yajra\DataTables\Facades\DataTables;
 
 
 class AreaController extends Controller
@@ -33,9 +34,9 @@ class AreaController extends Controller
      */
     public function index(Request $request): Response
     {
-        /* check if User does not have permission */
+        /* check if User does not have permission - @throws PermissionDeniedException */
         $this->checkPerms($request, 'view', $this->module);
-
+        /* return response */
         return response(
             view("pages.{$this->module}.index")
         );
@@ -51,20 +52,10 @@ class AreaController extends Controller
      */
     public function list(Request $request): JsonResponse
     {
-        /* check if User does not have permission */
+        /* check if User does not have permission - @throws PermissionDeniedException */
         $this->checkPerms($request, 'view', $this->module);
 
-        return DataTables::of(Area::leftJoin('factories', 'areas.factory_id', '=', 'factories.id')
-            ->select([
-                'areas.id',
-                'areas.name',
-                'areas.description',
-                'factories.name as factoryName',
-                'areas.active',
-            ]))
-            ->orderColumn('areas.id', function ($query, $order) {
-                $query->orderBy('id', $order);
-            })
+        return DataTables::eloquent(Area::with('factory'))
             ->addColumn('areaCodes', function ($area) {
                 return View::make("pages.{$this->module}.datatables.areacodes")->with('area', $area)->render();
             })
@@ -72,7 +63,8 @@ class AreaController extends Controller
                 return View::make("pages.{$this->module}.datatables.actions")->with('area', $area)->render();
             })
             ->rawColumns(['actions', 'areaCodes'])
-            ->make(true);
+            ->toJson();
+
     }
 
     /**
@@ -105,22 +97,7 @@ class AreaController extends Controller
     {
         /* check if User does not have permission */
         $this->checkPerms($request, 'create', $this->module);
-
-        $request->validated();
-        $area = Area::create([
-            'uuid' => Str::uuid(),
-            'name' => $request->get('name'),
-            'description' => $request->get('description'),
-            'factory_id' => $request->get('factory_id'),
-            'active' => $request->get('active') ?? false,
-        ]);
-
-        if ($area) {
-            collect($request->get('codes'))->each(function ($code) use ($area) {
-                $id = $area->id;
-                $code = ['area_id' => $id, 'code' => $code];
-                AreaCode::create($code);
-            });
+        if (CreateNewArea::create($request)) {
             return redirect($this->module)->with('success', __('area.area_added_success'));
         }
         return redirect($this->module);
@@ -175,19 +152,7 @@ class AreaController extends Controller
         $this->checkPerms($request, 'edit', $this->module);
 
         /* User does have permission */
-        $request->validated();
-        if ($area->update([
-            'name' => $request->get('name'),
-            'description' => $request->get('description'),
-            'factory_id' => $request->get('factory_id'),
-            'active' => $request->get('active') ?: null,
-        ])){
-            $area->codes()->delete();
-            collect($request->get('codes'))->each(function ($code) use ($area) {
-                $id = $area->id;
-                $code = ['area_id' => $id, 'code' => $code];
-                AreaCode::create($code);
-            });
+        if (UpdateArea::update($request, $area)) {
             return redirect($this->module)->with('success', __('area.area_edited_success'));
         }
         return redirect($this->module);

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Kerp\CreateNewEquipment;
+use App\Actions\Kerp\UpdateEquipment;
 use App\Http\Requests\UpdateEquipmentRequest;
 use App\Http\Requests\CreateEquipmentRequest;
 use Exception;
@@ -52,26 +54,12 @@ class EquipmentController extends Controller
 
         /* check if User does not have permission */
         $this->checkPerms($request, 'view', $this->module);
-
-        try {
-            return DataTables::of(Equipment::leftJoin('areas', 'equipment.area_id', '=', 'areas.id')
-                ->select([
-                    'equipment.id',
-                    'equipment.name',
-                    'equipment.code',
-                    'equipment.description',
-                    'equipment.area_code',
-                    'areas.name as areaName',
-                    'equipment.active',
-                ]))
-                ->addColumn('actions', function ($equipment) {
-                    return View::make("pages.{$this->module}.datatables.actions")->with('equipment', $equipment)->render();
-                })
-                ->rawColumns(['actions'])
-                ->make(true);
-        } catch (Exception $e) {
-            return response()->json([]);
-        }
+        return DataTables::eloquent(Equipment::with('area'))
+            ->addColumn('actions', function ($equipment) {
+                return View::make("pages.{$this->module}.datatables.actions")->with('equipment', $equipment)->render();
+            })
+            ->rawColumns(['actions'])
+            ->toJson();
     }
 
     /**
@@ -104,26 +92,7 @@ class EquipmentController extends Controller
         /* check if User does not have permission */
         $this->checkPerms($request, 'create', $this->module);
 
-        $request->validated();
-        $equipment = Equipment::create([
-            'uuid' => Str::uuid(),
-            'name' => $request->get('name'),
-            'code' => $request->get('code'),
-            'description' => $request->get('description'),
-            'area_id' => $request->get('area_id'),
-            'area_code' => $request->get('area_code'),
-            'active' => $request->get('active') ?? false,
-        ]);
-
-        if($equipment)
-        {
-            if($request->hasFile('photo')){
-                try {
-                    $equipment->addMedia($request->file('photo'))->toMediaCollection('equipment');
-                }catch (Exception $e){
-                    /* don't do anything ? */
-                }
-            }
+        if(CreateNewEquipment::create($request)){
             return redirect($this->module)->with('success', 'Equipment added successfully!');
         }
         return redirect($this->module);
@@ -174,8 +143,6 @@ class EquipmentController extends Controller
      * @param UpdateEquipmentRequest $request
      * @param Equipment $equipment
      * @return Application|RedirectResponse|Response|Redirector
-     * @throws FileDoesNotExist
-     * @throws FileIsTooBig
      * @throws PermissionDeniedException
      */
     public function update(UpdateEquipmentRequest $request, Equipment $equipment)
@@ -184,24 +151,8 @@ class EquipmentController extends Controller
         $this->checkPerms($request, 'edit', $this->module);
 
         /* User does have permission */
-        $request->validated();
-        if($equipment->update(
-            [
-                'name' => $request->get('name'),
-                'code' => $request->get('code'),
-                'description' => $request->get('description'),
-                'area_id' => $request->get('area_id'),
-                'area_code' => $request->get('area_code'),
-                'active' => $request->get('active') ?? false,
-            ]
-        ))
-        {
-            if($request->hasFile('photo')){
-                $equipment->clearMediaCollection('equipment');
-                $equipment->addMedia($request->file('photo'))
-                ->toMediaCollection('equipment');
-            }
-            return redirect($this->module.'/edit/'.$equipment->id)->with('success', 'Equipment edited successfully!');
+        if(UpdateEquipment::update($request, $equipment)){
+            return redirect($this->module)->with('success', 'Equipment edited successfully!');
         }
         return redirect($this->module);
     }

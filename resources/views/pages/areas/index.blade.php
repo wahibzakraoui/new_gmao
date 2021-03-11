@@ -253,7 +253,7 @@
                     { data: 'id' },
                     { data: 'name' },
                     { data: 'description' },
-                    { "data": "factoryName", "name": "factories.name"  },
+                    { "data": "factory.name", "name": "factory.name"  },
                     { data: 'areaCodes' },
                     { data: 'active' },
                     { data: 'actions', name: 'actions', orderable: false, searchable: false }

@@ -255,7 +255,7 @@
                     { data: 'code' },
                     { data: 'description' },
                     { data: 'area_code' },
-                    { "data": "areaName", "name": "areas.name"  },
+                    { "data": "area.name", "name": "area.name"  },
                     { data: 'active' },
                     { data: 'actions', name: 'actions', orderable: false, searchable: false }
                 ],

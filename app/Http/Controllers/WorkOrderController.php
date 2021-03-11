@@ -60,54 +60,19 @@ class WorkOrderController extends Controller
         $this->checkPerms($request, 'view', $this->module);
 
         try {
-                if($request->user()->hasPermissionTo('assign work_orders')){
-                    $query = DataTables::of(WorkOrder::
-                    leftJoin('equipment', 'equipment.id', '=', 'work_orders.equipment_id')
-                        ->leftJoin('gamuts', 'gamuts.id', '=', 'work_orders.gamut_id')
-                        ->leftJoin('services', 'services.id', '=', 'work_orders.service_id')
-                        ->leftJoin('users', 'users.id', '=', 'work_orders.assigned_user_id')
-                        ->select([
-                            'work_orders.id',
-                            'work_orders.created_at',
-                            'work_orders.designation',
-                            'work_orders.id as number',
-                            'equipment.name as equipmentName',
-                            'gamuts.code as gamutCode',
-                            'users.name as userName',
-                            'work_orders.assigned_user_id',
-                            'work_orders.type',
-                            'work_orders.status',
-                            'work_orders.gamut_id',
-                        ])
-                    );
-                }else{
-                    $query = DataTables::of(WorkOrder::
-                    leftJoin('equipment', 'equipment.id', '=', 'work_orders.equipment_id')
-                        ->leftJoin('gamuts', 'gamuts.id', '=', 'work_orders.gamut_id')
-                        ->leftJoin('services', 'services.id', '=', 'work_orders.service_id')
-                        ->leftJoin('users', 'users.id', '=', 'work_orders.assigned_user_id')
-                        ->select([
-                            'work_orders.id',
-                            'work_orders.created_at',
-                            'work_orders.designation',
-                            'work_orders.id as number',
-                            'equipment.name as equipmentName',
-                            'gamuts.code as gamutCode',
-                            'users.name as userName',
-                            'work_orders.assigned_user_id',
-                            'work_orders.type',
-                            'work_orders.status',
-                            'work_orders.gamut_id',
-                        ])
-                        ->where('work_orders.assigned_user_id', '=', $request->user()->id)
-                        ->orWhere('work_orders.requested_by', '=', $request->user()->id)
-                    );
+
+                $query = WorkOrder::getDatatable();
+                /* If Not Admin, restrict to own created WOs or assigned WOs */
+                if(!$request->user()->hasPermissionTo('assign work_orders')) {
+                    $query->where('work_orders.assigned_user_id', '=', $request->user()->id)
+                        ->orWhere('work_orders.requested_by', '=', $request->user()->id);
                 }
-             return $query->addColumn('actions', function ($workOrder) {
-                 return View::make("pages.{$this->module}.datatables.actions")->with('workOrder', $workOrder)->render();
-             })
-                ->rawColumns(['actions'])
-                ->make(true);
+
+                return DataTables::of($query)->addColumn('actions', function ($workOrder) {
+                    return View::make("pages.{$this->module}.datatables.actions")->with('workOrder', $workOrder)->render();
+                })
+                ->rawColumns(['actions'])->make(true);
+
         } catch (\Exception $e) {
 
         }
@@ -118,6 +83,7 @@ class WorkOrderController extends Controller
      * Show the form for creating a new resource.
      *
      * @param Request $request
+     * @param WorkOrder|null $workOrder
      * @return Response
      * @throws PermissionDeniedException
      */
@@ -149,15 +115,15 @@ class WorkOrderController extends Controller
         /* User does have permission */
         $request->validated();
 
+        $parentGamutID = null;
+        $parentequipmentID = null;
+        $parentPartID = null;
+
         if($request->filled('parent_id')){
             $parent = WorkOrder::whereId($request->get('parent_id'))->get()->first();
             $parentGamutID = $parent->gamut_id;
             $parentequipmentID = $parent->equipment_id;
             $parentPartID = $parent->part_id;
-        }else{
-            $parentGamutID = null;
-            $parentequipmentID = null;
-            $parentPartID = null;
         }
 
         if(WorkOrder::create(
