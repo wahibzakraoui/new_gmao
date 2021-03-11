@@ -145,9 +145,9 @@
                 </h3>
             </div>
             <div class="card-toolbar">
-                @can('add workorders')
+                @can('create work_orders')
                 <!--begin::Button-->
-                <a href="{{route('add-equipment')}}" class="btn btn-primary font-weight-bolder">
+                <a href="{{route('add-work_order')}}" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -171,7 +171,8 @@
             <table class="table table-separate table-head-custom table-checkable" id="kt_datatable">
                 <thead>
                     <tr>
-                        <th>Number</th>
+                        <th>#</th>
+                        <th>Date</th>
                         <th>Designation</th>
                         <th>Equipment</th>
                         <th>Gamut</th>
@@ -250,6 +251,7 @@
                 ],
                 columns: [
                     { "data": "number", "name": "work_orders.id"  },
+                    { "data": "created_at", "name": "work_orders.created_at"  },
                     { data: 'designation' },
                     { "data": "equipmentName", "name": "equipment.name"  },
                     { "data": "gamutCode", "name": "gamuts.code"  },
@@ -259,9 +261,10 @@
                     { data: 'actions', name: 'actions', orderable: false, searchable: false }
                 ],
                 columnDefs: [
+                    {width:'20px', targets: 0},
                     {
                         width: '75px',
-                        targets: 5,
+                        targets: 6,
                         render: function (data, type, full, meta) {
                             const status = {
                                 gamut: {'title': 'Gamut', 'state': 'success'},
@@ -278,7 +281,7 @@
                     },
                     {
                         width: '75px',
-                        targets: 6,
+                        targets: 7,
                         render: function (data, type, full, meta) {
                             const status = {
                                 finished: {'title': 'Finished', 'state': 'success'},
@@ -295,10 +298,19 @@
                     },
                     {
                         width: '75px',
-                        targets: 3,
+                        targets: 4,
+                        render: function (data, type, full, meta) {
+                            console.log(full);
+                            if(data !== 'undefined' && full.gamut_id !== 'undefined')
+                            return `<a href="/gamuts/show/${full.gamut_id}" class="btn btn-light-warning font-weight-bold mr-2">${data}</a>`;
+                        },
+                    },
+                    {
+                        width: '75px',
+                        targets: 1,
                         render: function (data, type, full, meta) {
                             if(data !== 'undefined')
-                            return `<a href="" class="btn btn-light-warning font-weight-bold mr-2">${data}</a>`;
+                                return moment.utc(data).format('YYYY-MM-DD').toString();
                         },
                     },
                 ],

@@ -174,9 +174,10 @@
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Equipment</th>
+                        <th>Equipment Code</th>
                         <th>Designation</th>
                         <th>Code</th>
-                        <th>Equipment</th>
                         <th>Area</th>
                         <th>State</th>
                         <th>Type</th>
@@ -256,9 +257,10 @@
                 ],
                 columns: [
                     { data: 'id' },
+                    { "data": "equipmentName", "name": "equipment.name"  },
+                    { "data": "equipmentCode", searchable: false  },
                     { data: 'designation' },
                     { data: 'code' },
-                    { "data": "equipmentName", "name": "equipment.name"  },
                     { "data": "areaName", "name": "areas.name"  },
                     { data: 'state' },
                     { data: 'type' },
@@ -271,7 +273,7 @@
                 columnDefs: [
                     {
                         width: '75px',
-                        targets: 9,
+                        targets: 10,
                         render: function (data, type, full, meta) {
                             var status = {
                                 0: { 'title': 'Inactive', 'state': 'danger' },
@@ -287,7 +289,7 @@
                     },
                     {
                         width: '75px',
-                        targets: 5,
+                        targets: 6,
                         render: function (data, type, full, meta) {
                             var status = {
                                 "Offline": { 'title': 'Offline', 'state': 'danger' },
@@ -303,7 +305,7 @@
                     },
                     {
                         width: '75px',
-                        targets: 6,
+                        targets: 7,
                         render: function (data, type, full, meta) {
                             var status = {
                                 "visit": { 'title': 'Visit', 'state': 'info' },

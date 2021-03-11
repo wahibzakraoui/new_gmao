@@ -97,7 +97,7 @@ class PartController extends Controller
         return response(
             view("pages.{$this->module}.add")
                 ->with('areasList', Area::All()->pluck('name', 'id')->prepend(''))
-                ->with('equipmentList', Equipment::All()->pluck('name', 'id')->prepend(''))
+                ->with('equipmentList', Equipment::getList()->prepend(''))
                 ->with('criticitiesList', Criticity::All()->pluck('name', 'id')->prepend(''))
         );
     }

@@ -1,8 +1,9 @@
 id,name,description,code,unit,frequency
 1,Daily,A daily task. Runs evey 1 Days.,Daily,day,1
 2,Weekly,A weekly task. Runs every 1 Weeks.,Weekly,week,1
-3,Monthly,A Monthly task. Runs every 1 Months.,Monthly,month,1
-4,Quarterly,A quarterly task. Runs every 3 Months,Quarterly,month,3
-5,Semestrial,A semi-annually task. Runs twice a year.,Semestrial,month,6
-6,Yearly,A yearly task. Runs every 1 years.,Yearly,year,1
-7,Biannual,"A Bi-Annual task, Runs every 2 years.",Biannual,year,2
+3,Bimensual,Runs evey 2 weeks,Bimensual,week,2
+4,Monthly,A Monthly task. Runs every 1 Months.,Monthly,month,1
+5,Quarterly,A quarterly task. Runs every 3 Months,Quarterly,month,3
+6,Semestrial,A semi-annually task. Runs twice a year.,Semestrial,month,6
+7,Yearly,A yearly task. Runs every 1 years.,Yearly,year,1
+8,Biannual,"A Bi-Annual task, Runs every 2 years.",Biannual,year,2

@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Service; 
+use App\Models\Service;
 
 use Trexology\Inventory\Models\InventoryMetric as Metric;
 
@@ -21,8 +21,7 @@ class ServicesTableSeeder extends Seeder
             ['name' => 'Mechanical'],
             ['name' => 'Electrical'],
             ['name' => 'Instrumentation'],
-            ['name' => 'Grease'],
-            ['name' => 'Oil'],
+            ['name' => 'Lubrication'],
         ];
 
         collect($services)->each(function($service){

@@ -147,7 +147,7 @@
         </div>
         @endif
     </div>
-    @if(count($areasList) > 0 && isset($areasList[1]))
+    @if(count($equipmentList) > 0 && isset($equipmentList[1]))
     <!--begin::Card-->
     <div class="card card-custom gutter-b">
         <div class="card-header flex-wrap py-3">
@@ -158,71 +158,44 @@
             </div>
         </div>
         <div class="card-body">
-            {{ Form::open(array('route' => array('store-work_order'), 'method' => 'POST', 'id' => 'create_equipment_form', 'files' => true)) }}
-            <div class="card-body">
+            {{ Form::open(array('route' => array('store-work_order'), 'method' => 'POST', 'id' => 'create_workOrder_form', 'files' => true)) }}
+            <div class="card-body"></div>
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                        <label>Designation <span class="text-danger">*</span></label>
+                        {{ Form::text('designation', null, ['class' => 'form-control']) }}
+                        <span class="form-text text-muted">Please enter a short name</span>
+                    </div>
+                </div>
+            <div class="form-group row">
+                <div class="col-lg-12">
+                    <label>Original WO <span class="text-danger">*</span></label>
+                    {{ Form::text('BT', $parentWO->id, ['class' => 'form-control', 'disabled']) }}
+                    <span class="form-text text-muted">Origin WO</span>
+                </div>
+            </div>
                 <div class="form-group row">
                     <div class="col-lg-6">
-                        <label>Equipment name <span class="text-danger">*</span></label>
-                        {{ Form::text('name', null, ['class' => 'form-control']) }}
-                        <span class="form-text text-muted">Please enter equipment name</span>
+                        <label>Equipment <span class="text-danger">*</span></label>
+                        {{ Form::select('equipment_id', $equipmentList , isset($parentWO) ? $parentWO->equipment_id : '', ['class' => 'form-control selectpicker' , 'data-size' => 7, 'data-live-search' => 'true', 'id' => 'equipment_id', isset($parentWO) ? 'disabled' : '' ]) }}
+                        <span class="form-text text-muted">Please enter equipment</span>
                     </div>
+                    @if($parentWO)
+                        <input type="hidden" name="parent_id" value="{{$parentWO->id}}">
+                    @endif
+
                     <div class="col-lg-6">
-                        <label>Equipment belongs in area <span class="text-danger">*</span></label>
-                        {{ Form::select('area_id', $areasList , '', ['class' => 'form-control selectpicker', 'id' =>
-                        'areaName', 'data-size' => 7, 'data-live-search' => 'true']) }}
-                        <span class="form-text text-muted">Please enter area name</span>
+                        <label>Part <span class="text-danger">*</span></label>
+                        {{ Form::select('part_id', $partsList , isset($parentWO) ? $parentWO->part_id : '', ['class' => 'form-control selectpicker', 'id' =>
+                        'part_id', 'data-size' => 7, 'data-live-search' => 'true', isset($parentWO) ? 'disabled' : '']) }}
+                        <span class="form-text text-muted">Please enter part</span>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-lg-6">
-                        <label>Description <span class="text-danger">*</span></label>
-                        {{ Form::text('description', null, ['class' => 'form-control']) }}
-                        <span class="form-text text-muted">Please enter a breif description of this equipment</span>
-                    </div>
-                    <div class="col-lg-6">
-                        <label>Equipment code <span class="text-danger">*</span></label>
-                        <div class=" col-lg-12">
-                            {{ Form::text('code', null, ['class' => 'form-control']) }}
-                            <span class="form-text text-muted">Please enter code.</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row fv-plugins-icon-container">
-                    <div class="col-lg-6">
-                        <label>Equipment belongs in area code <span class="text-danger">*</span></label>
-                        {{ Form::select('area_code', [] , '', ['class' => 'form-control', 'id' => 'areaCode' ,
-                        'disabled' => 'disabled']) }}
-                        <span class="form-text text-muted">Please enter area code</span>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="image-input image-input-outline" id="kt_image_1">
-                            <div class="image-input-wrapper" style="background-image: url()">
-                            </div>
-                            <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                data-action="change" data-toggle="tooltip" title="" data-original-title="Change image">
-                                <i class="fa fa-pen icon-sm text-muted"></i>
-                                <input type="file" name="photo" accept=".png, .jpg, .jpeg" />
-                                <input type="hidden" name="photo_remove" />
-                            </label>
-                            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
-                                <i class="ki ki-bold-close icon-xs text-muted"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-6">
-                        <label class="col-3 col-form-label">Active</label>
-                        <div class="col-3">
-                            <span class="switch switch-outline switch-icon switch-success">
-                                <label>
-                                    {{ Form::checkbox('active', '1', true) }}
-                                    <span></span>
-                                </label>
-                            </span>
-                        </div>
-                        <span class="form-text text-muted">Is this equipment active?</span>
+                    <div class="col-lg-12">
+                        <label>Description of the problem <span class="text-danger">*</span></label>
+                        {{ Form::textarea('description', null, ['class' => 'form-control', 'id' => 'kt-tinymce-1']) }}
+                        <span class="form-text text-muted">Please enter a brief description of this problem</span>
                     </div>
                 </div>
             </div>
@@ -263,49 +236,35 @@
         <!--end::Callout-->
     </div>
     @endif
-</div>
 <!--end::Content-->
 @stop
 
 @section('my-scripts')
-<script src="{{asset('assets/js/pages/crud/forms/widgets/select2.js')}}"></script>
+    <script src="{{asset('assets/plugins/custom/tinymce/tinymce.bundle.js')}}"></script>
+    <script src="{{asset('assets/js/pages/crud/forms/editors/tinymce.js')}}"></script>
 <script>
     FormValidation.formValidation(
-        document.getElementById('create_equipment_form'),
+        document.getElementById('create_workOrder_form'),
         {
             fields: {
-                name: {
+                designation: {
                     validators: {
                         notEmpty: {
-                            message: 'Factory name is required'
-                        }
-                    }
-                },
-                code: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Factory code is required.'
+                            message: 'Designation is required.'
                         },
                     }
                 },
-                description: {
+                equipment_id: {
                     validators: {
                         notEmpty: {
-                            message: 'Factory description is required'
+                            message: 'Equipment is required'
                         },
                     }
                 },
-                area_id: {
+                part_id: {
                     validators: {
                         notEmpty: {
-                            message: 'Area ID is required'
-                        },
-                    }
-                },
-                area_code: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Area Code is required'
+                            message: 'Part is required'
                         },
                     }
                 },
@@ -328,24 +287,30 @@
     );
 </script>
 <script>
-    const avatar1 = new KTImageInput('kt_image_1');
-    $('#areaName').change(function () {
-        const selected_area = $(this).val();
-        const self = $('#areaCode');
-        if (selected_area !== "") {
-            self.empty().attr('disabled', 'disabled');
-            $.get("{{route('areas-json')}}" + '/' + selected_area, function (data) {
-                $(data).each(function (index, d) {
-                    const newOption = new Option(d.name, d.id, true, true);
-                    self.append(newOption).trigger('change');
-                });
-            }).then(function () {
-                self.attr('disabled', false);
+    var KTTinymce = function () {
+        // Private functions
+        var demos = function () {
+            tinymce.init({
+                selector: '#kt-tinymce-1',
+                menubar: false,
+                toolbar: ['styleselect fontselect fontsizeselect',
+                    'undo redo | cut copy paste | bold italic | link image | alignleft aligncenter alignright alignjustify',
+                    'bullist numlist | outdent indent | blockquote subscript superscript | advlist | autolink | lists charmap | print preview |  code'],
+                plugins : 'advlist autolink link image lists charmap print preview code'
             });
-
-        } else {
-            self.empty().trigger('change');
         }
+
+        return {
+            // public functions
+            init: function() {
+                demos();
+            }
+        };
+    }();
+    // Initialization
+    jQuery(document).ready(function() {
+        KTTinymce.init();
     });
+
 </script>
 @stop

@@ -149,7 +149,9 @@ class RoleTableSeeder extends Seeder
         $role->givePermissionTo(Permission::all());
 
         // Give superAdmin rights to User ID 1
-        User::find(1)->first()->assignRole(['Super Admin']);
+        User::find(1)->assignRole(['Super Admin']);
+        // Give WO rights to User ID 2
+        User::find(2)->assignRole(['Preparateur WO']);
 
         // or may be done by chaining
         /* $role = Role::create(['name' => 'moderator'])

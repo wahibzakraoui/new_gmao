@@ -143,9 +143,10 @@ Route::prefix('work_orders')->middleware(['auth:sanctum', 'verified'])->group(fu
     Route::get('/', [WorkOrderController::class, 'index'])->name('work_orders');
     Route::post('/list', [WorkOrderController::class, 'list'])->name('work_orders-list');
     Route::get('/show/{work_order}', [WorkOrderController::class, 'show'])->name('show-work_order');
-    Route::get('/add', [WorkOrderController::class, 'create'])->name('add-work_order');
+    Route::get('/add/{workOrder?}', [WorkOrderController::class, 'create'])->name('add-work_order');
     Route::post('/add', [WorkOrderController::class, 'store'])->name('store-work_order');
     Route::get('/edit/{workOrder}', [WorkOrderController::class, 'edit'])->name('edit-work_order');
+    Route::get('/execute/{workOrder}', [WorkOrderController::class, 'execute'])->name('execute-work_order');
     Route::post('/update/{workOrder}', [WorkOrderController::class, 'update'])->name('update-work_order');
     Route::post('/delete/{workOrder}', [WorkOrderController::class, 'destroy'])->name('delete-work_order');
     Route::get('/pdf/{workOrder}', [WorkOrderController::class, 'pdf'])->name('work_order-pdf');

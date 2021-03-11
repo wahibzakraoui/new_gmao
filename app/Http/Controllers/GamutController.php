@@ -68,7 +68,8 @@ class GamutController extends Controller
                     'gamuts.id',
                     'gamuts.designation',
                     'gamuts.code',
-                     DB::raw("CONCAT(equipment.name,' - ',equipment.area_code) AS equipmentName"),
+                     DB::raw("CONCAT(equipment.name) AS equipmentName"),
+                     DB::raw("CONCAT(equipment.area_code,'-', equipment.code) AS equipmentCode"),
                     'areas.name as areaName',
                     'gamuts.state',
                     'gamuts.type',
@@ -128,9 +129,9 @@ class GamutController extends Controller
             ->with('areasList', Area::All()->pluck('name', 'id'))
             ->with('periodicitiesList', Periodicity::select([DB::raw("CONCAT(name,' - ',description) AS name"),'id'])->pluck('name', 'id'))
             ->with('servicesList', Service::All()->pluck('name', 'id'))
-            ->with('partsList', Part::select([DB::raw("CONCAT(name,' - ',code) AS name"),'id'])->pluck('name', 'id')->prepend([0 =>'Select if applicable']))
+            ->with('partsList', Part::getList())
             ->with('usersList', User::All()->pluck('name', 'id')->prepend([''=>'Assign to...']))
-            ->with('equipmentList', Equipment::select([DB::raw("CONCAT(name,' - ',code) AS name"),'id'])->pluck('name', 'id'))
+            ->with('equipmentList', Equipment::getList())
         );
     }
 
@@ -277,6 +278,7 @@ class GamutController extends Controller
                 ->where('work_orders.gamut_id', '=', $gamut->id)
                 ->select([
                     'work_orders.id',
+                    'work_orders.created_at',
                     'work_orders.designation',
                     'work_orders.id as number',
                     'equipment.name as equipmentName',
@@ -285,8 +287,8 @@ class GamutController extends Controller
                     'work_orders.type',
                     'work_orders.status',
                 ]))
-                ->addColumn('actions', function ($equipment) {
-                    return '';
+                ->addColumn('actions', function ($workOrder) {
+                    return View::make("pages.work_orders.datatables.actions")->with('workOrder', $workOrder)->render();
                 })
                 ->rawColumns(['actions'])
                 ->make(true);

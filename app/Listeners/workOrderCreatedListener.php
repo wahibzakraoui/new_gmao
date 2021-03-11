@@ -31,9 +31,13 @@ class workOrderCreatedListener
     public function handle(WorkOrder $workOrder)
     {
         $when = Carbon::now()->addSeconds(10);
-        $user = \App\Models\User::find(1);
-        $user->notify(
-            (new workOrderCreatedNotification($workOrder)
-            )->delay($when));
+        $users = \App\Models\User::all();
+        $users->map(function(User $user) use ($when, $workOrder){
+            if($user->hasRole('Preparateur WO')) {
+                $user->notify(
+                    (new workOrderCreatedNotification($workOrder)
+                    )->delay($when));
+            }
+        });
     }
 }
