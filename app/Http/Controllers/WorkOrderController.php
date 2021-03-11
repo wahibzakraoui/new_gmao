@@ -51,6 +51,23 @@ class WorkOrderController extends Controller
      * Display a listing of the resource.
      *
      * @param Request $request
+     * @return Response
+     * @throws PermissionDeniedException
+     */
+    public function finished(Request $request) : Response
+    {
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'view', $this->module);
+
+        return response(
+            view("pages.{$this->module}.finished")
+        );
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
      * @return JsonResponse
      * @throws PermissionDeniedException
      */
@@ -63,6 +80,7 @@ class WorkOrderController extends Controller
 
                 $query = WorkOrder::getDatatable();
                 /* If Not Admin, restrict to own created WOs or assigned WOs */
+                $query->where('status', '!=', 'finished');
                 if(!$request->user()->hasPermissionTo('assign work_orders')) {
                     $query->where('work_orders.assigned_user_id', '=', $request->user()->id)
                         ->orWhere('work_orders.requested_by', '=', $request->user()->id);
@@ -71,6 +89,39 @@ class WorkOrderController extends Controller
                 return DataTables::of($query)->addColumn('actions', function ($workOrder) {
                     return View::make("pages.{$this->module}.datatables.actions")->with('workOrder', $workOrder)->render();
                 })
+                ->rawColumns(['actions'])->make(true);
+
+        } catch (\Exception $e) {
+
+        }
+        return response()->json([]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     * @throws PermissionDeniedException
+     */
+    public function finished_list(Request $request) : JsonResponse{
+
+        /* check if User does not have permission */
+        $this->checkPerms($request, 'view', $this->module);
+
+        try {
+
+            $query = WorkOrder::getDatatable();
+            /* If Not Admin, restrict to own created WOs or assigned WOs */
+            $query->where('status', '=', 'finished');
+            if(!$request->user()->hasPermissionTo('assign work_orders')) {
+                $query->where('work_orders.assigned_user_id', '=', $request->user()->id)
+                    ->orWhere('work_orders.requested_by', '=', $request->user()->id);
+            }
+
+            return DataTables::of($query)->addColumn('actions', function ($workOrder) {
+                return View::make("pages.{$this->module}.datatables.actions")->with('workOrder', $workOrder)->render();
+            })
                 ->rawColumns(['actions'])->make(true);
 
         } catch (\Exception $e) {

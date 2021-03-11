@@ -141,7 +141,9 @@ Route::prefix('gamuts')->middleware(['auth:sanctum', 'verified'])->group(functio
 */
 Route::prefix('work_orders')->middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', [WorkOrderController::class, 'index'])->name('work_orders');
+    Route::get('/finished', [WorkOrderController::class, 'finished'])->name('work_orders-finished');
     Route::post('/list', [WorkOrderController::class, 'list'])->name('work_orders-list');
+    Route::post('/finished_list', [WorkOrderController::class, 'finished_list'])->name('work_orders-finished_list');
     Route::get('/show/{work_order}', [WorkOrderController::class, 'show'])->name('show-work_order');
     Route::get('/add/{workOrder?}', [WorkOrderController::class, 'create'])->name('add-work_order');
     Route::post('/add', [WorkOrderController::class, 'store'])->name('store-work_order');

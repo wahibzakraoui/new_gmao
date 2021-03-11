@@ -1,4 +1,4 @@
-<li class="menu-item menu-item-submenu {{ Route::currentRouteName() == 'work_orders' || Route::currentRouteName() == 'add-work_order' ? 'menu-item-open' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+<li class="menu-item menu-item-submenu {{ Route::currentRouteName() == 'work_orders' || Route::currentRouteName() == 'add-work_order' || Route::currentRouteName() == 'work_orders-finished' ? 'menu-item-open' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
     <a href="javascript:;" class="menu-link menu-toggle">
         <span class="svg-icon menu-icon">
         <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Tools\Tools.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -25,7 +25,15 @@
                     <i class="menu-bullet menu-bullet-dot">
                         <span></span>
                     </i>
-                    <span class="menu-text">Work Orders</span>
+                    <span class="menu-text text-hover-dark-50">Active WOs <i class="flaticon2-bell-5 text-success text-hover-dark-50 ml-2"></i></span>
+                </a>
+            </li>
+            <li class="menu-item {{ Route::currentRouteName() == 'work_orders-finished' ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                <a href="{{route('work_orders-finished')}}" class="menu-link">
+                    <i class="menu-bullet menu-bullet-dot">
+                        <span></span>
+                    </i>
+                    <span class="menu-text">Archived WOs<i class="flaticon2-folder text-info text-hover-dark-50 ml-2"></i></span>
                 </a>
             </li>
             <li class="menu-item {{ Route::currentRouteName() == 'add-work_order' ? 'menu-item-active' : '' }}" aria-haspopup="true">
