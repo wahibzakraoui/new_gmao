@@ -18,4 +18,11 @@ return [
     'code' => 'Code',
     'is_required' => 'is required',
     'email' => 'Email',
+    'to_do_during_the_day' => 'To do during the day - 1 Day',
+    'to_do_during_the_week' => 'To do during the week - 7 Days',
+    'to_do_during_the_fortnight' => 'To do during the fortnight - 15 Days',
+    'to_do_during_the_month' => 'To do during the month - 30 Days',
+    'to_do_during_the_quarter' => 'To do during the quarter - 3 Months',
+    'to_do_during_the_semester' => 'To do during the semester - 6 months',
+    'to_do_during_the_year' => 'To do during the year - 12 Months',
 ];

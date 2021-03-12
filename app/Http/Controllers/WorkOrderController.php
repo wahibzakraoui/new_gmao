@@ -12,9 +12,11 @@ use App\Models\Equipment;
 use App\Models\Gamut;
 use App\Models\Part;
 use App\Models\Service;
+use App\Models\Urgency;
 use App\Models\User;
 use App\Models\WorkOrder;
 use DB;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -147,6 +149,7 @@ class WorkOrderController extends Controller
             view("pages.{$this->module}.add")
                 ->with('equipmentList', Equipment::getList())
                 ->with('partsList', Part::getList())
+                ->with('urgenciesList', Urgency::getList())
                 ->with('parentWO', $workOrder)
         );
     }
@@ -177,7 +180,7 @@ class WorkOrderController extends Controller
             $parentPartID = $parent->part_id;
         }
 
-        if(WorkOrder::create(
+        $workOrder = WorkOrder::create(
             [
                 'uuid' => Str::uuid(),
                 'designation' => $request->get('designation'),
@@ -190,11 +193,20 @@ class WorkOrderController extends Controller
                 'gamut_id' => $request->filled('parent_id') ? $parentGamutID : null,
                 'status' => 'pending',
             ]
-        ))
+        );
+
+        if($workOrder)
         {
             if(isset($parent)){
                 $parent->status = 'finished';
                 $parent->save();
+            }
+            if($request->hasFile('photo')){
+                try {
+                    $workOrder->addMedia($request->file('photo'))->toMediaCollection('work_orders');
+                }catch (Exception $e){
+                    /* don't do anything ? */
+                }
             }
             return redirect($this->module)->with('success', 'WO created successfully!');
         }

@@ -167,13 +167,15 @@
                         <span class="form-text text-muted">Please enter a short name</span>
                     </div>
                 </div>
+            @if(isset($parentWO))
             <div class="form-group row">
                 <div class="col-lg-12">
-                    <label>Original WO <span class="text-danger">*</span></label>
-                    {{ Form::text('BT', $parentWO->id, ['class' => 'form-control', 'disabled']) }}
-                    <span class="form-text text-muted">Origin WO</span>
+                        <label>Original WO <span class="text-danger">*</span></label>
+                        {{ Form::text('BT', $parentWO->id, ['class' => 'form-control', 'disabled']) }}
+                        <span class="form-text text-muted">Origin WO</span>
                 </div>
             </div>
+            @endif
                 <div class="form-group row">
                     <div class="col-lg-6">
                         <label>Equipment <span class="text-danger">*</span></label>
@@ -191,11 +193,37 @@
                         <span class="form-text text-muted">Please enter part</span>
                     </div>
                 </div>
+                <div class="from-group row mb-8">
+                    <div class="col-lg-6">
+                        <label>Part <span class="text-danger">*</span></label>
+                        {{ Form::select('urgency_id', $urgenciesList , null, ['class' => 'form-control selectpicker', 'id' =>
+                        'part_id', 'data-size' => 7, 'data-live-search' => 'true']) }}
+                        <span class="form-text text-muted">Please enter urgency</span>
+                    </div>
+                </div>
                 <div class="form-group row">
                     <div class="col-lg-12">
                         <label>Description of the problem <span class="text-danger">*</span></label>
                         {{ Form::textarea('description', null, ['class' => 'form-control', 'id' => 'kt-tinymce-1']) }}
                         <span class="form-text text-muted">Please enter a brief description of this problem</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-6">
+                        <div class="image-input image-input-outline" id="kt_image_1">
+                            <div class="image-input-wrapper" style="background-image: url()">
+                            </div>
+                            <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                   data-action="change" data-toggle="tooltip" title="" data-original-title="Change image">
+                                <i class="fa fa-pen icon-sm text-muted"></i>
+                                <input type="file" name="photo" accept=".png, .jpg, .jpeg" />
+                                <input type="hidden" name="photo_remove" />
+                            </label>
+                            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                  data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                <i class="ki ki-bold-close icon-xs text-muted"></i>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -287,6 +315,7 @@
     );
 </script>
 <script>
+    const avatar1 = new KTImageInput('kt_image_1');
     var KTTinymce = function () {
         // Private functions
         var demos = function () {

@@ -30,5 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ServicesTableSeeder::class);
         $this->call(GamutDraftsTableSeeder::class);
         $this->call(CriticitiesTableSeeder::class);
+        $this->call(UrgenciesTableSeeder::class);
     }
 }

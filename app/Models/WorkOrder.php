@@ -5,11 +5,15 @@ namespace App\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class WorkOrder extends Model
+class WorkOrder extends Model implements HasMedia
 {
     use HasFactory;
+    use InteractsWithMedia;
     protected $guarded = [];
+    protected  $dates = ['deadline'];
 
     public function gamut(){
         return $this->belongsTo(Gamut::class);

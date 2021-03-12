@@ -22,26 +22,26 @@
             </li>
             <li class="menu-item {{ Route::currentRouteName() == 'work_orders' ? 'menu-item-active' : '' }}" aria-haspopup="true">
                 <a href="{{route('work_orders')}}" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
+                    <i class="menu-bullet far fa-2x fa-calendar-times text-danger text-hover-dark-50 mr-5">
                         <span></span>
                     </i>
-                    <span class="menu-text text-hover-dark-50">Active WOs <i class="flaticon2-bell-5 text-success text-hover-dark-50 ml-2"></i></span>
+                    <span class="menu-text text-hover-dark-50">Active WOs </span>
                 </a>
             </li>
             <li class="menu-item {{ Route::currentRouteName() == 'work_orders-finished' ? 'menu-item-active' : '' }}" aria-haspopup="true">
                 <a href="{{route('work_orders-finished')}}" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
+                    <i class="menu-bullet far fa-2x fa-calendar-check text-primary text-hover-dark-50 mr-5">
                         <span></span>
                     </i>
-                    <span class="menu-text">Archived WOs<i class="flaticon2-folder text-info text-hover-dark-50 ml-2"></i></span>
+                    <span class="menu-text text-hover-dark-50">Archived WOs</span>
                 </a>
             </li>
             <li class="menu-item {{ Route::currentRouteName() == 'add-work_order' ? 'menu-item-active' : '' }}" aria-haspopup="true">
                 <a href="{{route('add-work_order')}}" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
+                    <i class="menu-bullet far fa-2x fa-calendar-plus text-success mr-5">
                         <span></span>
                     </i>
-                    <span class="menu-text">Add Work Order</span>
+                    <span class="menu-text">Create WO</span>
                 </a>
             </li>
         </ul>
