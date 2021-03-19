@@ -117,9 +117,18 @@ class RoleTableSeeder extends Seeder
         Permission::create(['name' => 'edit readings']);
         Permission::create(['name' => 'delete readings']);
 
+        // create purchasing permissions
+        Permission::create(['name' => 'view purchases']);
+        Permission::create(['name' => 'create purchases']);
+        Permission::create(['name' => 'review purchases']);
+        Permission::create(['name' => 'consult purchases']);
+        Permission::create(['name' => 'receive purchases']);
+        Permission::create(['name' => 'edit purchases']);
+        Permission::create(['name' => 'delete purchases']);
+
         // create roles and assign created permissions
         // this can be done as separate statements
-        Role::create(['name' => 'Preparateur WO'])
+        Role::create(['name' => 'Maintenance Officer'])
             ->givePermissionTo('create work_orders')
             ->givePermissionTo('edit work_orders')
             ->givePermissionTo('assign work_orders')
@@ -127,6 +136,14 @@ class RoleTableSeeder extends Seeder
             ->givePermissionTo('cancel work_orders')
             ->givePermissionTo('delete work_orders')
             ->givePermissionTo('view work_orders');
+
+        Role::create(['name' => 'Purchasing Officer'])
+            ->givePermissionTo('create purchases')
+            ->givePermissionTo('edit purchases')
+            ->givePermissionTo('consult purchases')
+            ->givePermissionTo('review purchases')
+            ->givePermissionTo('delete purchases')
+            ->givePermissionTo('view purchases');
 
         Role::create(['name' => 'Electrical Technician'])
             ->givePermissionTo('create work_orders')
@@ -151,11 +168,10 @@ class RoleTableSeeder extends Seeder
         // Give superAdmin rights to User ID 1
         User::find(1)->assignRole(['Super Admin']);
         // Give WO rights to User ID 2
-        User::find(2)->assignRole(['Preparateur WO']);
+        User::find(2)->assignRole(['Maintenance Officer']);
 
-        // or may be done by chaining
-        /* $role = Role::create(['name' => 'moderator'])
-            ->givePermissionTo(['publish articles', 'unpublish articles']); */
+        // Give PO rights to User ID 12
+        User::find(12)->assignRole(['Purchasing Officer']);
 
 
     }

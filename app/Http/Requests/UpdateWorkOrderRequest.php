@@ -11,7 +11,7 @@ class UpdateWorkOrderRequest extends FormRequest
         return [
             'designation' => 'required|string',
             'description' => 'nullable|string',
-            'deadline' => 'required|string',
+            'objective_completion_date' => 'required|date',
             'service_id' => 'required|numeric',
             'assigned_user_id' => 'required|numeric',
         ];

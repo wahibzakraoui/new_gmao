@@ -3,19 +3,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Kerp\CreateNewArea;
-use App\Actions\Kerp\UpdateArea;
-use App\Exceptions\PermissionDeniedException;
-use App\Http\Requests\CreateAreaRequest;
-use App\Http\Requests\UpdateAreaRequest;
 use App\Models\Area;
 use App\Models\Factory;
-use Exception;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use App\Actions\Kerp\Areas\CreateNewArea;
+use App\Actions\Kerp\Areas\UpdateArea;
+use App\Http\Requests\Areas\CreateAreaRequest;
+use App\Http\Requests\Areas\UpdateAreaRequest;
+use Exception;
+use App\Exceptions\PermissionDeniedException;
 use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;

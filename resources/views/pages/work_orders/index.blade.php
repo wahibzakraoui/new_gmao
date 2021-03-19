@@ -113,7 +113,7 @@
 </div>
 <!--end::Subheader-->
 <!--begin::Content-->
-<div class="container">
+<div class="container-fluid">
     <!--begin::Notice-->
     <div class="alert alert-custom alert-white alert-shadow gutter-b" role="alert">
         <div class="alert-icon">
@@ -172,13 +172,15 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Date</th>
+                        <th>Date Created</th>
+                        <th>Objective Date</th>
+                        <th>Expected Date</th>
                         <th>Designation</th>
                         <th>Equipment</th>
                         <th>Gamut</th>
-                        <th>Assigned Technician</th>
                         <th>Type</th>
                         <th>Status</th>
+                        <th>Status Code</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -250,21 +252,23 @@
                     },
                 ],
                 columns: [
-                    { "data": "number", "name": "work_orders.id"  },
+                    { "data": "id" },
                     { "data": "created_at", "name": "work_orders.created_at"  },
+                    { "data": "objective_completion_date" },
+                    { "data": "expected_completion_date" },
                     { data: 'designation' },
-                    { "data": "equipmentName", "name": "equipment.name"  },
-                    { "data": "gamutCode", "name": "gamuts.code"  },
-                    { "data": "userName", "name": "users.name"  },
+                    { "data": "equipment.name", "name": "equipment.name"  },
+                    { "data": "gamut.code", "name": "gamut.code"  },
                     { data: 'type' },
                     { data: 'status' },
+                    { data: 'status_code' },
                     { data: 'actions', name: 'actions', orderable: false, searchable: false }
                 ],
                 columnDefs: [
                     {width:'20px', targets: 0},
                     {
                         width: '75px',
-                        targets: 6,
+                        targets: 7,
                         render: function (data, type, full, meta) {
                             const status = {
                                 gamut: {'title': 'Gamut', 'state': 'success'},
@@ -281,7 +285,7 @@
                     },
                     {
                         width: '75px',
-                        targets: 7,
+                        targets: 8,
                         render: function (data, type, full, meta) {
                             const status = {
                                 finished: {'title': 'Finished', 'state': 'success'},
@@ -307,7 +311,7 @@
                     },
                     {
                         width: '75px',
-                        targets: 1,
+                        targets: [1, 2],
                         render: function (data, type, full, meta) {
                             if(data !== 'undefined')
                                 return moment.utc(data).format('YYYY-MM-DD').toString();

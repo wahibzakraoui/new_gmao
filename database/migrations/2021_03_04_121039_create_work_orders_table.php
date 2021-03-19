@@ -26,10 +26,15 @@ class CreateWorkOrdersTable extends Migration
             $table->foreignId('assigned_user_id')->nullable()->constrained('users');
             $table->foreignId('approved_by')->nullable()->constrained('users');
             $table->foreignId('requested_by')->nullable()->constrained('users');
-            $table->dateTime('deadline')->nullable();
+            $table->decimal('expected_duration_in_hours')->default(8);
+            $table->dateTime('objective_completion_date')->nullable();
+            $table->dateTime('expected_completion_date')->nullable();
+            $table->dateTime('real_completion_date')->nullable();
+            $table->mediumText('feedback')->nullable();
             $table->set('type', ['gamut', 'complementary_wo', 'corrective_maintenance']);
             $table->set('status', ['pending', 'assigned', 'finished_with_remarks','finished']);
-            $table->dateTime('date_completed')->nullable();
+            $table->boolean('done')->nullable()->default(false);
+            $table->string('status_code')->default('64-RDY ');
             $table->softDeletes();
             $table->timestamps();
         });

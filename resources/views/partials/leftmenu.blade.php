@@ -28,6 +28,9 @@
             @can('view work_orders')
                 @include('partials.menu-chunks.work_orders.menu')
             @endcan
+            @can('view purchases')
+                @include('partials.menu-chunks.purchases.menu')
+            @endcan
             @can('manage users')
                 @include('partials.menu-chunks.users.menu')
             @endcan

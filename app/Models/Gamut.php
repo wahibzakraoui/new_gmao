@@ -70,5 +70,4 @@ class Gamut extends Model
         return $this->hasMany(WorkOrder::class)->btc();
     }
 
-
 }

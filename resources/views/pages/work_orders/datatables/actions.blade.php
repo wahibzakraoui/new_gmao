@@ -7,6 +7,9 @@
 
     <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
         <ul class="nav nav-hoverable flex-column">
+            @if(Auth()->user()->hasPermissionTo('create purchases'))
+                <li class="nav-item"><a class="nav-link" href="{{route('add-purchase', $workOrder->id)}}"><i class="nav-icon la la-cart-plus"></i><span class="nav-text">Create Purchase</span></a></li>
+            @endif
             @if(Auth()->user()->hasPermissionTo('create work_orders'))
                 <li class="nav-item"><a class="nav-link" href="{{route('add-work_order', $workOrder->id)}}"><i class="nav-icon la la-asterisk"></i><span class="nav-text">Create BTC</span></a></li>
             @endif

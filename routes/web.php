@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PartController;
+use App\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\DashboardController;
@@ -148,7 +149,8 @@ Route::prefix('work_orders')->middleware(['auth:sanctum', 'verified'])->group(fu
     Route::get('/add/{workOrder?}', [WorkOrderController::class, 'create'])->name('add-work_order');
     Route::post('/add', [WorkOrderController::class, 'store'])->name('store-work_order');
     Route::get('/edit/{workOrder}', [WorkOrderController::class, 'edit'])->name('edit-work_order');
-    Route::get('/execute/{workOrder}', [WorkOrderController::class, 'execute'])->name('execute-work_order');
+    Route::get('/execute/{workOrder}', [WorkOrderController::class, 'execute'])->name('execute-work_order-form');
+    Route::post('/execute/{workOrder}', [WorkOrderController::class, 'store_execution'])->name('execute-work_order');
     Route::post('/update/{workOrder}', [WorkOrderController::class, 'update'])->name('update-work_order');
     Route::post('/delete/{workOrder}', [WorkOrderController::class, 'destroy'])->name('delete-work_order');
     Route::get('/pdf/{workOrder}', [WorkOrderController::class, 'pdf'])->name('work_order-pdf');
@@ -178,5 +180,43 @@ Route::prefix('users')->middleware(['auth:sanctum', 'verified'])->group(function
     Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit-user');
     Route::post('/update/{user}', [UserController::class, 'update'])->name('update-user');
     Route::post('/delete/{user}', [UserController::class, 'destroy'])->name('delete-user');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Purchases Routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::prefix('purchases')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/', [PurchaseController::class, 'index'])->name('purchases');
+    Route::get('/view/{purchase?}', [PurchaseController::class, 'show'])->name('view-purchase');
+    Route::get('/pending', [PurchaseController::class, 'pending'])->name('pending-purchases');
+    Route::get('/consulting', [PurchaseController::class, 'consulting'])->name('consulting-purchases');
+    Route::get('/pending_delivery', [PurchaseController::class, 'pending_delivery'])->name('pending-delivery-purchases');
+    Route::get('/archived', [PurchaseController::class, 'archived'])->name('archived-purchases');
+    Route::post('/list', [PurchaseController::class, 'list'])->name('purchases-list');
+    Route::post('/list_pending', [PurchaseController::class, 'list_pending'])->name('purchases-list_pending');
+    Route::post('/list_consulting', [PurchaseController::class, 'list_consulting'])->name('purchases-list_consulting');
+    Route::post('/list_pending_delivery', [PurchaseController::class, 'list_pending_delivery'])->name('purchases-list_pending_delivery');
+    Route::post('/list_archived', [PurchaseController::class, 'list_archived'])->name('purchases-list_archived');
+    Route::get('/add/{workOrder?}', [PurchaseController::class, 'create'])->name('add-purchase');
+    Route::post('/add', [PurchaseController::class, 'store'])->name('store-purchase');
+    Route::get('/edit/{purchase}', [PurchaseController::class, 'edit'])->name('edit-purchase');
+    Route::get('/approve/{purchase?}', [PurchaseController::class, 'approve'])->name('approve-purchase');
+    Route::post('/approve/{purchase?}', [PurchaseController::class, 'store_approval'])->name('approve-purchase');
+    Route::get('/quotation/{purchase}', [PurchaseController::class, 'create_quotation'])->name('add-quotation');
+    Route::post('/quotation/{purchase?}', [PurchaseController::class, 'store_quotation'])->name('store-quotation');
+    Route::post('/update/{purchase}', [PurchaseController::class, 'update'])->name('update-purchase');
+    Route::post('/delete/{purchase}', [PurchaseController::class, 'destroy'])->name('delete-purchase');
+    Route::post('/quotation/delete/{quotation}', [PurchaseController::class, 'destroy_quotation'])->name('delete-quotation');
+    Route::get('/quotation/select/{quotation}', [PurchaseController::class, 'select_quotation'])->name('select-quotation');
+
+    // dirty test with the client @todo it's obvious
+    Route::get('/receive/{purchase}', function (\App\Models\Purchase $purchase){
+        if($purchase->state->transitionTo('fulfilled')){
+            return redirect('purchases');
+        }
+    })->name('receive-purchase');
 });
 

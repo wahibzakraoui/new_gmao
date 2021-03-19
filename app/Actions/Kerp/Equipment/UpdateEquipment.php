@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Actions\Kerp;
+namespace App\Actions\Kerp\Equipment;
 
 
 use App\Http\Requests\UpdateEquipmentRequest;

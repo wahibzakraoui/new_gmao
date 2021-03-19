@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         //User::factory(1)->create();
+        $this->call(ServicesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(RoleTableSeeder::class);
         $this->call(MetricsTableSeeder::class);
@@ -27,9 +28,13 @@ class DatabaseSeeder extends Seeder
         $this->call(EquipmentsTableSeeder::class);
         $this->call(PeriodicitiesTableSeeder::class);
         $this->call(PartsTableSeeder::class);
-        $this->call(ServicesTableSeeder::class);
         $this->call(GamutDraftsTableSeeder::class);
         $this->call(CriticitiesTableSeeder::class);
         $this->call(UrgenciesTableSeeder::class);
+        $this->call(SuppliersSeeder::class);
+
+
+        // Other migrations should be added above this line
+        $this->call(FirstTimeSetup::class);
     }
 }

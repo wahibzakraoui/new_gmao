@@ -4,7 +4,7 @@
 namespace App\Contracts;
 
 
-use App\Http\Requests\UpdateAreaRequest;
+use App\Http\Requests\Areas\UpdateAreaRequest;
 use App\Models\Area;
 
 interface UpdatesArea

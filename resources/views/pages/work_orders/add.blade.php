@@ -195,7 +195,7 @@
                 </div>
                 <div class="from-group row mb-8">
                     <div class="col-lg-6">
-                        <label>Part <span class="text-danger">*</span></label>
+                        <label>Urgency <span class="text-danger">*</span></label>
                         {{ Form::select('urgency_id', $urgenciesList , null, ['class' => 'form-control selectpicker', 'id' =>
                         'part_id', 'data-size' => 7, 'data-live-search' => 'true']) }}
                         <span class="form-text text-muted">Please enter urgency</span>

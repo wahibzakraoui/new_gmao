@@ -1,34 +1,33 @@
 <?php
 
 
-namespace App\Actions\Kerp;
+namespace App\Actions\Kerp\Areas;
 
-use App\Contracts\CreatesNewArea;
-use App\Http\Requests\CreateAreaRequest;
+
+use App\Contracts\UpdatesArea;
+use App\Http\Requests\Areas\UpdateAreaRequest;
 use App\Models\Area;
 use App\Models\AreaCode;
-use Illuminate\Support\Str;
 
-class CreateNewArea implements CreatesNewArea
+class UpdateArea implements UpdatesArea
 {
-    public static function create(CreateAreaRequest $request)
+
+    public static function update(UpdateAreaRequest $request, Area $area) : ?Area
     {
         $request->validated();
-        $area = Area::create([
-            'uuid' => Str::uuid(),
+        if ($area->update([
             'name' => $request->get('name'),
             'description' => $request->get('description'),
             'factory_id' => $request->get('factory_id'),
-            'active' => $request->get('active') ?? false,
-        ]);
-
-        if ($area) {
+            'active' => $request->get('active') ?: null,
+        ])) {
+            $area->codes()->delete();
             collect($request->get('codes'))->each(function ($code) use ($area) {
                 $id = $area->id;
                 $code = ['area_id' => $id, 'code' => $code];
                 AreaCode::create($code);
             });
-            return $area;
+            return $area->fresh();
         }
         return null;
     }

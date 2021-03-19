@@ -11,9 +11,8 @@ class CreateInventorySupplierTables extends Migration
     public function up()
     {
         Schema::create('suppliers', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->timestamps();
-
             $table->string('name');
             $table->string('address')->nullable();
             $table->string('postal_code')->nullable();
@@ -34,7 +33,7 @@ class CreateInventorySupplierTables extends Migration
             $table->timestamps();
 
             $table->integer('inventory_id')->unsigned();
-            $table->integer('supplier_id')->unsigned();
+            $table->bigInteger('supplier_id')->unsigned();
 
             $table->foreign('inventory_id')->references('id')->on('inventories')
                 ->onUpdate('restrict')

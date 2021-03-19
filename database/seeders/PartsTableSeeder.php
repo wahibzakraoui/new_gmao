@@ -23,7 +23,5 @@ class PartsTableSeeder extends CsvSeeder {
 		//DB::table($this->table)->truncate();
 
 		parent::run();
-		
-		Artisan::call('init:parts');
 	}
 }

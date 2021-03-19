@@ -27,6 +27,7 @@ namespace App\Models{
  * @property-read int|null $codes_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Equipment[] $equipments
  * @property-read int|null $equipments_count
+ * @property-read \App\Models\Factory $factory
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Gamut[] $gamuts
  * @property-read int|null $gamuts_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Part[] $parts
@@ -67,6 +68,37 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|AreaCode whereUpdatedAt($value)
  */
 	class AreaCode extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Buyable
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $uuid
+ * @property string $code
+ * @property string $modelType
+ * @property int $modelId
+ * @property int|null $area_id
+ * @property int $equates_to
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Buyable newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Buyable newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Buyable query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Buyable whereAreaId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Buyable whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Buyable whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Buyable whereEquatesTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Buyable whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Buyable whereModelId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Buyable whereModelType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Buyable whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Buyable whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Buyable whereUuid($value)
+ */
+	class Buyable extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -147,6 +179,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Area[] $areas
+ * @property-read int|null $areas_count
  * @method static \Illuminate\Database\Eloquent\Builder|Factory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Factory newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Factory query()
@@ -173,6 +207,7 @@ namespace App\Models{
  * @property string $code
  * @property string $state
  * @property string $type
+ * @property string $run_day
  * @property int|null $factory_id
  * @property int|null $equipment_id
  * @property int|null $part_id
@@ -217,6 +252,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Gamut whereNextRun($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Gamut wherePartId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Gamut wherePeriodicityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Gamut whereRunDay($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Gamut whereRuns($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Gamut whereServiceId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Gamut whereState($value)
@@ -365,6 +401,128 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Purchase
+ *
+ * @property int $id
+ * @property string $uuid
+ * @property string $reference
+ * @property \Illuminate\Support\Carbon $should_be_available_by
+ * @property string|null $expected_delivery_date
+ * @property string|null $actual_delivery_date
+ * @property int|null $work_order_id
+ * @property int $created_by
+ * @property int|null $received_by
+ * @property int|null $supplier_id
+ * @property int|null $service_id
+ * @property int $number_of_items
+ * @property int|null $subtotal_in_cents
+ * @property int|null $tax_total_in_cents
+ * @property int|null $transportation_fees_in_cents
+ * @property int|null $importation_fees_in_cents
+ * @property int|null $discounted_amount_in_cents
+ * @property int|null $total_amount_in_cents
+ * @property string|null $internal_note
+ * @property string|null $supplier_note
+ * @property int|null $reviewed_by
+ * @property string|null $review_date
+ * @property string|null $review_reason
+ * @property \App\States\Purchases\PurchaseState $state
+ * @property \App\States\Fulfillment\FulfillmentState $fulfillment
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Buyable[] $buyables
+ * @property-read int|null $buyables_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Quotation[] $quotations
+ * @property-read int|null $quotations_count
+ * @property-read \App\Models\User|null $receiver
+ * @property-read \App\Models\User|null $reviewer
+ * @property-read \App\Models\Service|null $service
+ * @property-read \App\Models\Supplier|null $supplier
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereActualDeliveryDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereDiscountedAmountInCents($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereExpectedDeliveryDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereFulfillment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereImportationFeesInCents($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereInternalNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereNotState(string $column, $states)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereNumberOfItems($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereReceivedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereReference($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereReviewDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereReviewReason($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereReviewedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereServiceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereShouldBeAvailableBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereSubtotalInCents($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereSupplierId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereSupplierNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereTaxTotalInCents($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereTotalAmountInCents($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereTransportationFeesInCents($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereUuid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Purchase whereWorkOrderId($value)
+ */
+	class Purchase extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Quotation
+ *
+ * @property int $id
+ * @property int $purchase_id
+ * @property int $supplier_id
+ * @property string $quotation_reference
+ * @property \Illuminate\Support\Carbon|null $expected_delivery_date
+ * @property int $number_of_items
+ * @property int|null $subtotal_in_cents
+ * @property int|null $tax_total_in_cents
+ * @property int|null $transportation_fees_in_cents
+ * @property int|null $importation_fees_in_cents
+ * @property int|null $discounted_amount_in_cents
+ * @property int|null $total_amount_in_cents
+ * @property int $created_by
+ * @property string $state
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Buyable[] $buyables
+ * @property-read int|null $buyables_count
+ * @property-read \App\Models\Purchase $purchase
+ * @property-read \App\Models\Supplier $supplier
+ * @method static \Illuminate\Database\Eloquent\Builder|Quotation newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Quotation newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Quotation query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Quotation whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Quotation whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Quotation whereDiscountedAmountInCents($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Quotation whereExpectedDeliveryDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Quotation whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Quotation whereImportationFeesInCents($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Quotation whereNumberOfItems($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Quotation wherePurchaseId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Quotation whereQuotationReference($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Quotation whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Quotation whereSubtotalInCents($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Quotation whereSupplierId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Quotation whereTaxTotalInCents($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Quotation whereTotalAmountInCents($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Quotation whereTransportationFeesInCents($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Quotation whereUpdatedAt($value)
+ */
+	class Quotation extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Service
  *
  * @property int $id
@@ -380,6 +538,49 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereUpdatedAt($value)
  */
 	class Service extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Supplier
+ *
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $name
+ * @property string|null $address
+ * @property string|null $postal_code
+ * @property string|null $zip_code
+ * @property string|null $region
+ * @property string|null $city
+ * @property string|null $country
+ * @property string|null $type
+ * @property string|null $contact_title
+ * @property string|null $contact_name
+ * @property string|null $contact_phone
+ * @property string|null $contact_fax
+ * @property string|null $contact_email
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereContactEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereContactFax($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereContactName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereContactPhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereContactTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereCountry($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier wherePostalCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereRegion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereZipCode($value)
+ */
+	class Supplier extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -438,13 +639,34 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Urgency
+ *
+ * @property int $id
+ * @property string $localized_name_key
+ * @property int $value_in_days
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Urgency newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Urgency newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Urgency query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Urgency whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Urgency whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Urgency whereLocalizedNameKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Urgency whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Urgency whereValueInDays($value)
+ */
+	class Urgency extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\User
  *
  * @property int $id
  * @property string $name
  * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
- * @property int|null $service_id
+ * @property int $service_id
  * @property string|null $service
  * @property string $password
  * @property string|null $two_factor_secret
@@ -521,14 +743,22 @@ namespace App\Models{
  * @property int|null $assigned_user_id
  * @property int|null $approved_by
  * @property int|null $requested_by
- * @property string|null $deadline
+ * @property string $expected_duration_in_hours
+ * @property \Illuminate\Support\Carbon|null $objective_completion_date
+ * @property \Illuminate\Support\Carbon|null $expected_completion_date
+ * @property \Illuminate\Support\Carbon|null $real_completion_date
  * @property mixed $type
  * @property mixed $status
- * @property string|null $date_completed
+ * @property \App\States\WorkOrders\WorkOrderState $status_code
  * @property string|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Equipment|null $equipment
  * @property-read \App\Models\Gamut|null $gamut
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|\Spatie\MediaLibrary\MediaCollections\Models\Media[] $media
+ * @property-read int|null $media_count
+ * @property-read \App\Models\User|null $requester
+ * @property-read \App\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder btc()
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder finished()
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder newModelQuery()
@@ -537,23 +767,28 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereApprovedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereAssignedUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereDateCompleted($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereDeadline($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereDesignation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereEquipmentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereExpectedCompletionDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereExpectedDurationInHours($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereGamutId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereNotState(string $column, $states)
+ * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereObjectiveCompletionDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereParentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder wherePartId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereRealCompletionDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereRequestedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereServiceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereState(string $column, $states)
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereStatusCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WorkOrder whereUuid($value)
  */
-	class WorkOrder extends \Eloquent {}
+	class WorkOrder extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
 }
 

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Kerp\CreateNewEquipment;
-use App\Actions\Kerp\UpdateEquipment;
+use App\Actions\Kerp\Equipment\CreateNewEquipment;
+use App\Actions\Kerp\Equipment\UpdateEquipment;
 use App\Http\Requests\UpdateEquipmentRequest;
 use App\Http\Requests\CreateEquipmentRequest;
 use Exception;

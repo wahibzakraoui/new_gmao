@@ -18,6 +18,7 @@ class ServicesTableSeeder extends Seeder
     public function run()
     {
         $services = [
+            ['name' => 'Administration'],
             ['name' => 'Mechanical'],
             ['name' => 'Electrical'],
             ['name' => 'Instrumentation'],

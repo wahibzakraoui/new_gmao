@@ -20,6 +20,11 @@ class VerifyCsrfToken extends Middleware
         'gamuts/list',
         'work_orders/list',
         'work_orders/finished_list',
+        'purchases/list',
+        'purchases/list_pending',
+        'purchases/list_consulting',
+        'purchases/list_pending_delivery',
+        'purchases/list_archived',
         'gamuts/list_work_orders/*',
     ];
 }

@@ -139,9 +139,14 @@
                 'edit_equipment_form', 'files' => 'true')) }}
                 <div class="card-body">
                     <div class="form-group row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <label>Designation <span class="text-danger">*</span></label>
                             {{ Form::text('designation', null, ['class' => 'form-control']) }}
+                            <span class="form-text text-muted">Designation of this WO</span>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Requested by <span class="text-danger">*</span></label>
+                            <input type="text" name="requested_by" class="form-control" value="{{$work_order->requester->name ?? 'GMAO'}}" disabled="disabled">
                             <span class="form-text text-muted">Designation of this WO</span>
                         </div>
                     </div>
@@ -177,11 +182,10 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-lg-6">
-                            <label class="col-form-label">Deadline</label>
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
+                            <label class="col-form-label">Objective Completion Date</label>
                                 <div class="input-group date" id="kt_datetimepicker_1" data-target-input="nearest">
-                                    {{ Form::text('deadline', null, ['class' => 'form-control datetimepicker-input', 'data-target' => '#kt_datetimepicker_1']) }}
+                                    {{ Form::text('objective_completion_date', null, ['class' => 'form-control datetimepicker-input', 'data-target' => '#kt_datetimepicker_1']) }}
 
                                     <div class="input-group-append" data-target="#kt_datetimepicker_1"
                                          data-toggle="datetimepicker">
@@ -191,8 +195,32 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-lg-6">
+                                <label class="col-form-label">Expected Completion Date</label>
+                                <div class="input-group date" id="kt_datetimepicker_2" data-target-input="nearest">
+                                    {{ Form::text('expected_completion_date', null, ['class' => 'form-control datetimepicker-input', 'data-target' => '#kt_datetimepicker_1']) }}
+                                    <div class="input-group-append" data-target="#kt_datetimepicker_2"
+                                         data-toggle="datetimepicker">
+                                        <span class="input-group-text">
+                                         <i class="ki ki-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    @if($work_order->status_code->getValue() === "10-IDT")
+                    <div class="form-group row fv-plugins-icon-container">
+                        <div class="col-lg-6">
+                            <label>Send to status <span class="text-danger">*</span></label>
+                            <select name="status_code" id="" class="form-control selectpicker">
+                                <option value="90-CAN">90-CAN</option>
+                                <option value="20-PLN">20-PLN</option>
+                                <option value="64-RDY">64-RDY</option>
+                            </select>
+                            <span class="form-text text-muted">Status code</span>
                         </div>
                     </div>
+                    @endif
                 </div>
                 <div class="card-footer">
                     <div class="row">
@@ -224,7 +252,13 @@
             document.getElementById('edit_equipment_form'),
             {
                 fields: {
-
+                    service_id: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Equipment is required'
+                            },
+                        }
+                    },
                 },
 
                 plugins: {

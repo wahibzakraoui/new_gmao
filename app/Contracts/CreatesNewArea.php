@@ -4,7 +4,7 @@
 namespace App\Contracts;
 
 
-use App\Http\Requests\CreateAreaRequest;
+use App\Http\Requests\Areas\CreateAreaRequest;
 
 interface CreatesNewArea
 {
