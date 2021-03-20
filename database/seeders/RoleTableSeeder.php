@@ -133,6 +133,7 @@ class RoleTableSeeder extends Seeder
             ->givePermissionTo('edit work_orders')
             ->givePermissionTo('assign work_orders')
             ->givePermissionTo('postpone work_orders')
+            ->givePermissionTo('review purchases')
             ->givePermissionTo('cancel work_orders')
             ->givePermissionTo('delete work_orders')
             ->givePermissionTo('view work_orders');
@@ -141,7 +142,7 @@ class RoleTableSeeder extends Seeder
             ->givePermissionTo('create purchases')
             ->givePermissionTo('edit purchases')
             ->givePermissionTo('consult purchases')
-            ->givePermissionTo('review purchases')
+            //->givePermissionTo('review purchases')
             ->givePermissionTo('delete purchases')
             ->givePermissionTo('view purchases');
 
