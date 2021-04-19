@@ -113,8 +113,8 @@
 </div>
 <!--end::Subheader-->
 <!--begin::Content-->
-<div class="container">
-    <div class="col-xs-12 col-md-12">
+<div class="container-fluid">
+    <div class="col-xs-8 col-md-8">
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -125,8 +125,10 @@
         </div>
         @endif
     </div>
+    <div class="row">
+
     <!--begin::Card-->
-    <div class="card card-custom gutter-b">
+    <div class="card card-custom gutter-b col-xs-5 col-md-5">
         <div class="card-header flex-wrap py-3">
             <div class="card-title">
                 <h3 class="card-label">@lang('lang.edit') @lang('equipment.equipment'):
@@ -218,6 +220,92 @@
         </div>
     </div>
     <!--end::Card-->
+    <div class="col-md-7">
+        <style>
+            model-viewer#reveal {
+                --poster-color: transparent;
+            }
+            model-viewer{
+                width: 100%;
+                height: 100vh;
+            }
+        </style>
+        <model-viewer id="envlight-demo" camera-controls src="https://modelviewer.dev/shared-assets/models/glTF-Sample-Models/2.0/2CylinderEngine/glTF-Draco/2CylinderEngine.gltf" ar ar-modes="webxr scene-viewer quick-look" ar-scale="fixed"  alt="A 3D model of a damaged helmet"></model-viewer>
+
+        <script type="module">
+            const modelViewer = document.querySelector("#envlight-demo");
+            modelViewer.addEventListener('contextmenu', event => event.preventDefault());
+
+            let lastX;
+            let panning = false;
+            let skyboxAngle = 0;
+            let radiansPerPixel;
+
+            const startPan = () => {
+                const orbit = modelViewer.getCameraOrbit();
+                const { radius } = orbit;
+                radiansPerPixel = -1 * radius / modelViewer.getBoundingClientRect().height;
+                modelViewer.interactionPrompt = 'none';
+            };
+
+            const updatePan = (thisX) => {
+                const delta = (thisX - lastX) * radiansPerPixel;
+                lastX = thisX;
+                skyboxAngle += delta;
+                const orbit = modelViewer.getCameraOrbit();
+                orbit.theta += delta;
+                modelViewer.cameraOrbit = orbit.toString();
+                modelViewer.resetTurntableRotation(skyboxAngle);
+                modelViewer.jumpCameraToGoal();
+            }
+
+            modelViewer.addEventListener('mousedown', (event) => {
+                panning = event.button === 2 || event.ctrlKey || event.metaKey ||
+                    event.shiftKey;
+                if (!panning)
+                    return;
+
+                lastX = event.clientX;
+                startPan();
+                event.stopPropagation();
+            }, true);
+
+            modelViewer.addEventListener('touchstart', (event) => {
+                panning = event.touches.length === 2;
+                if (!panning)
+                    return;
+
+                const {touches} = event;
+                lastX = 0.5 * (touches[0].clientX + touches[1].clientX);
+                startPan();
+            }, true);
+
+            modelViewer.addEventListener('mousemove', (event) => {
+                if (!panning)
+                    return;
+
+                updatePan(event.clientX);
+                event.stopPropagation();
+            }, true);
+
+            modelViewer.addEventListener('touchmove', (event) => {
+                if (!panning || event.touches.length !== 2)
+                    return;
+
+                const {touches} = event;
+                const thisX = 0.5 * (touches[0].clientX + touches[1].clientX);
+                updatePan(thisX);
+            }, true);
+
+            self.addEventListener('mouseup', (event) => {
+                panning = false;
+            }, true);
+
+            self.addEventListener('touchend', (event) => {
+                panning = false;
+            }, true);
+        </script></div>
+    </div>
 </div>
 
 <!--end::Content-->
@@ -225,6 +313,7 @@
 
 @section('my-scripts')
 <script src="{{asset('assets/js/pages/crud/forms/widgets/select2.js')}}"></script>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 <script>
     FormValidation.formValidation(
         document.getElementById('edit_equipment_form'),
