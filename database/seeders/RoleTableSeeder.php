@@ -59,6 +59,12 @@ class RoleTableSeeder extends Seeder
         Permission::create(['name' => 'edit parts']);
         Permission::create(['name' => 'delete parts']);
 
+        // create Spares permissions
+        Permission::create(['name' => 'view spares']);
+        Permission::create(['name' => 'create spares']);
+        Permission::create(['name' => 'edit spares']);
+        Permission::create(['name' => 'delete spares']);
+
         // create periodicities permissions
         Permission::create(['name' => 'view periodicities']);
         Permission::create(['name' => 'create periodicities']);
@@ -117,6 +123,18 @@ class RoleTableSeeder extends Seeder
         Permission::create(['name' => 'edit readings']);
         Permission::create(['name' => 'delete readings']);
 
+        // create receival permissions
+        Permission::create(['name' => 'view receival']);
+        Permission::create(['name' => 'create receival']);
+        Permission::create(['name' => 'edit receival']);
+        Permission::create(['name' => 'delete receival']);
+
+        // create delivery permissions
+        Permission::create(['name' => 'view delivery']);
+        Permission::create(['name' => 'create delivery']);
+        Permission::create(['name' => 'edit delivery']);
+        Permission::create(['name' => 'delete delivery']);
+
         // create purchasing permissions
         Permission::create(['name' => 'view purchases']);
         Permission::create(['name' => 'create purchases']);
@@ -161,9 +179,16 @@ class RoleTableSeeder extends Seeder
             ->givePermissionTo('execute work_orders')
             ->givePermissionTo('view work_orders');
 
+        Role::create(['name' => 'Warehousing'])
+            ->givePermissionTo('create receival')
+            ->givePermissionTo('edit receival')
+            ->givePermissionTo('create delivery')
+            ->givePermissionTo('edit delivery');
 
 
         $role = Role::create(['name' => 'Super Admin']);
+
+
         $role->givePermissionTo(Permission::all());
 
         // Give superAdmin rights to User ID 1
@@ -171,8 +196,20 @@ class RoleTableSeeder extends Seeder
         // Give WO rights to User ID 2
         User::find(2)->assignRole(['Maintenance Officer']);
 
+        User::find(11)->assignRole(['Electrical Technician']);
+        User::find(8)->assignRole(['Electrical Technician']);
+        User::find(10)->assignRole(['Electrical Technician']);
+        User::find(3)->assignRole(['Electrical Technician']);
+        User::find(9)->assignRole(['Electrical Technician']);
+
+        User::find(4)->assignRole(['Mechanical Technician']);
+        User::find(5)->assignRole(['Mechanical Technician']);
+
+        User::find(6)->assignRole(['Mechanical Technician']);
+
+        User::find(13)->assignRole(['Warehousing']);
         // Give PO rights to User ID 12
-        User::find(12)->assignRole(['Purchasing Officer']);
+        User::find(14)->assignRole(['Purchasing Officer']);
 
 
     }

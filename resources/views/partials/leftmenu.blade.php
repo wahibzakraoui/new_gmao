@@ -22,6 +22,9 @@
             @can('add parts')
                 @include('partials.menu-chunks.parts.menu')
             @endcan
+            @can('add spares')
+                @include('partials.menu-chunks.spares.menu')
+            @endcan
             @can('add gamuts')
                 @include('partials.menu-chunks.gamuts.menu')
             @endcan

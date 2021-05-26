@@ -25,6 +25,7 @@ class VerifyCsrfToken extends Middleware
         'purchases/list_consulting',
         'purchases/list_pending_delivery',
         'purchases/list_archived',
+        'spares/list',
         'gamuts/list_work_orders/*',
     ];
 }

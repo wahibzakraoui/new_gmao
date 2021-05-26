@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PartController;
+use App\Http\Controllers\SpareController;
 use App\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -113,6 +114,22 @@ Route::prefix('parts')->middleware(['auth:sanctum', 'verified'])->group(function
     Route::get('/edit/{part}', [PartController::class, 'edit'])->name('edit-part');
     Route::post('/update/{part}', [PartController::class, 'update'])->name('update-part');
     Route::post('/delete/{part}', [PartController::class, 'destroy'])->name('delete-part');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Spares Routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::prefix('spares')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/', [SpareController::class, 'index'])->name('spares');
+    Route::post('/list', [SpareController::class, 'list'])->name('spares-list');
+    Route::get('/add', [SpareController::class, 'create'])->name('add-spare');
+    Route::post('/add', [SpareController::class, 'store'])->name('store-spare');
+    Route::get('/edit/{spare}', [SpareController::class, 'edit'])->name('edit-spare');
+    Route::post('/update/{spare}', [SpareController::class, 'update'])->name('update-spare');
+    Route::post('/delete/{spare}', [SpareController::class, 'destroy'])->name('delete-spare');
 });
 
 /*

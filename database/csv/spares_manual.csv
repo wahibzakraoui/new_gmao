@@ -1,0 +1,12 @@
+id,name,uuid,code,complementary_code,stock,active
+23,Relais temporisé  multifonction 1 contact inverseur  13 fonctions 7plages de temps (005s...100 h) 12...240V CA/CC pour 50/60 HZ,7324639f-d82d-4cb1-92ea-0734ee8745a2,3RP2505-1AW30,0,0,1
+24,Débitmètre électromagnétique ,9e34150b-b356-472f-af01-84cd1161e236,5W4C25-AAALHA0AUD5K0A+AC,0,0,1
+25,Sonde de température ,dc9b76da-4b18-488e-bbaf-2c25d1d5c690,TR10-ABD1BHTXCB000,0,0,1
+26,PANNEAU TACTILE ,0795134a-46ed-4e15-8765-d1d09975a115,10321026,0,0,1
+27,porte de coffret de commutateur,e1a60ad8-c031-4785-9505-4d61abe2ff96,10321027,0,0,1
+28,Cofferet de prise triphase 40A 400x300x15 IP55 3P+N+T.2P+N+T,a219001f-3c26-497c-9e6e-583e50ea1ac1,CPX32150,0,0,1
+29,Cofferet Mural equipe d'une protection domestique 16A DISJ+6 INTERR DIFF,9cf4652f-526b-44c4-b2b3-9f7c9b2e46c4,CPX65250,0,0,1
+30,Sonde de température avec ressort /RTD/ PT100,1c83a402-e0cb-4c2d-ab10-153ac9a35001,TM1113-8-60-109-11-13-2000,0,0,1
+31,capteur d'accelération ,46e957ae-69a5-4c12-9961-45c3f3d014b5,AS-063,0,0,1
+32,contac de puis  AC-3 : 7A  3KW/400V 1NO24V CC Taille S00 ,17a927e4-2698-47fb-a64a-07e4db3f4e2f,3RT2015-1BB41,0,0,1
+33,contac  3PH 4KW/400V 1NO24V CC50HZ 3POL Taille S00 ,4a5b4775-a1ad-4b23-bc93-4a61ea1a5e5e,3RT2016-1BB41,0,0,1

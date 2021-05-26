@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EquipmentsTableSeeder::class);
         $this->call(PeriodicitiesTableSeeder::class);
         $this->call(PartsTableSeeder::class);
+        $this->call(SparesTableSeeder::class);
         $this->call(GamutDraftsTableSeeder::class);
         $this->call(CriticitiesTableSeeder::class);
         $this->call(UrgenciesTableSeeder::class);
