@@ -2,6 +2,13 @@
 
 namespace App\Models;
 
+use App\States\WorkOrders\CAN90;
+use App\States\WorkOrders\COM80;
+use App\States\WorkOrders\IDT10;
+use App\States\WorkOrders\PLN20;
+use App\States\WorkOrders\RDY64;
+use App\States\WorkOrders\WMA60;
+use App\States\WorkOrders\WMA62;
 use App\States\WorkOrders\WorkOrderState;
 use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

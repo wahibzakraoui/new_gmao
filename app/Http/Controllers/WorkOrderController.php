@@ -83,6 +83,7 @@ class WorkOrderController extends Controller
                 ->withCasts(['status_code' => 'string']);
             /* If Not Admin, restrict to own created WOs or assigned WOs */
             $query->where('status', '!=', 'finished');
+            $query->orderBy('id', 'desc');
 
             if (!$request->user()->hasPermissionTo('assign work_orders')) {
                 $query->where('work_orders.assigned_user_id', '=', $request->user()->id)

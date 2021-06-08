@@ -208,14 +208,14 @@
                                 </div>
                             </div>
                     </div>
-                    @if($work_order->status_code->getValue() === "10-IDT")
+                    @if($work_order->status_code->transitionableStates())
                     <div class="form-group row fv-plugins-icon-container">
                         <div class="col-lg-6">
                             <label>Send to status <span class="text-danger">*</span></label>
                             <select name="status_code" id="" class="form-control selectpicker">
-                                <option value="90-CAN">90-CAN</option>
-                                <option value="20-PLN">20-PLN</option>
-                                <option value="64-RDY">64-RDY</option>
+                                @foreach($work_order->status_code->transitionableStates() as $s)
+                                <option value="{{$s}}">{{$s}}</option>
+                                @endforeach
                             </select>
                             <span class="form-text text-muted">Status code</span>
                         </div>

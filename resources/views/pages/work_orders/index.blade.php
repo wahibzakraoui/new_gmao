@@ -254,14 +254,14 @@
                 columns: [
                     { "data": "id" },
                     { "data": "created_at", "name": "work_orders.created_at"  },
-                    { "data": "objective_completion_date" },
-                    { "data": "expected_completion_date" },
-                    { data: 'designation' },
-                    { "data": "equipment.name", "name": "equipment.name"  },
-                    { "data": "gamut.code", "name": "gamut.code"  },
-                    { data: 'type' },
-                    { data: 'status' },
-                    { data: 'status_code' },
+                    { "data": "objective_completion_date" , "defaultContent" : "Not set" },
+                    { "data": "expected_completion_date" , "defaultContent" : "Not set" },
+                    { data: 'designation', "defaultContent" : "Not set" },
+                    { "data": "equipment.name", "name": "equipment.name" , "defaultContent" : "Not set" },
+                    { "data": "gamut.code", "name": "gamut.code", "defaultContent" : "Not set"  },
+                    { data: 'type', "defaultContent" : "Not set" },
+                    { data: 'status', "defaultContent" : "Not set" },
+                    { data: 'status_code', "defaultContent" : "Not set" },
                     { data: 'actions', name: 'actions', orderable: false, searchable: false }
                 ],
                 columnDefs: [
@@ -311,7 +311,7 @@
                     },
                     {
                         width: '75px',
-                        targets: [1, 2],
+                        targets: [1, 2, 3],
                         render: function (data, type, full, meta) {
                             if(data !== 'undefined')
                                 return moment.utc(data).format('YYYY-MM-DD').toString();

@@ -125,7 +125,7 @@
                 </div>
             @endif
         </div>
-        @if($work_order->status_code->getValue() === "64-RDY")
+        @if($work_order->status_code->getValue() === "RDY64")
         <!--begin::Card-->
         <div class="card card-custom gutter-b">
             <div class="card-header flex-wrap py-3">
